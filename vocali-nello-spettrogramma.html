@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Vocali nello Spettrogramma</title>
+<!-- 2018-02-20 Tue 18:51 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a id ="home" href = "index.html" ><i class="fa fa-language"></i> Home</a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ Archive</a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> GitHub</a>
+</div>
+<div id="content">
+<h1 class="title">Vocali nello Spettrogramma</h1>
+<p>
+Trovare le formanti manualmente non è difficile, anche se può richiedere abbastanza tempo. Tutto ciò che serve è un microfono esterno per il pc e due free softwares. 
+</p>
+
+<div id="outline-container-sec-0-1" class="outline-3">
+<h3 id="sec-0-1">Strumenti</h3>
+<div class="outline-text-3" id="text-0-1">
+<p>
+La prima cosa che occorre è un microfono esterno per il vostro computer. E' possibile eseguire le registrazioni con il proprio smartphone, ma la qualità sarà probabilmente minore, e bisogna assicurarsi di registrare sempre in formato WAV. 
+</p>
+
+<p>
+Per poter registrare l'audio basta utilizzare un qualsiasi software come <a href="https://www.audacityteam.org/">Audacity</a> o <a href="https://www.ocenaudio.com/">Ocenaudio</a>. Infine, per poter analizzare lo spettrogramma e trovare le formanti delle vocali basta usare <a href="http://www.fon.hum.uva.nl/praat/">PRAAT</a> (che può anche essere usato per registrare). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Come distinguere le vocali</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Le <b>formanti</b> che solitamente interessano l'analisi di un sistema vocale sono 3: <b>F1</b> (frequenze più basse), <b>F2</b> ed <b>F3</b> (frequenze più alte). Queste sono rappresentate sullo spettrogramma come ombre, a tre altezze diverse l'una dall'altra, più scure rispetto al resto dell'immagine e, a seconda delle loro possibili disposizioni, è possibile avere un'idea della vocale che è stata prodotta in un segmento.
+</p>
+
+<p>
+Per questa guida analizzeremo solo F1 ed F2, che bastano per dare un'idea generica della vocale che ci si trova davanti.
+Come potete vedere nell'immagine seguente, ogni vocale ha una distanza fra F1 ed F2 differente e, se ci si fa caso, F2 indica quanto una vocale sia <i>frontale</i> o <i>posteriore</i>, mentre F1 indica quanto sia <i>alta</i> o <i>bassa</i> (anche riferiti come <i>chiusa</i> o <i>aperta</i>).
+</p>
+
+<div class="center">
+
+<div class="figure">
+<p><img src="http://www.iapct.org/festschrift/nevin_files/image031.jpg" alt="image031.jpg" width="40%" height="40%" align="center" />  
+</p>
+</div>
+</div>
+
+<p>
+Potete provare voi stessi a registrarvi mentre pronunciate singole vocali o parole brevi. Cercate di creare registrazioni di pochi secondi.
+</p>
+
+<p>
+Per prima cosa basta caricare ed aprire il vostro file audio in PRAAT e cliccando su <b>View &amp; Edit</b> nella finestra <b>Praat Objects</b>. Si avrà una finestra che somiglia a quella nell'immagine seguente. 
+</p>
+
+
+<div class="figure">
+<p><img src="https://i.imgur.com/qv0z4LA.png" alt="qv0z4LA.png" width="60%" height="60%" />
+</p>
+</div>
+
+<p>
+Chiaramente, non è immediatamente visualizzabile lo spettrogramma, per poterlo fare basta zoommare premendo <b>Ctrl + I</b> e per dezoommare <b>Ctrl + O</b> (basta pensare a <i>zoom <b>I</b> n</i> &amp; <i>zoom <b>O</b> out</i>).
+Una volta zoommato abbastanza, sarà possibile vedere lo spettrogramma dove le "ombre" delle frequenze acustiche saranno rappresentate. 
+</p>
+
+<p>
+Cliccando su un qualsiasi punto, sarà possibile vedere sulla sinistra in rosso le coordinate di altezza e, quindi, ottenere manualmente le formanti. 
+</p>
+
+
+<div class="figure">
+<p><img src="https://imgur.com/J2mAIPC.png" alt="J2mAIPC.png" width="60%" height="60%" />
+</p>
+</div>
+
+<p>
+Un altro modo per ottenere le formanti è selezionare, tenendo premuto il <b>click sinistro</b>, la parte interessata e dopo premere F1, F2 o F3 a seconda delle formanti che si vuole ottenere. PRAAT aprirà una finestra che mostrerà il <b>valore medio</b> della formante in quell'area.
+</p>
+
+<p>
+Un altro modo per guidare l'identificazione visiva è aiutarsi con spettrogrammi già taggati come quello nell'immagine sottostante.
+</p>
+
+
+<div class="figure">
+<p><img src="http://ec-concord.ied.edu.hk/phonetics_and_phonology/wordpress/learning_website/chapter_2_vowels_new.files/image014.jpg" alt="image014.jpg" width="40%" height="40%" /> 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2017-09-12</p>
+<p class="author"> Author: Andrew</p>
+<a href = "archive.html" >Other posts</a>
+</div>
+</body>
+</html>
