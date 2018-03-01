@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Come Estrarre Ngrams Facilmente</title>
+<!-- 2018-03-01 Thu 18:23 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a id ="home" href = "index.html" ><i class="fa fa-language"></i> Home</a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ Archive</a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> GitHub</a>
+</div>
+<div id="content">
+<h1 class="title">Come Estrarre Ngrams Facilmente</h1>
+<p>
+Installando la <a href="https://www.nltk.org/">libreria NLTK</a> per Python3 si possono immediatamente provare molti dei suoi strumenti sui corpora che la libreria stessa fornisce.
+Il modo più semplice per scaricare e installare i vari moduli e corpora è usando la funzione <b>nltk.download()</b> in uno shell di python oppure con <b>python -m nltk.downloader</b> nel terminale.
+Tramite il downloader installate i moduli <b>stopwords</b>, <b>punkt</b> e il corpus <b>gutenberg</b>. 
+</p>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Moduli da importare</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Per prima cosa si importano i moduli che servono. <b>word<sub>tokenize</sub></b> dividerà il corpus in parole singole, <b>stopwords</b> toglierà dai token raccolti tutti quelli meno utili e che fornirebbero ben poche informazioni (come le parole "but" o "so"). Per finire, <b>ngrams</b> produrrà gli ngram desiderati e con nltk si potranno rappresentare i risultati in un grafico.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #fb4933;">from</span> nltk <span style="color: #fb4933;">import</span> ngrams
+<span style="color: #fb4933;">from</span> nltk.tokenize <span style="color: #fb4933;">import</span> word_tokenize
+<span style="color: #fb4933;">from</span> nltk.corpus <span style="color: #fb4933;">import</span> stopwords
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Importare il corpus e impostare le stopwords</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #fb4933;">with</span> <span style="color: #fe8019;">open</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">"austen-emma.txt"</span>, <span style="color: #b8bb26;">"r"</span><span style="color: #458588;">)</span> <span style="color: #fb4933;">as</span> corpus:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">corpus</span> = corpus.read<span style="color: #458588;">()</span>
+
+<span style="color: #83a598;">stop_words</span> = <span style="color: #fe8019;">set</span><span style="color: #458588;">(</span>stopwords.words<span style="color: #b16286;">(</span><span style="color: #b8bb26;">'english'</span><span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Tokenizzare</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Per prima cosa si tokenizza tutto il testo, producendo una lista di parole singole che contengono sia parole utili che parole meno utili e caratteri come <b>?</b> o <b>!</b>.
+Successivamente, utilizzando la variabile precedentemente impostata, si eliminano tutte le stopword con un semplice <b>for loop</b> che inserirà le parole utili in una nuova lista di token filtrati.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #83a598;">tokens</span> = word_tokenize<span style="color: #458588;">(</span>corpus<span style="color: #458588;">)</span>
+
+<span style="color: #83a598;">filteredTokens</span> = <span style="color: #458588;">[]</span>
+
+<span style="color: #7c6f64;">## </span><span style="color: #7c6f64;">Togliere le stopwords dai tokens</span>
+
+<span style="color: #fb4933;">for</span> token <span style="color: #fb4933;">in</span> tokens:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4933;">if</span> token <span style="color: #fb4933;">not</span> <span style="color: #fb4933;">in</span> stop_words:
+        filteredTokens.append<span style="color: #458588;">(</span>token<span style="color: #458588;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Ngram</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Ora che si è ottenuta la lista di tokens filtrati, utilizzando il modulo ngrams si imposta prima il numero di parole e poi si crea la lista di ngrams.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #83a598;">n</span> = 3 <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">Numero di ngrams</span>
+
+<span style="color: #83a598;">ngrammi</span> = <span style="color: #fe8019;">list</span><span style="color: #458588;">(</span>ngrams<span style="color: #b16286;">(</span>filteredTokens, n<span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
+
+<span style="color: #83a598;">fDist</span> = nltk.FreqDist<span style="color: #458588;">(</span>ngrammi<span style="color: #458588;">)</span>
+
+<span style="color: #83a598;">mostComm</span> = fDist.most_common<span style="color: #458588;">(</span>30<span style="color: #458588;">)</span> <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Grafici</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+
+<pre class="src src-python">fDist.plot<span style="color: #458588;">(</span>30,                      <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
+           cumulative=<span style="color: #d3869b;">False</span>,        <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Se mostrare frequenza cumulativa</span>
+           title=<span style="color: #b8bb26;">"Titolo"</span>,          <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Titolo del grafico</span>
+           color=<span style="color: #b8bb26;">"blue"</span>,            <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Colore della linea</span>
+           linestyle=<span style="color: #b8bb26;">'solid'</span>,       <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Tipo di linea (dotted, dashed, ecc...)</span>
+           marker=<span style="color: #b8bb26;">"."</span>,              <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Punti di riferimento sulla linea</span>
+           markerfacecolor=<span style="color: #b8bb26;">"red"</span>,   <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Colore interno del marker</span>
+           markeredgecolor=<span style="color: #b8bb26;">"blue"</span>,  <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Contorno del marker </span>
+           markersize=10.0<span style="color: #458588;">)</span>         <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Dimensione del Marker (float)</span>
+</pre>
+</div>
+
+<p>
+Altri oggetti / arguments per il grafico disponibili sono <b>linewidth</b> e <b>alpha</b>. Descrizioni di questi ed altri si possono trovare nella documentazione di <a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html">Matplotlib</a>.
+</p>
+
+<p>
+Il risultato finale sarà un grafico simile a questo.
+</p>
+
+
+<div class="figure">
+<p><img src="https://andcarnivorous.github.io/img/Austen-Word-Freq.png" alt="Austen-Word-Freq.png" width="105%" height="105%" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-03-01 Thu&gt;</span></span></p>
+<p class="author"> Author: Andrew</p>
+<a href = "archive.html" >Other posts</a>
+</div>
+</body>
+</html>

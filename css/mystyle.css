@@ -33,22 +33,22 @@ body {
 
 h1 {
     font-weight: bold;
-/*    background-color: #ccccff;
-   background: -webkit-linear-gradient(bottom, rgba(204, 204, 255,1), rgba(255, 255, 200,.1));
-    background: -moz-linear-gradient(bottom, rgba(255, 255, 200,.1), rgba(204, 204, 255,2)); */
     padding: 30px;
     padding-top: 25px;
     padding-bottom: 43px;
     border-radius: 10px;
 }
 
-.outline-2 {
-    border-bottom: 4px black;
-    border-bottom-style:inset;
+#postamble{
+    border-top: 4px #B2B2B2;
+    border-top-style:solid;
 }
-
 .outline-text-2 {
     margin-left: 10px;
+}
+
+.org-src-container{
+    font-size:medium;
 }
 
 .highlight {
@@ -57,6 +57,7 @@ h1 {
 
 h2{
     margin-left: 30px;
+    margin-top: 40px;
 }
 
 h3{
@@ -82,6 +83,7 @@ p {
     text-align: justify;
     text-justify: inter-word;    
 }
+
 
 p a:link{
     color:blue;
