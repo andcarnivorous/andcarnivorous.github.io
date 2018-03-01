@@ -1,7 +1,7 @@
-*{
-    font-family: "Lucida Console", Monaco, monospace;
+/**{
+
     color:#000015;
-}
+}*/
 
 #postamble {
     margin-top: 30px;
@@ -32,6 +32,7 @@ body {
 }
 
 h1 {
+    font-family: "Lucida Console", Monaco, monospace;
     font-weight: bold;
     padding: 30px;
     padding-top: 25px;
@@ -47,15 +48,12 @@ h1 {
     margin-left: 10px;
 }
 
-.org-src-container{
-    font-size:medium;
-}
-
 .highlight {
     margin-left: 30px;
 }
 
 h2{
+    font-family: "Lucida Console", Monaco, monospace;
     margin-left: 30px;
     margin-top: 40px;
 }
@@ -78,7 +76,7 @@ tbody{
 }
 
 p {
-    margin-left: 40px;
+    margin-left: 30px;
     font-family: "Lucida Console", Monaco, monospace;
     text-align: justify;
     text-justify: inter-word;    
