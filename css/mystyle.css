@@ -1,10 +1,13 @@
-/**{
-
-    color:#000015;
-}*/
-
 #postamble {
     margin-top: 30px;
+}
+
+#postamble{
+    border-top: 4px #B2B2B2;
+    border-top-style:solid;
+    color: black;
+    text-decoration: none;
+    padding-top:20px;
 }
 
 #home, #archive, #git{
@@ -26,10 +29,8 @@ body {
     font-family: "Courier New", Courier, monospace;
     background-color: #fffffe;
     font-family: helvetica;
-    max-width: 1000px;
+    max-width: 55%;
     margin: 0px auto;
-    /*    margin-left: 150px;
-       margin-right: 150px; */
 }
 
 h1 {
@@ -41,57 +42,38 @@ h1 {
     border-radius: 10px;
 }
 
-#postamble{
-    border-top: 4px #B2B2B2;
-    border-top-style:solid;
-    color: black;
-    text-decoration: none;
-}
-.outline-text-2 {
-    margin-left: 10px;
-}
-
-.highlight {
-    margin-left: 30px;
-}
-.src.src-python{
-    overflow:auto;
-}
-
 h2{
     font-family: "Lucida Console", Monaco, monospace;
-    margin-left: 30px;
+    margin-left: 1%;
     margin-top: 40px;
 }
 
 h3{
-    margin-left: 35px;
+    margin-left: 2%;
 }
 
 h4{
     margin-left: 40px;
 }
 
-
 table {
     margin: 0 auto;
 }
 
-tbody{
-    
-}
-
 p {
-    margin-left: 30px;
+    margin-left: 2%;
     font-family: "Lucida Console", Monaco, monospace;
     text-align: justify;
     text-justify: inter-word;
     text-decoration: none;
 }
 
-
 p a:link{
     color:blue;
+}
+
+p a:hover{
+    color:red;
 }
 
 p a:visited{
@@ -99,5 +81,18 @@ p a:visited{
 }
 
 a {
+    color:black;
+}
+
+
+.highlight {
+    margin-left: 30px;
+}
+
+.src.src-python{
+    overflow:auto;
+}
+
+.timestamp{
     color:black;
 }
