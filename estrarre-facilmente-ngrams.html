@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Come Estrarre Ngrams Facilmente</title>
-<!-- 2018-03-01 Thu 18:23 -->
+<!-- 2018-06-07 Thu 08:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew" />
@@ -140,7 +140,7 @@ for the JavaScript code in this tag.
 <body>
 <div id="preamble" class="status">
 <a id ="home" href = "index.html" ><i class="fa fa-language"></i> Home</a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
- Archive</a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> GitHub</a>
+ Archive</a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> GitHub</a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> <font color="black">RSS</font></a>
 </div>
 <div id="content">
 <h1 class="title">Come Estrarre Ngrams Facilmente</h1>
@@ -172,10 +172,10 @@ Per prima cosa si importano i moduli che servono. <b>word<sub>tokenize</sub></b>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #fb4933;">with</span> <span style="color: #fe8019;">open</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">"austen-emma.txt"</span>, <span style="color: #b8bb26;">"r"</span><span style="color: #458588;">)</span> <span style="color: #fb4933;">as</span> corpus:
-<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">corpus</span> = corpus.read<span style="color: #458588;">()</span>
+<pre class="src src-python"><span style="color: #fb4933;">with</span> <span style="color: #6699ff;">open</span><span style="color: #8c8c8c;">(</span><span style="color: #b8bb26;">"austen-emma.txt"</span>, <span style="color: #b8bb26;">"r"</span><span style="color: #8c8c8c;">)</span> <span style="color: #fb4933;">as</span> corpus:
+<span style="background-color: #060606;"> </span>   <span style="color: #00ffff;">corpus</span> = corpus.read<span style="color: #8c8c8c;">()</span>
 
-<span style="color: #83a598;">stop_words</span> = <span style="color: #fe8019;">set</span><span style="color: #458588;">(</span>stopwords.words<span style="color: #b16286;">(</span><span style="color: #b8bb26;">'english'</span><span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
+<span style="color: #00ffff;">stop_words</span> = <span style="color: #6699ff;">set</span><span style="color: #8c8c8c;">(</span>stopwords.words<span style="color: #93a8c6;">(</span><span style="color: #b8bb26;">'english'</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 </div>
@@ -191,15 +191,15 @@ Successivamente, utilizzando la variabile precedentemente impostata, si eliminan
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #83a598;">tokens</span> = word_tokenize<span style="color: #458588;">(</span>corpus<span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #00ffff;">tokens</span> = word_tokenize<span style="color: #8c8c8c;">(</span>corpus<span style="color: #8c8c8c;">)</span>
 
-<span style="color: #83a598;">filteredTokens</span> = <span style="color: #458588;">[]</span>
+<span style="color: #00ffff;">filteredTokens</span> = <span style="color: #8c8c8c;">[]</span>
 
 <span style="color: #7c6f64;">## </span><span style="color: #7c6f64;">Togliere le stopwords dai tokens</span>
 
 <span style="color: #fb4933;">for</span> token <span style="color: #fb4933;">in</span> tokens:
-<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4933;">if</span> token <span style="color: #fb4933;">not</span> <span style="color: #fb4933;">in</span> stop_words:
-        filteredTokens.append<span style="color: #458588;">(</span>token<span style="color: #458588;">)</span>
+<span style="background-color: #060606;"> </span>   <span style="color: #fb4933;">if</span> token <span style="color: #fb4933;">not</span> <span style="color: #fb4933;">in</span> stop_words:
+        filteredTokens.append<span style="color: #8c8c8c;">(</span>token<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 </div>
@@ -214,13 +214,13 @@ Ora che si è ottenuta la lista di tokens filtrati, utilizzando il modulo ngrams
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #83a598;">n</span> = 3 <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">Numero di ngrams</span>
+<pre class="src src-python"><span style="color: #00ffff;">n</span> = 3 <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">Numero di ngrams</span>
 
-<span style="color: #83a598;">ngrammi</span> = <span style="color: #fe8019;">list</span><span style="color: #458588;">(</span>ngrams<span style="color: #b16286;">(</span>filteredTokens, n<span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
+<span style="color: #00ffff;">ngrammi</span> = <span style="color: #6699ff;">list</span><span style="color: #8c8c8c;">(</span>ngrams<span style="color: #93a8c6;">(</span>filteredTokens, n<span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 
-<span style="color: #83a598;">fDist</span> = nltk.FreqDist<span style="color: #458588;">(</span>ngrammi<span style="color: #458588;">)</span>
+<span style="color: #00ffff;">fDist</span> = nltk.FreqDist<span style="color: #8c8c8c;">(</span>ngrammi<span style="color: #8c8c8c;">)</span>
 
-<span style="color: #83a598;">mostComm</span> = fDist.most_common<span style="color: #458588;">(</span>30<span style="color: #458588;">)</span> <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
+<span style="color: #00ffff;">mostComm</span> = fDist.most_common<span style="color: #8c8c8c;">(</span>30<span style="color: #8c8c8c;">)</span> <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
 </pre>
 </div>
 </div>
@@ -231,7 +231,7 @@ Ora che si è ottenuta la lista di tokens filtrati, utilizzando il modulo ngrams
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 
-<pre class="src src-python">fDist.plot<span style="color: #458588;">(</span>30,                      <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
+<pre class="src src-python">fDist.plot<span style="color: #8c8c8c;">(</span>30,                      <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
            cumulative=<span style="color: #d3869b;">False</span>,        <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Se mostrare frequenza cumulativa</span>
            title=<span style="color: #b8bb26;">"Titolo"</span>,          <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Titolo del grafico</span>
            color=<span style="color: #b8bb26;">"blue"</span>,            <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Colore della linea</span>
@@ -239,7 +239,7 @@ Ora che si è ottenuta la lista di tokens filtrati, utilizzando il modulo ngrams
            marker=<span style="color: #b8bb26;">"."</span>,              <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Punti di riferimento sulla linea</span>
            markerfacecolor=<span style="color: #b8bb26;">"red"</span>,   <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Colore interno del marker</span>
            markeredgecolor=<span style="color: #b8bb26;">"blue"</span>,  <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Contorno del marker </span>
-           markersize=10.0<span style="color: #458588;">)</span>         <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Dimensione del Marker (float)</span>
+           markersize=10.0<span style="color: #8c8c8c;">)</span>         <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Dimensione del Marker (float)</span>
 </pre>
 </div>
 
@@ -260,7 +260,7 @@ Il risultato finale sarà un grafico simile a questo.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-03-01 Thu&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-01-07 Sun&gt;</span></span></p>
 <p class="author"> Author: Andrew</p>
 <a href = "archive.html" >Other posts</a>
 </div>

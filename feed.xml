@@ -1,0 +1,48 @@
+<?xml
+version="1.0"
+encoding="UTF-8"
+?>
+<rss
+version="2.0">
+<channel>
+<title>Blogging
+Linguistics</title>
+<link>https://andcarnivorous.github.io</link>
+<description></description>
+
+<item>
+ 	<title>Classificazione delle Vocali in Python</title>
+ 	<link>https://andcarnivorous.github.io/classificazione-vocali-in-python.html</link>
+ 	<description></description>
+</item>
+
+<item>
+ 	<title>Come Estrarre Ngrams Facilmente</title>
+ 	<link>https://andcarnivorous.github.io/estrarre-facilmente-ngrams.html</link>
+ 	<description></description>
+</item>
+
+<item>
+ 	<title>Le Parole Più Comuni Con Praw ed NLTK</title>
+ 	<link>https://andcarnivorous.github.io/le-parole-piu-comuni-nei-commenti-con-praw-ed-nltk.html</link>
+ 	<description></description>
+</item>
+
+<item>
+ 	<title>Modificare Stopwords in NLTK</title>
+ 	<link>https://andcarnivorous.github.io/modificare-stopwords-in-nltk.html</link>
+ 	<description></description>
+</item>
+
+<item>
+ 	<title>Vocali nello Spettrogramma</title>
+ 	<link>https://andcarnivorous.github.io/vocali-nello-spettrogramma.html</link>
+ 	<description></description>
+</item>
+
+<item>
+ 	<title>Blogging Linguistics</title>
+ 	<link>https://andcarnivorous.github.io/theindex.html</link>
+ 	<description></description>
+</item>
+</channel></rss>

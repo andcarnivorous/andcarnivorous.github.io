@@ -1,3 +1,14 @@
+#text-table-of-contents{
+    color: red;
+    link: red;
+    margin-bottom: 60px;
+}
+
+
+#text-table-of-contents a:hover{
+    color:#5c3566;
+}
+
 #postamble {
     margin-top: 30px;
 }
@@ -10,11 +21,14 @@
     padding-top:20px;
 }
 
-#home, #archive, #git{
+
+#home, #archive, #git, #rss{
     background-color: #ccccff;
     background: -webkit-linear-gradient(bottom, rgba(200,200,255,.4), rgba(255, 255, 255,1));
     background: -moz-linear-gradient(bottom, rgba(200,200,255,.6), rgba(255,255,255,.8));
     margin-top: 5px;
+    margin-right: 2px;
+    
     padding-top: 15px;
     padding-bottom: 8px;
     padding-right: 8px;
@@ -23,6 +37,10 @@
     text-decoration: none;
     border-radius: 0px 0px 10px 10px;
     display:inline-block;
+}
+
+#rss {
+    color:darkorange;
 }
 
 body {
@@ -91,6 +109,7 @@ a {
 
 .src.src-python{
     overflow:auto;
+    background-color:lightgrey;
 }
 
 .timestamp{
