@@ -11,38 +11,55 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>Individuare un Merger Vocalico</title>
+ 	<link>https://andcarnivorous.github.io/individuare-un-merger-vocalico.html</link>
+ 	<description>
+Merger e split sono due dei vari possibili cambiamenti fonologici che una lingua può attraversare. 
+Grazie ad analisi acustiche accurate e con abbastanza dati a disposizione, è possibile ottere in modo scientifico una risposta su un possibile merger o split di vocali.
+Per poter fare ciò, basta sottoporre le formanti ottenute ad un t-test.
+</description>
+</item>
+
+<item>
  	<title>Classificazione delle Vocali in Python</title>
  	<link>https://andcarnivorous.github.io/classificazione-vocali-in-python.html</link>
- 	<description></description>
+ 	<description>
+Un modo interessante di testare i dati fonetici raccolti è quello di sottoporli a vari classifiers (algoritmi di classificazione) 
+per vedere quali algoritmi possano essere i più accurati e se i dati sono sufficienti ad avere classificatori affidabili.
+</description>
 </item>
 
 <item>
  	<title>Come Estrarre Ngrams Facilmente</title>
  	<link>https://andcarnivorous.github.io/estrarre-facilmente-ngrams.html</link>
- 	<description></description>
+ 	<description>
+Installando la libreria NLTK per Python3 si possono immediatamente provare molti dei suoi strumenti sui corpora che la libreria stessa fornisce.
+Il modo più semplice per scaricare e installare i vari moduli e corpora è usando la funzione nltk.download() in uno shell di python oppure con python -m nltk.downloader nel terminale.
+Tramite il downloader installate i moduli stopwords, punkt e il corpus gutenberg. 
+</description>
 </item>
 
 <item>
  	<title>Le Parole Più Comuni Con Praw ed NLTK</title>
  	<link>https://andcarnivorous.github.io/le-parole-piu-comuni-nei-commenti-con-praw-ed-nltk.html</link>
- 	<description></description>
+ 	<description>
+Ultimamente ho iniziato a dare uno sguardo a PRAW, un wrapper per l'API di Reddit che permette di fare data mining in modo molto semplice. 
+</description>
 </item>
 
 <item>
  	<title>Modificare Stopwords in NLTK</title>
  	<link>https://andcarnivorous.github.io/modificare-stopwords-in-nltk.html</link>
- 	<description></description>
+ 	<description>
+Spesso capita di voler analizzare un corpus in modo molto semplice e preliminare in Python con la libreria NLTK vedendo semplicemente le frequenze dei lemmi.
+</description>
 </item>
 
 <item>
  	<title>Vocali nello Spettrogramma</title>
  	<link>https://andcarnivorous.github.io/vocali-nello-spettrogramma.html</link>
- 	<description></description>
-</item>
-
-<item>
- 	<title>Blogging Linguistics</title>
- 	<link>https://andcarnivorous.github.io/theindex.html</link>
- 	<description></description>
+ 	<description>
+Trovare le formanti manualmente non è difficile, anche se può richiedere abbastanza tempo. Tutto ciò che serve è un microfono esterno per il pc e due free softwares. 
+</description>
 </item>
 </channel></rss>
