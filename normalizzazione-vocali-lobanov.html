@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Normalizzazione Lobanov delle Vocali</title>
-<!-- 2018-07-23 Mon 08:35 -->
+<!-- 2018-07-23 Mon 09:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew" />
@@ -260,20 +260,20 @@ che applica la formula dello z-score sulle formanti F1 ed F2 è il modo più sem
 
 <p>
 Tenendo a mente la formula quindi, si creano due nuove serie (<code>norm_F1</code> e <code>norm_F2</code>) contenenti i valori normalizzati. 
-Si sottrae al valore di ogni formante dello speaker la media dei valori di quella formante e si divide per la deviazione standard della formante dello speaker.
+Quindi, si sottrae al valore di ogni formante dello speaker la media dei valori di quella formante e si divide per la deviazione standard della formante dello speaker.
 E' importante organizzare il dataframe con la funzione <b>groupby()</b> in modo da avere la formula applicata sul singolo speaker e non sull'intera popolazione di parlanti.
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #9d0006;">def</span> <span style="color: #b57614;">lobanov</span><span style="color: #458588;">(</span>F1,F2, speaker<span style="color: #458588;">)</span>:
-<span style="background-color: #ebdbb2;"> </span>   <span style="color: #076678;">vowelsform</span><span style="color: #458588;">[</span><span style="color: #79740e;">'norm_F1'</span><span style="color: #458588;">]</span> = <span style="color: #458588;">(</span>vowelsform<span style="color: #b16286;">[</span>F1<span style="color: #b16286;">]</span>
-                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F1<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #458588;">)</span> \
-                             / vowelsform.groupby<span style="color: #458588;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #458588;">)[</span>F1<span style="color: #458588;">]</span>.transform<span style="color: #458588;">(</span>np.std<span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #fb4933;">def</span> <span style="color: #fabd2f;">lobanov</span><span style="color: #8c8c8c;">(</span>F1,F2, speaker<span style="color: #8c8c8c;">)</span>:
+<span style="background-color: #060606;"> </span>   <span style="color: #00ffff;">vowelsform</span><span style="color: #8c8c8c;">[</span><span style="color: #b8bb26;">'norm_F1'</span><span style="color: #8c8c8c;">]</span> = <span style="color: #8c8c8c;">(</span>vowelsform<span style="color: #93a8c6;">[</span>F1<span style="color: #93a8c6;">]</span>
+                             - vowelsform.groupby<span style="color: #93a8c6;">(</span><span style="color: #b0b1a3;">[</span>speaker<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)[</span>F1<span style="color: #93a8c6;">]</span>.transform<span style="color: #93a8c6;">(</span>np.mean<span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span> \
+                             / vowelsform.groupby<span style="color: #8c8c8c;">(</span><span style="color: #93a8c6;">[</span>speaker<span style="color: #93a8c6;">]</span><span style="color: #8c8c8c;">)[</span>F1<span style="color: #8c8c8c;">]</span>.transform<span style="color: #8c8c8c;">(</span>np.std<span style="color: #8c8c8c;">)</span>
 
-<span style="background-color: #ebdbb2;"> </span>   <span style="color: #076678;">vowelsform</span><span style="color: #458588;">[</span><span style="color: #79740e;">'norm_F2'</span><span style="color: #458588;">]</span> = <span style="color: #458588;">(</span>vowelsform<span style="color: #b16286;">[</span>F2<span style="color: #b16286;">]</span>
-                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F2<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #458588;">)</span> \
-                             / vowelsform.groupby<span style="color: #458588;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #458588;">)[</span>F2<span style="color: #458588;">]</span>.transform<span style="color: #458588;">(</span>np.std<span style="color: #458588;">)</span>
+<span style="background-color: #060606;"> </span>   <span style="color: #00ffff;">vowelsform</span><span style="color: #8c8c8c;">[</span><span style="color: #b8bb26;">'norm_F2'</span><span style="color: #8c8c8c;">]</span> = <span style="color: #8c8c8c;">(</span>vowelsform<span style="color: #93a8c6;">[</span>F2<span style="color: #93a8c6;">]</span>
+                             - vowelsform.groupby<span style="color: #93a8c6;">(</span><span style="color: #b0b1a3;">[</span>speaker<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)[</span>F2<span style="color: #93a8c6;">]</span>.transform<span style="color: #93a8c6;">(</span>np.mean<span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span> \
+                             / vowelsform.groupby<span style="color: #8c8c8c;">(</span><span style="color: #93a8c6;">[</span>speaker<span style="color: #93a8c6;">]</span><span style="color: #8c8c8c;">)[</span>F2<span style="color: #8c8c8c;">]</span>.transform<span style="color: #8c8c8c;">(</span>np.std<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
