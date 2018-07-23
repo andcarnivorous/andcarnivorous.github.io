@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Normalizzazione Lobanov delle Vocali</title>
+<!-- 2018-07-23 Mon 08:35 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a id ="home" href = "index.html" ><i class="fa fa-language"></i> Home</a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ Archive</a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> GitHub</a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> <font color="black">RSS</font></a>
+</div>
+<div id="content">
+<h1 class="title">Normalizzazione Lobanov delle Vocali</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Normalizzazione</a></li>
+<li><a href="#sec-2">Z-score</a></li>
+<li><a href="#sec-3">Applicazione in Python</a></li>
+</ul>
+</div>
+</div>
+<p>
+In questo post verrà spiegato come normalizzare un dataframe di valori delle formanti attraverso il metodo di Lobanov, che non è niente altro che un z-score applicato sulle formanti di un parlante. 
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Normalizzazione</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Normalizzare le vocali è un processo necessario quando si confrontano più parlanti. Teoricamente se si analizzassero i dati fonetici di un singolo parlante non ci sarebbe bisogno di normalizzare i valori delle formanti. 
+La maggior parte delle volte, però, queste analisi servono a scoprire quali cambiamenti stanno avvenendo in una lingua o quali le caratteristiche fonetiche e fonologiche di una lingua sono, e questo è difficile da fare con dati provenienti da un solo parlante.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Z-score</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+La normalizzazione Lobanov non è altro che uno Z-score applicato alle formanti di un parlante.
+La formula utilizzata quindi è:
+</p>
+
+<p>
+F<sub>n</sub><sub>[</sub><sub>V</sub><sub>]</sub><sup>N</sup> = (F<sub>n[V]</sub> - MEAN<sub>n</sub> )/S<sub>n</sub>
+</p>
+
+<p>
+E la sua spiegazione più dettagliata può essere trovata <a href="http://lingtools.uoregon.edu/norm/norm1_methods.php#lobanov">sulla pagina del NORM</a> dell'università dell'Oregon.
+</p>
+
+<p>
+E' uno dei metodi di normalizzazione più diffuso ed anche affidabile tra i metodi vowel-extrinsic.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Applicazione in Python</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Dato un dataframe che ha un aspetto simile a quello riportato qui sotto, mettere insieme una semplice funzione 
+che applica la formula dello z-score sulle formanti F1 ed F2 è il modo più semplice per avere i dati normalizzati.
+</p>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">speaker</th>
+<th scope="col" class="left">vowel</th>
+<th scope="col" class="right">F1</th>
+<th scope="col" class="right">F2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">speaker1</td>
+<td class="left">o</td>
+<td class="right">948</td>
+<td class="right">1099</td>
+</tr>
+
+<tr>
+<td class="left">speaker1</td>
+<td class="left">e</td>
+<td class="right">693</td>
+<td class="right">2004</td>
+</tr>
+
+<tr>
+<td class="left">speaker2</td>
+<td class="left">o</td>
+<td class="right">956</td>
+<td class="right">1080</td>
+</tr>
+
+<tr>
+<td class="left">speaker2</td>
+<td class="left">a</td>
+<td class="right">850</td>
+<td class="right">1348</td>
+</tr>
+
+<tr>
+<td class="left">&#x2026;</td>
+<td class="left">&#x2026;</td>
+<td class="right">&#x2026;</td>
+<td class="right">&#x2026;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Tenendo a mente la formula quindi, si creano due nuove serie (<code>norm_F1</code> e <code>norm_F2</code>) contenenti i valori normalizzati. 
+Si sottrae al valore di ogni formante dello speaker la media dei valori di quella formante e si divide per la deviazione standard della formante dello speaker.
+E' importante organizzare il dataframe con la funzione <b>groupby()</b> in modo da avere la formula applicata sul singolo speaker e non sull'intera popolazione di parlanti.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #9d0006;">def</span> <span style="color: #b57614;">lobanov</span><span style="color: #458588;">(</span>F1,F2, speaker<span style="color: #458588;">)</span>:
+<span style="background-color: #ebdbb2;"> </span>   <span style="color: #076678;">vowelsform</span><span style="color: #458588;">[</span><span style="color: #79740e;">'norm_F1'</span><span style="color: #458588;">]</span> = <span style="color: #458588;">(</span>vowelsform<span style="color: #b16286;">[</span>F1<span style="color: #b16286;">]</span>
+                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F1<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #458588;">)</span> \
+                             / vowelsform.groupby<span style="color: #458588;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #458588;">)[</span>F1<span style="color: #458588;">]</span>.transform<span style="color: #458588;">(</span>np.std<span style="color: #458588;">)</span>
+
+<span style="background-color: #ebdbb2;"> </span>   <span style="color: #076678;">vowelsform</span><span style="color: #458588;">[</span><span style="color: #79740e;">'norm_F2'</span><span style="color: #458588;">]</span> = <span style="color: #458588;">(</span>vowelsform<span style="color: #b16286;">[</span>F2<span style="color: #b16286;">]</span>
+                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F2<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #458588;">)</span> \
+                             / vowelsform.groupby<span style="color: #458588;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #458588;">)[</span>F2<span style="color: #458588;">]</span>.transform<span style="color: #458588;">(</span>np.std<span style="color: #458588;">)</span>
+</pre>
+</div>
+
+
+<p>
+Il risultato sarà una tabella con valori simili a questa:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">speaker</th>
+<th scope="col" class="left">vowel</th>
+<th scope="col" class="right">F1</th>
+<th scope="col" class="right">F2</th>
+<th scope="col" class="right"><code>norm_F1</code></th>
+<th scope="col" class="right"><code>norm_F2</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">speaker1</td>
+<td class="left">o</td>
+<td class="right">948</td>
+<td class="right">1099</td>
+<td class="right">0.577</td>
+<td class="right">-0.961</td>
+</tr>
+
+<tr>
+<td class="left">speaker1</td>
+<td class="left">e</td>
+<td class="right">693</td>
+<td class="right">2004</td>
+<td class="right">-0.164</td>
+<td class="right">0.484</td>
+</tr>
+
+<tr>
+<td class="left">speaker2</td>
+<td class="left">o</td>
+<td class="right">956</td>
+<td class="right">1080</td>
+<td class="right">-0.27</td>
+<td class="right">-1.103</td>
+</tr>
+
+<tr>
+<td class="left">speaker2</td>
+<td class="left">a</td>
+<td class="right">850</td>
+<td class="right">1348</td>
+<td class="right">1.351</td>
+<td class="right">-0.341</td>
+</tr>
+
+<tr>
+<td class="left">&#x2026;</td>
+<td class="left">&#x2026;</td>
+<td class="right">&#x2026;</td>
+<td class="right">&#x2026;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Rappresentando i valori in scatterplot possiamo vedere la differenza tra raw data e normalized:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/norm-plot.png" alt="norm-plot.png" width="100%" height="100%" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-07-23 Mon&gt;</span></span></p>
+<p class="author"> Author: Andrew</p>
+<a href = "archive.html" >Other posts</a>
+</div>
+</body>
+</html>
