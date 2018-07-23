@@ -11,6 +11,14 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>Normalizzazione Lobanov delle Vocali</title>
+ 	<link>https://andcarnivorous.github.io/normalizzazione-vocali-lobanov.html</link>
+ 	<description>
+In questo post verrà spiegato come normalizzare un dataframe di valori delle formanti attraverso il metodo di Lobanov, che non è niente altro che un z-score applicato sulle formanti di un parlante. 
+</description>
+</item>
+
+<item>
  	<title>Individuare un Merger Vocalico</title>
  	<link>https://andcarnivorous.github.io/individuare-un-merger-vocalico.html</link>
  	<description>
