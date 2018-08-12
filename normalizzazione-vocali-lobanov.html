@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Normalizzazione Lobanov delle Vocali</title>
-<!-- 2018-07-23 Mon 09:30 -->
+<!-- 2018-07-31 Tue 14:00 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew" />
@@ -89,7 +89,7 @@
   /*]]>*/-->
 </style>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -139,8 +139,8 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="preamble" class="status">
-<a id ="home" href = "index.html" ><i class="fa fa-language"></i> Home</a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
- Archive</a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> GitHub</a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> <font color="black">RSS</font></a>
+<a id ="home" href = "index.html" ><i class="fa fa-language"></i> </a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ </a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> <font color="black"></font></a>
 </div>
 <div id="content">
 <h1 class="title">Normalizzazione Lobanov delle Vocali</h1>
@@ -266,14 +266,14 @@ E' importante organizzare il dataframe con la funzione <b>groupby()</b> in modo 
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #fb4933;">def</span> <span style="color: #fabd2f;">lobanov</span><span style="color: #8c8c8c;">(</span>F1,F2, speaker<span style="color: #8c8c8c;">)</span>:
-<span style="background-color: #060606;"> </span>   <span style="color: #00ffff;">vowelsform</span><span style="color: #8c8c8c;">[</span><span style="color: #b8bb26;">'norm_F1'</span><span style="color: #8c8c8c;">]</span> = <span style="color: #8c8c8c;">(</span>vowelsform<span style="color: #93a8c6;">[</span>F1<span style="color: #93a8c6;">]</span>
-                             - vowelsform.groupby<span style="color: #93a8c6;">(</span><span style="color: #b0b1a3;">[</span>speaker<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)[</span>F1<span style="color: #93a8c6;">]</span>.transform<span style="color: #93a8c6;">(</span>np.mean<span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span> \
-                             / vowelsform.groupby<span style="color: #8c8c8c;">(</span><span style="color: #93a8c6;">[</span>speaker<span style="color: #93a8c6;">]</span><span style="color: #8c8c8c;">)[</span>F1<span style="color: #8c8c8c;">]</span>.transform<span style="color: #8c8c8c;">(</span>np.std<span style="color: #8c8c8c;">)</span>
+<pre class="src src-python"><span style="color: #fb4933;">def</span> <span style="color: #fabd2f;">lobanov</span><span style="color: #458588;">(</span>F1,F2, speaker<span style="color: #458588;">)</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">vowelsform</span><span style="color: #458588;">[</span><span style="color: #b8bb26;">'norm_F1'</span><span style="color: #458588;">]</span> = <span style="color: #458588;">(</span>vowelsform<span style="color: #b16286;">[</span>F1<span style="color: #b16286;">]</span>
+                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F1<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #458588;">)</span> \
+                             / vowelsform.groupby<span style="color: #458588;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #458588;">)[</span>F1<span style="color: #458588;">]</span>.transform<span style="color: #458588;">(</span>np.std<span style="color: #458588;">)</span>
 
-<span style="background-color: #060606;"> </span>   <span style="color: #00ffff;">vowelsform</span><span style="color: #8c8c8c;">[</span><span style="color: #b8bb26;">'norm_F2'</span><span style="color: #8c8c8c;">]</span> = <span style="color: #8c8c8c;">(</span>vowelsform<span style="color: #93a8c6;">[</span>F2<span style="color: #93a8c6;">]</span>
-                             - vowelsform.groupby<span style="color: #93a8c6;">(</span><span style="color: #b0b1a3;">[</span>speaker<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)[</span>F2<span style="color: #93a8c6;">]</span>.transform<span style="color: #93a8c6;">(</span>np.mean<span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span> \
-                             / vowelsform.groupby<span style="color: #8c8c8c;">(</span><span style="color: #93a8c6;">[</span>speaker<span style="color: #93a8c6;">]</span><span style="color: #8c8c8c;">)[</span>F2<span style="color: #8c8c8c;">]</span>.transform<span style="color: #8c8c8c;">(</span>np.std<span style="color: #8c8c8c;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">vowelsform</span><span style="color: #458588;">[</span><span style="color: #b8bb26;">'norm_F2'</span><span style="color: #458588;">]</span> = <span style="color: #458588;">(</span>vowelsform<span style="color: #b16286;">[</span>F2<span style="color: #b16286;">]</span>
+                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F2<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #458588;">)</span> \
+                             / vowelsform.groupby<span style="color: #458588;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #458588;">)[</span>F2<span style="color: #458588;">]</span>.transform<span style="color: #458588;">(</span>np.std<span style="color: #458588;">)</span>
 </pre>
 </div>
 
@@ -362,7 +362,7 @@ Rappresentando i valori in scatterplot possiamo vedere la differenza tra raw dat
 
 
 <div class="figure">
-<p><img src="./img/norm-plot.png" alt="norm-plot.png" width="100%" height="100%" />
+<p><img src="./img/norm-plot.png" alt="norm-plot.png" width="70%" height="70%" align="center" />
 </p>
 </div>
 </div>

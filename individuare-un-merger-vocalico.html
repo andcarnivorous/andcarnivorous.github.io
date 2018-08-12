@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Individuare un Merger Vocalico</title>
-<!-- 2018-07-23 Mon 08:25 -->
+<!-- 2018-07-31 Tue 14:01 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew" />
@@ -89,7 +89,7 @@
   /*]]>*/-->
 </style>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -139,8 +139,8 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="preamble" class="status">
-<a id ="home" href = "index.html" ><i class="fa fa-language"></i> Home</a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
- Archive</a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> GitHub</a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> <font color="black">RSS</font></a>
+<a id ="home" href = "index.html" ><i class="fa fa-language"></i> </a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ </a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> <font color="black"></font></a>
 </div>
 <div id="content">
 <h1 class="title">Individuare un Merger Vocalico</h1>
@@ -196,10 +196,10 @@ Usando un dataframe con colonne contenenti formanti F1 ed F2 e classificatori co
 
 <pre class="src src-python"><span style="color: #fb4933;">from</span> scipy.stats <span style="color: #fb4933;">import</span> ttest_ind
 
-<span style="color: #00ffff;">group1</span> = <span style="color: #8c8c8c;">[</span>x <span style="color: #fb4933;">for</span> x <span style="color: #fb4933;">in</span>  vowelsform<span style="color: #93a8c6;">[</span><span style="color: #b8bb26;">'F2'</span><span style="color: #93a8c6;">][</span>vowelsform<span style="color: #b0b1a3;">[</span><span style="color: #b8bb26;">'vowel_id'</span><span style="color: #b0b1a3;">]</span> == <span style="color: #b8bb26;">'e'</span><span style="color: #93a8c6;">]</span><span style="color: #8c8c8c;">]</span>
-<span style="color: #00ffff;">group2</span> = <span style="color: #8c8c8c;">[</span>x <span style="color: #fb4933;">for</span> x <span style="color: #fb4933;">in</span> vowelsform<span style="color: #93a8c6;">[</span><span style="color: #b8bb26;">'F2'</span><span style="color: #93a8c6;">][</span>vowelsform<span style="color: #b0b1a3;">[</span><span style="color: #b8bb26;">'vowel_id'</span><span style="color: #b0b1a3;">]</span> == <span style="color: #b8bb26;">'E'</span><span style="color: #93a8c6;">]</span><span style="color: #8c8c8c;">]</span>
-<span style="color: #00ffff;">group3</span> = <span style="color: #8c8c8c;">[</span>x <span style="color: #fb4933;">for</span> x <span style="color: #fb4933;">in</span> vowelsform<span style="color: #93a8c6;">[</span><span style="color: #b8bb26;">'F1'</span><span style="color: #93a8c6;">][</span>vowelsform<span style="color: #b0b1a3;">[</span><span style="color: #b8bb26;">'vowel_id'</span><span style="color: #b0b1a3;">]</span> == <span style="color: #b8bb26;">'e'</span><span style="color: #93a8c6;">]</span><span style="color: #8c8c8c;">]</span>
-<span style="color: #00ffff;">group4</span> = <span style="color: #8c8c8c;">[</span>x <span style="color: #fb4933;">for</span> x <span style="color: #fb4933;">in</span> vowelsform<span style="color: #93a8c6;">[</span><span style="color: #b8bb26;">'F1'</span><span style="color: #93a8c6;">][</span>vowelsform<span style="color: #b0b1a3;">[</span><span style="color: #b8bb26;">'vowel_id'</span><span style="color: #b0b1a3;">]</span> == <span style="color: #b8bb26;">'E'</span><span style="color: #93a8c6;">]</span><span style="color: #8c8c8c;">]</span>
+<span style="color: #83a598;">group1</span> = <span style="color: #458588;">[</span>x <span style="color: #fb4933;">for</span> x <span style="color: #fb4933;">in</span>  vowelsform<span style="color: #b16286;">[</span><span style="color: #b8bb26;">'F2'</span><span style="color: #b16286;">][</span>vowelsform<span style="color: #8ec07c;">[</span><span style="color: #b8bb26;">'vowel_id'</span><span style="color: #8ec07c;">]</span> == <span style="color: #b8bb26;">'e'</span><span style="color: #b16286;">]</span><span style="color: #458588;">]</span>
+<span style="color: #83a598;">group2</span> = <span style="color: #458588;">[</span>x <span style="color: #fb4933;">for</span> x <span style="color: #fb4933;">in</span> vowelsform<span style="color: #b16286;">[</span><span style="color: #b8bb26;">'F2'</span><span style="color: #b16286;">][</span>vowelsform<span style="color: #8ec07c;">[</span><span style="color: #b8bb26;">'vowel_id'</span><span style="color: #8ec07c;">]</span> == <span style="color: #b8bb26;">'E'</span><span style="color: #b16286;">]</span><span style="color: #458588;">]</span>
+<span style="color: #83a598;">group3</span> = <span style="color: #458588;">[</span>x <span style="color: #fb4933;">for</span> x <span style="color: #fb4933;">in</span> vowelsform<span style="color: #b16286;">[</span><span style="color: #b8bb26;">'F1'</span><span style="color: #b16286;">][</span>vowelsform<span style="color: #8ec07c;">[</span><span style="color: #b8bb26;">'vowel_id'</span><span style="color: #8ec07c;">]</span> == <span style="color: #b8bb26;">'e'</span><span style="color: #b16286;">]</span><span style="color: #458588;">]</span>
+<span style="color: #83a598;">group4</span> = <span style="color: #458588;">[</span>x <span style="color: #fb4933;">for</span> x <span style="color: #fb4933;">in</span> vowelsform<span style="color: #b16286;">[</span><span style="color: #b8bb26;">'F1'</span><span style="color: #b16286;">][</span>vowelsform<span style="color: #8ec07c;">[</span><span style="color: #b8bb26;">'vowel_id'</span><span style="color: #8ec07c;">]</span> == <span style="color: #b8bb26;">'E'</span><span style="color: #b16286;">]</span><span style="color: #458588;">]</span>
 </pre>
 </div>
 
@@ -210,9 +210,9 @@ Create le variabili, sottoporre i valori al t-test è semplice:
 <div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">t-test tra i valori F1 delle due vocali</span>
-<span style="color: #00ffff;">test1</span> = ttest_ind<span style="color: #8c8c8c;">(</span>group1, group2, equal_var=<span style="color: #d3869b;">False</span><span style="color: #8c8c8c;">)</span>
+<span style="color: #83a598;">test1</span> = ttest_ind<span style="color: #458588;">(</span>group1, group2, equal_var=<span style="color: #d3869b;">False</span><span style="color: #458588;">)</span>
 <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">t-test tra i valori F2 delle due vocali</span>
-<span style="color: #00ffff;">test2</span> = ttest_ind<span style="color: #8c8c8c;">(</span>group3, group4, equal_var=<span style="color: #d3869b;">False</span><span style="color: #8c8c8c;">)</span>
+<span style="color: #83a598;">test2</span> = ttest_ind<span style="color: #458588;">(</span>group3, group4, equal_var=<span style="color: #d3869b;">False</span><span style="color: #458588;">)</span>
 
 <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">equal_var come falso non da per scontata la varianza della popolazione </span>
 <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">e condurr&#224; un Welch's t-test che &#232; pi&#249; adatto su popolazioni di dimensioni diverse</span>
@@ -259,19 +259,19 @@ Un modo per avere una rappresentazione visiva del confronto che avviene con il t
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #00ffff;">fig</span> = plt.figure<span style="color: #8c8c8c;">()</span>
-plt.subplot<span style="color: #8c8c8c;">(</span>221<span style="color: #8c8c8c;">)</span>
-plt.boxplot<span style="color: #8c8c8c;">(</span>group1<span style="color: #8c8c8c;">)</span>
-plt.title<span style="color: #8c8c8c;">(</span><span style="color: #b8bb26;">'o F2'</span><span style="color: #8c8c8c;">)</span>
-plt.subplot<span style="color: #8c8c8c;">(</span>222<span style="color: #8c8c8c;">)</span>
-plt.boxplot<span style="color: #8c8c8c;">(</span>group2<span style="color: #8c8c8c;">)</span>
-plt.title<span style="color: #8c8c8c;">(</span><span style="color: #b8bb26;">'O F2'</span><span style="color: #8c8c8c;">)</span>
-plt.subplot<span style="color: #8c8c8c;">(</span>223<span style="color: #8c8c8c;">)</span>
-plt.boxplot<span style="color: #8c8c8c;">(</span>group3<span style="color: #8c8c8c;">)</span>
-plt.title<span style="color: #8c8c8c;">(</span><span style="color: #b8bb26;">'o F1'</span><span style="color: #8c8c8c;">)</span>
-plt.subplot<span style="color: #8c8c8c;">(</span>224<span style="color: #8c8c8c;">)</span>
-plt.boxplot<span style="color: #8c8c8c;">(</span>group4<span style="color: #8c8c8c;">)</span>
-plt.title<span style="color: #8c8c8c;">(</span><span style="color: #b8bb26;">'O F1'</span><span style="color: #8c8c8c;">)</span>
+<pre class="src src-python"><span style="color: #83a598;">fig</span> = plt.figure<span style="color: #458588;">()</span>
+plt.subplot<span style="color: #458588;">(</span>221<span style="color: #458588;">)</span>
+plt.boxplot<span style="color: #458588;">(</span>group1<span style="color: #458588;">)</span>
+plt.title<span style="color: #458588;">(</span><span style="color: #b8bb26;">'o F2'</span><span style="color: #458588;">)</span>
+plt.subplot<span style="color: #458588;">(</span>222<span style="color: #458588;">)</span>
+plt.boxplot<span style="color: #458588;">(</span>group2<span style="color: #458588;">)</span>
+plt.title<span style="color: #458588;">(</span><span style="color: #b8bb26;">'O F2'</span><span style="color: #458588;">)</span>
+plt.subplot<span style="color: #458588;">(</span>223<span style="color: #458588;">)</span>
+plt.boxplot<span style="color: #458588;">(</span>group3<span style="color: #458588;">)</span>
+plt.title<span style="color: #458588;">(</span><span style="color: #b8bb26;">'o F1'</span><span style="color: #458588;">)</span>
+plt.subplot<span style="color: #458588;">(</span>224<span style="color: #458588;">)</span>
+plt.boxplot<span style="color: #458588;">(</span>group4<span style="color: #458588;">)</span>
+plt.title<span style="color: #458588;">(</span><span style="color: #b8bb26;">'O F1'</span><span style="color: #458588;">)</span>
 </pre>
 </div>
 
