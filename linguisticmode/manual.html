@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Linguistic Mode</title>
-<!-- 2018-08-12 Sun 18:37 -->
+<!-- 2018-09-03 Mon 22:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -214,11 +214,11 @@ It was designed in order to introduce linguistics students and linguistics enthu
 <h2 id="sec-2"><span class="section-number-2">2</span> How to install</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-You can install the package from MELPA with ~M-x package-install linguistic~
+You can install the package from MELPA with <code>M-x package-install linguistic</code>
 </p>
 
 <p>
-Alternatively, you can use ~M-x package-build-create-recipe~ and use the following:
+Alternatively, you can use <code>M-x package-build-create-recipe</code> and use the following:
 </p>
 
 <div class="org-src-container">
@@ -230,7 +230,7 @@ Alternatively, you can use ~M-x package-build-create-recipe~ and use the followi
 </div>
 
 <p>
-If you want to install with <b>git clone</b> you will have to tweak the functions ~linguistic-gram-freq~ and ~linguistic-word-freq~ in order for them to find the <b>graph.org</b> file.
+If you want to install with <b>git clone</b> you will have to tweak the functions <b>linguistic-gram-freq</b> and <b>linguistic-word-freq</b> in order for them to find the <b>graph.org</b> file.
 </p>
 </div>
 </div>
@@ -243,18 +243,18 @@ The main interactive functions are 4:
 </p>
 
 <ul class="org-ul">
-<li>`linguistic-collocation`
+<li><b>linguistic-collocation</b>
 </li>
-<li>`linguistic-ngrams` &emsp;&emsp;&emsp;&emsp;(<b>C-c C-g</b>)
+<li><b>linguistic-ngrams</b> &emsp;&emsp;&emsp;&emsp;(<code>C-c C-g</code>)
 </li>
-<li>`linguistic-word-freq` &emsp;&emsp; (<b>C-c C-w</b>)
+<li><b>linguistic-word-freq</b> &emsp;&emsp; (<code>C-c C-w</code>)
 </li>
-<li>`linguistic-grams-freq` &emsp;&emsp; (<b>C-c C-n</b>)
+<li><b>linguistic-grams-freq</b> &emsp;&emsp; (<code>C-c C-n</code>)
 </li>
 </ul>
 
 <p>
-If you activate the minor mode with `M-x linguistic-mode` these functions will be available with their respective keybindings.
+If you activate the minor mode with <code>M-x linguistic-mode</code> these functions will be available with their respective keybindings.
 </p>
 </div>
 
@@ -266,18 +266,18 @@ If you want to build a custom corpus from different files, buffers or regions yo
 </p>
 
 <ul class="org-ul">
-<li>`linguistic-build-corpus`
+<li><b>linguistic-build-corpus</b>
 </li>
-<li>`linguistic-collect-file`
+<li><b>linguistic-collect-file</b>
 </li>
-<li>`linguistic-collect-buffer`
+<li><b>linguistic-collect-buffer</b>
 </li>
-<li>`linguistic-collect-region`
+<li><b>linguistic-collect-region</b>
 </li>
 </ul>
 
 <p>
-With `linguistic-build-corpus` you will just create a new empy buffer called <b><b>corpus</b></b>, where then you can maybe copy-paste things from other windows in your OS.
+With <b>linguistic-build-corpus</b> you will just create a new empy buffer called <b><b>corpus</b></b>, where then you can maybe copy-paste things from other windows in your OS.
 </p>
 
 <p>
@@ -287,37 +287,38 @@ With the other functions you can take the contents of multiple files, buffers or
 <p>
 This allows you to maybe take the contents of a .txt file, some <b><b>eww</b></b> buffers and a region of a file and put them all together to be scrutinized by means of the previous functions.
 </p>
+</div>
+</div>
 
 
-<p>
-### Basic operations
-</p>
-
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Basic operations</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 With linguistic-mode you can get the number of sentences in a raw corpus and also the average number of characters or words per sentence.
 </p>
 
 <ul class="org-ul">
-<li>`linguistic-count-sentences`
+<li><b>linguistic-count-sentences</b>
 </li>
-<li>`linguistic-average-sent-length`
+<li><b>linguistic-average-sent-length</b>
 </li>
-<li>`linguistic-average-words-sent`
+<li><b>linguistic-average-words-sent</b>
 </li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Collocation</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Collocation</h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
 This function allows you to find every instance of a word in the buffer and its surrounding context. The size of the context (how many words on the left and right will be displayed) is chosen by the user.
 </p>
 
 <p>
-After calling `linguistic-collocation` you will be asked to insert the number of words after the keyword, before the keyword and finally the keyword itself. Remember that the keyword should always be lowercase.
+After calling <b>linguistic-collocation</b> you will be asked to insert the number of words after the keyword, before the keyword and finally the keyword itself. Remember that the keyword should always be lowercase.
 </p>
 
 <p>
@@ -325,11 +326,7 @@ Once the function has analyzed the whole buffer it will return in a new buffer t
 </p>
 
 <p>
-If you use 0 as number for your context before and/or after the keyword the word "nil" will show up instead of any context.
-</p>
-
-<p>
-Remember that the more words on the sides, the more it will take to analyze the buffer. The function also substitutes any punctuation with a period.
+If you use 0 as number for your context before and/or after the keyword the word "nil" will show up instead of any context. The function also substitutes any punctuation with a period.
 </p>
 
 
@@ -339,39 +336,39 @@ Remember that the more words on the sides, the more it will take to analyze the 
 </figure>
 </div>
 
-<div id="outline-container-sec-3-2-1" class="outline-4">
-<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Collocation Frequency</h4>
-<div class="outline-text-4" id="text-3-2-1">
+<div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Collocation Frequency</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <p>
-The new function `linguistic-collocation-freq` requires the same input as the other one, but it returns in a new buffer the list of all the collocates and their frequencies.
+The new function <b>linguistic-collocation-freq</b> requires the same input as the other one, but it returns in a new buffer the list of all the collocates and their frequencies.
 </p>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Ngrams</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Ngrams</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
 This function will return a list, in a new buffer, of all the ngrams present in the buffer and the number of ngrams resulted.
 </p>
 
 <p>
-When you call `linguistic-ngrams` you will have to insert the size of the ngram first. 
+When you call <b>linguistic-ngrams</b> you will have to insert the size of the ngram first. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Word Frequency</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Word Frequency</h3>
+<div class="outline-text-3" id="text-3-5">
 <p>
 This function will return, in a new buffer, an org-table with the N most frequent words in the buffer or selected area  and their occurrences. The new buffer will also contain some code snippets in Python, Gnuplot and R that will allow you to get a bar chart of the result.
 </p>
 
 <p>
-When you call `linguistic-word-freq` you will be asked how long you want the result list (the table, basically) to be. If you choose a number that is higher than the number of single words in the result, the function will return an error.
+When you call <b>linguistic-word-freq</b> you will be asked how long you want the result list (the table, basically) to be. If you choose a number that is higher than the number of single words in the result, the function will return an error.
 </p>
 
 <p>
@@ -386,28 +383,28 @@ You will also be asked if you want to include stopwords or not. Stopwords are wo
 </div>
 </div>
 
-<div id="outline-container-sec-3-5" class="outline-3">
-<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Ngram Frequency</h3>
-<div class="outline-text-3" id="text-3-5">
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Ngram Frequency</h3>
+<div class="outline-text-3" id="text-3-6">
 <p>
-This function works just like `linguistic-word-freq` and can be applied to the whole buffer or a selected area. The only difference is that you will also be prompted to insert the size of the ngram you want in your result (2 for bigrams, 3 for trigrams and so on).
+This function <b>linguistic-grams-freq</b> works just like <b>linguistic-word-freq</b> and can be applied to the whole buffer or a selected area. The only difference is that you will also be prompted to insert the size of the ngram you want in your result (2 for bigrams, 3 for trigrams and so on).
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-sec-3-6" class="outline-3">
-<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Custom variables</h3>
-<div class="outline-text-3" id="text-3-6">
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Custom variables</h3>
+<div class="outline-text-3" id="text-3-7">
 <p>
-There are 2 custom variable that you can customize with `M-x customize-group linguistic-analysis`:
+There are 2 custom variable that you can customize with <code>M-x customize-group linguistic-analysis</code>:
 </p>
 
 <ul class="org-ul">
-<li>`linguistic-splitter` contains the regex that regulate which special characters will be included in ngrams, word-freq and grams-freq.
+<li><b>linguistic-splitter</b> contains the regex that regulate which special characters will be included in ngrams, word-freq and grams-freq.
 </li>
 
-<li>`linguistic-stopwords` contains a list of words that will not be included in word-freq if the uses chooses to apply the stopwords filter.
+<li><b>linguistic-stopwords</b> contains a list of words that will not be included in word-freq if the uses chooses to apply the stopwords filter.
 </li>
 </ul>
 </div>
@@ -436,12 +433,12 @@ When you use linguistic-mode on big files the waiting time for results can be lo
 </p>
 
 <p>
-Using `linguistic-collocation`, with an i5, it took this machine 61 seconds to find all the occurrences of the word "emma", with 3 context words on each side, in the novel "Emma" by Austen.
-Instead it took 33 seconds to find the same word with just 1 context word per side.
+Using <b>linguistic-collocation</b>, with an i5, it took this machine 61 seconds to find all the occurrences of the word "emma", with 3 context words on each side, in the novel "Emma" by Austen.
+Instead it took 14 seconds to find the same word with just 1 context word per side.
 </p>
 
 <p>
-Using `linguistic-grams-freq` to get the most frequent trigrams in the novel took 160 seconds.
+Using <b>linguistic-grams-freq</b> to get the most frequent trigrams in the novel took 160 seconds.
 </p>
 </div>
 </div>
@@ -468,11 +465,12 @@ Using `linguistic-grams-freq` to get the most frequent trigrams in the novel too
 <li><a href="#sec-3">3. How to use</a>
 <ul class="nav">
 <li><a href="#sec-3-1">3.1. Building a Corpus</a></li>
-<li><a href="#sec-3-2">3.2. Collocation</a></li>
-<li><a href="#sec-3-3">3.3. Ngrams</a></li>
-<li><a href="#sec-3-4">3.4. Word Frequency</a></li>
-<li><a href="#sec-3-5">3.5. Ngram Frequency</a></li>
-<li><a href="#sec-3-6">3.6. Custom variables</a></li>
+<li><a href="#sec-3-2">3.2. Basic operations</a></li>
+<li><a href="#sec-3-3">3.3. Collocation</a></li>
+<li><a href="#sec-3-4">3.4. Ngrams</a></li>
+<li><a href="#sec-3-5">3.5. Word Frequency</a></li>
+<li><a href="#sec-3-6">3.6. Ngram Frequency</a></li>
+<li><a href="#sec-3-7">3.7. Custom variables</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4. Examples</a>
@@ -489,7 +487,7 @@ Using `linguistic-grams-freq` to get the most frequent trigrams in the novel too
 <footer id="postamble" class="">
 <div><p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-07-30 Mon&gt;</span></span></p>
 <p class="author">Author: Andrew</p>
-<p class="date">Created: 2018-08-12 Sun 18:37</p>
+<p class="date">Created: 2018-09-03 Mon 22:36</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org-mode</a> 8.2.10)</p>
 </div>
 </footer>
