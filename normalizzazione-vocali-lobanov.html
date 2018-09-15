@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Normalizzazione Lobanov delle Vocali</title>
-<!-- 2018-07-31 Tue 14:00 -->
+<!-- 2018-09-15 Sat 21:18 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew" />
@@ -266,14 +266,14 @@ E' importante organizzare il dataframe con la funzione <b>groupby()</b> in modo 
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #fb4933;">def</span> <span style="color: #fabd2f;">lobanov</span><span style="color: #458588;">(</span>F1,F2, speaker<span style="color: #458588;">)</span>:
-<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">vowelsform</span><span style="color: #458588;">[</span><span style="color: #b8bb26;">'norm_F1'</span><span style="color: #458588;">]</span> = <span style="color: #458588;">(</span>vowelsform<span style="color: #b16286;">[</span>F1<span style="color: #b16286;">]</span>
-                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F1<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #458588;">)</span> \
-                             / vowelsform.groupby<span style="color: #458588;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #458588;">)[</span>F1<span style="color: #458588;">]</span>.transform<span style="color: #458588;">(</span>np.std<span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #fb4933;">def</span> <span style="color: #fabd2f;">lobanov</span><span style="color: #0000ff;">(</span>F1,F2, speaker<span style="color: #0000ff;">)</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">vowelsform</span><span style="color: #0000ff;">[</span><span style="color: #b8bb26;">'norm_F1'</span><span style="color: #0000ff;">]</span> = <span style="color: #0000ff;">(</span>vowelsform<span style="color: #b16286;">[</span>F1<span style="color: #b16286;">]</span>
+                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F1<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #0000ff;">)</span> \
+                             / vowelsform.groupby<span style="color: #0000ff;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #0000ff;">)[</span>F1<span style="color: #0000ff;">]</span>.transform<span style="color: #0000ff;">(</span>np.std<span style="color: #0000ff;">)</span>
 
-<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">vowelsform</span><span style="color: #458588;">[</span><span style="color: #b8bb26;">'norm_F2'</span><span style="color: #458588;">]</span> = <span style="color: #458588;">(</span>vowelsform<span style="color: #b16286;">[</span>F2<span style="color: #b16286;">]</span>
-                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F2<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #458588;">)</span> \
-                             / vowelsform.groupby<span style="color: #458588;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #458588;">)[</span>F2<span style="color: #458588;">]</span>.transform<span style="color: #458588;">(</span>np.std<span style="color: #458588;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">vowelsform</span><span style="color: #0000ff;">[</span><span style="color: #b8bb26;">'norm_F2'</span><span style="color: #0000ff;">]</span> = <span style="color: #0000ff;">(</span>vowelsform<span style="color: #b16286;">[</span>F2<span style="color: #b16286;">]</span>
+                             - vowelsform.groupby<span style="color: #b16286;">(</span><span style="color: #8ec07c;">[</span>speaker<span style="color: #8ec07c;">]</span><span style="color: #b16286;">)[</span>F2<span style="color: #b16286;">]</span>.transform<span style="color: #b16286;">(</span>np.mean<span style="color: #b16286;">)</span><span style="color: #0000ff;">)</span> \
+                             / vowelsform.groupby<span style="color: #0000ff;">(</span><span style="color: #b16286;">[</span>speaker<span style="color: #b16286;">]</span><span style="color: #0000ff;">)[</span>F2<span style="color: #0000ff;">]</span>.transform<span style="color: #0000ff;">(</span>np.std<span style="color: #0000ff;">)</span>
 </pre>
 </div>
 
@@ -369,6 +369,14 @@ Rappresentando i valori in scatterplot possiamo vedere la differenza tra raw dat
 </div>
 </div>
 <div id="postamble" class="status">
+<div>
+<script src="https://utteranc.es/client.js"
+        repo="andcarnivorous/andcarnivorous.github.io"
+        issue-term="title"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-07-23 Mon&gt;</span></span></p>
 <p class="author"> Author: Andrew</p>
 <a href = "archive.html" >Other posts</a>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Classificazione delle Vocali in Python</title>
-<!-- 2018-07-31 Tue 14:02 -->
+<!-- 2018-09-15 Sat 21:20 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew" />
@@ -187,10 +187,10 @@ Importiamo i nostri dati e prendiamo solo le colonne e righe che servono.
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #83a598;">vowelsform</span> = pd.read_csv<span style="color: #458588;">(</span><span style="color: #b8bb26;">'informants.csv'</span><span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #83a598;">vowelsform</span> = pd.read_csv<span style="color: #0000ff;">(</span><span style="color: #b8bb26;">'informants.csv'</span><span style="color: #0000ff;">)</span>
 
-<span style="color: #83a598;">X</span> = vowelsform.loc<span style="color: #458588;">[</span>:, <span style="color: #b8bb26;">'F1'</span>:<span style="color: #b8bb26;">'F2'</span><span style="color: #458588;">]</span>
-<span style="color: #83a598;">y</span> = vowelsform.loc<span style="color: #458588;">[</span>:, <span style="color: #b8bb26;">'vowel_id'</span><span style="color: #458588;">]</span>
+<span style="color: #83a598;">X</span> = vowelsform.loc<span style="color: #0000ff;">[</span>:, <span style="color: #b8bb26;">'F1'</span>:<span style="color: #b8bb26;">'F2'</span><span style="color: #0000ff;">]</span>
+<span style="color: #83a598;">y</span> = vowelsform.loc<span style="color: #0000ff;">[</span>:, <span style="color: #b8bb26;">'vowel_id'</span><span style="color: #0000ff;">]</span>
 </pre>
 </div>
 
@@ -199,7 +199,7 @@ Adesso è ora di dividere il dataframe nei gruppi di train e test. Solitamente �
 </p>
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #83a598;">X_train</span>, <span style="color: #83a598;">X_test</span>, <span style="color: #83a598;">y_train</span>, <span style="color: #83a598;">y_test</span> = train_test_split<span style="color: #458588;">(</span>X,y, random_state = 0<span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #83a598;">X_train</span>, <span style="color: #83a598;">X_test</span>, <span style="color: #83a598;">y_train</span>, <span style="color: #83a598;">y_test</span> = train_test_split<span style="color: #0000ff;">(</span>X,y, random_state = 0<span style="color: #0000ff;">)</span>
 </pre>
 </div>
 </div>
@@ -214,9 +214,9 @@ il loro gruppo per poter poi classificare il punto. In questo caso l'algoritmo d
 </p>
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #83a598;">knn</span> = KNeighborsClassifier<span style="color: #458588;">(</span>n_neighbors = 7<span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #83a598;">knn</span> = KNeighborsClassifier<span style="color: #0000ff;">(</span>n_neighbors = 7<span style="color: #0000ff;">)</span>
 
-knn.fit<span style="color: #458588;">(</span>X_train, y_train<span style="color: #458588;">)</span>
+knn.fit<span style="color: #0000ff;">(</span>X_train, y_train<span style="color: #0000ff;">)</span>
 </pre>
 </div>
 
@@ -224,9 +224,9 @@ knn.fit<span style="color: #458588;">(</span>X_train, y_train<span style="color:
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #83a598;">gauss</span> = GaussianNB<span style="color: #458588;">()</span>
+<pre class="src src-python"><span style="color: #83a598;">gauss</span> = GaussianNB<span style="color: #0000ff;">()</span>
 
-gauss.fit<span style="color: #458588;">(</span>X,y<span style="color: #458588;">)</span>
+gauss.fit<span style="color: #0000ff;">(</span>X,y<span style="color: #0000ff;">)</span>
 </pre>
 </div>
 
@@ -234,9 +234,9 @@ gauss.fit<span style="color: #458588;">(</span>X,y<span style="color: #458588;">
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #83a598;">vec</span> = SVC<span style="color: #458588;">(</span>gamma=0.0001, C=100<span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #83a598;">vec</span> = SVC<span style="color: #0000ff;">(</span>gamma=0.0001, C=100<span style="color: #0000ff;">)</span>
 
-vec.fit<span style="color: #458588;">(</span>X,y<span style="color: #458588;">)</span>
+vec.fit<span style="color: #0000ff;">(</span>X,y<span style="color: #0000ff;">)</span>
 </pre>
 </div>
 </div>
@@ -252,26 +252,26 @@ Dopo di ciò proveremo a vedere come quale vocale viene classificato il dato ins
 </p>
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #fb4933;">print</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">'SVM: \t \t'</span>, vec.score<span style="color: #b16286;">(</span>X_test,y_test<span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #fb4933;">print</span><span style="color: #0000ff;">(</span><span style="color: #b8bb26;">'SVM: \t \t'</span>, vec.score<span style="color: #b16286;">(</span>X_test,y_test<span style="color: #b16286;">)</span><span style="color: #0000ff;">)</span>
 
-<span style="color: #fb4933;">print</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">'KNN: \t \t'</span>, knn.score<span style="color: #b16286;">(</span>X_test,y_test<span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
+<span style="color: #fb4933;">print</span><span style="color: #0000ff;">(</span><span style="color: #b8bb26;">'KNN: \t \t'</span>, knn.score<span style="color: #b16286;">(</span>X_test,y_test<span style="color: #b16286;">)</span><span style="color: #0000ff;">)</span>
 
-<span style="color: #fb4933;">print</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">'Gaussian: \t'</span>, gauss.score<span style="color: #b16286;">(</span>X_test,y_test<span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
-
-
-<span style="color: #83a598;">vowelpred</span> = vec.predict<span style="color: #458588;">(</span><span style="color: #b16286;">[</span><span style="color: #8ec07c;">[</span>626.891, 1820.1<span style="color: #8ec07c;">]</span><span style="color: #b16286;">]</span><span style="color: #458588;">)</span>
-
-<span style="color: #fb4933;">print</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">'SVM: \t \t'</span>, vowelpred<span style="color: #458588;">)</span>
+<span style="color: #fb4933;">print</span><span style="color: #0000ff;">(</span><span style="color: #b8bb26;">'Gaussian: \t'</span>, gauss.score<span style="color: #b16286;">(</span>X_test,y_test<span style="color: #b16286;">)</span><span style="color: #0000ff;">)</span>
 
 
-<span style="color: #83a598;">vowelpred</span> = knn.predict<span style="color: #458588;">(</span><span style="color: #b16286;">[</span><span style="color: #8ec07c;">[</span>626.891, 1820.1<span style="color: #8ec07c;">]</span><span style="color: #b16286;">]</span><span style="color: #458588;">)</span>
+<span style="color: #83a598;">vowelpred</span> = vec.predict<span style="color: #0000ff;">(</span><span style="color: #b16286;">[</span><span style="color: #8ec07c;">[</span>626.891, 1820.1<span style="color: #8ec07c;">]</span><span style="color: #b16286;">]</span><span style="color: #0000ff;">)</span>
 
-<span style="color: #fb4933;">print</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">'KNN: \t \t'</span>, vowelpred<span style="color: #458588;">)</span>
+<span style="color: #fb4933;">print</span><span style="color: #0000ff;">(</span><span style="color: #b8bb26;">'SVM: \t \t'</span>, vowelpred<span style="color: #0000ff;">)</span>
 
 
-<span style="color: #83a598;">vowelpred</span> = gauss.predict<span style="color: #458588;">(</span><span style="color: #b16286;">[</span><span style="color: #8ec07c;">[</span>626.891, 1820.1<span style="color: #8ec07c;">]</span><span style="color: #b16286;">]</span><span style="color: #458588;">)</span>
+<span style="color: #83a598;">vowelpred</span> = knn.predict<span style="color: #0000ff;">(</span><span style="color: #b16286;">[</span><span style="color: #8ec07c;">[</span>626.891, 1820.1<span style="color: #8ec07c;">]</span><span style="color: #b16286;">]</span><span style="color: #0000ff;">)</span>
 
-<span style="color: #fb4933;">print</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">'Gaussian: \t'</span>, vowelpred<span style="color: #458588;">)</span>
+<span style="color: #fb4933;">print</span><span style="color: #0000ff;">(</span><span style="color: #b8bb26;">'KNN: \t \t'</span>, vowelpred<span style="color: #0000ff;">)</span>
+
+
+<span style="color: #83a598;">vowelpred</span> = gauss.predict<span style="color: #0000ff;">(</span><span style="color: #b16286;">[</span><span style="color: #8ec07c;">[</span>626.891, 1820.1<span style="color: #8ec07c;">]</span><span style="color: #b16286;">]</span><span style="color: #0000ff;">)</span>
+
+<span style="color: #fb4933;">print</span><span style="color: #0000ff;">(</span><span style="color: #b8bb26;">'Gaussian: \t'</span>, vowelpred<span style="color: #0000ff;">)</span>
 </pre>
 </div>
 
@@ -281,9 +281,9 @@ Il risultato:
 
 <div class="org-src-container">
 
-<pre class="src src-python">SVM:             <span style="color: #458588;">[</span><span style="color: #b8bb26;">'E'</span><span style="color: #458588;">]</span>
-KNN:             <span style="color: #458588;">[</span><span style="color: #b8bb26;">'E'</span><span style="color: #458588;">]</span>
-Gaussian:        <span style="color: #458588;">[</span><span style="color: #b8bb26;">'e'</span><span style="color: #458588;">]</span>
+<pre class="src src-python">SVM:             <span style="color: #0000ff;">[</span><span style="color: #b8bb26;">'E'</span><span style="color: #0000ff;">]</span>
+KNN:             <span style="color: #0000ff;">[</span><span style="color: #b8bb26;">'E'</span><span style="color: #0000ff;">]</span>
+Gaussian:        <span style="color: #0000ff;">[</span><span style="color: #b8bb26;">'e'</span><span style="color: #0000ff;">]</span>
 SVM:             0.852713178295
 KNN:             0.53488372093
 Gaussian:        0.581395348837
@@ -299,6 +299,14 @@ affidabile. Una percentuale tra l'80% e 95% è ottimale.
 </div>
 </div>
 <div id="postamble" class="status">
+<div>
+<script src="https://utteranc.es/client.js"
+        repo="andcarnivorous/andcarnivorous.github.io"
+        issue-term="title"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-05-20 Sun&gt;</span></span></p>
 <p class="author"> Author: Andrew</p>
 <a href = "archive.html" >Other posts</a>

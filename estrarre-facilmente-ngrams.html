@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Come Estrarre Ngrams Facilmente</title>
-<!-- 2018-07-31 Tue 14:02 -->
+<!-- 2018-09-15 Sat 21:20 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew" />
@@ -172,10 +172,10 @@ Per prima cosa si importano i moduli che servono. <b>word<sub>tokenize</sub></b>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #fb4933;">with</span> <span style="color: #fe8019;">open</span><span style="color: #458588;">(</span><span style="color: #b8bb26;">"austen-emma.txt"</span>, <span style="color: #b8bb26;">"r"</span><span style="color: #458588;">)</span> <span style="color: #fb4933;">as</span> corpus:
-<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">corpus</span> = corpus.read<span style="color: #458588;">()</span>
+<pre class="src src-python"><span style="color: #fb4933;">with</span> <span style="color: #fe8019;">open</span><span style="color: #0000ff;">(</span><span style="color: #b8bb26;">"austen-emma.txt"</span>, <span style="color: #b8bb26;">"r"</span><span style="color: #0000ff;">)</span> <span style="color: #fb4933;">as</span> corpus:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">corpus</span> = corpus.read<span style="color: #0000ff;">()</span>
 
-<span style="color: #83a598;">stop_words</span> = <span style="color: #fe8019;">set</span><span style="color: #458588;">(</span>stopwords.words<span style="color: #b16286;">(</span><span style="color: #b8bb26;">'english'</span><span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
+<span style="color: #83a598;">stop_words</span> = <span style="color: #fe8019;">set</span><span style="color: #0000ff;">(</span>stopwords.words<span style="color: #b16286;">(</span><span style="color: #b8bb26;">'english'</span><span style="color: #b16286;">)</span><span style="color: #0000ff;">)</span>
 </pre>
 </div>
 </div>
@@ -191,15 +191,15 @@ Successivamente, utilizzando la variabile precedentemente impostata, si eliminan
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #83a598;">tokens</span> = word_tokenize<span style="color: #458588;">(</span>corpus<span style="color: #458588;">)</span>
+<pre class="src src-python"><span style="color: #83a598;">tokens</span> = word_tokenize<span style="color: #0000ff;">(</span>corpus<span style="color: #0000ff;">)</span>
 
-<span style="color: #83a598;">filteredTokens</span> = <span style="color: #458588;">[]</span>
+<span style="color: #83a598;">filteredTokens</span> = <span style="color: #0000ff;">[]</span>
 
 <span style="color: #7c6f64;">## </span><span style="color: #7c6f64;">Togliere le stopwords dai tokens</span>
 
 <span style="color: #fb4933;">for</span> token <span style="color: #fb4933;">in</span> tokens:
 <span style="background-color: #3c3836;"> </span>   <span style="color: #fb4933;">if</span> token <span style="color: #fb4933;">not</span> <span style="color: #fb4933;">in</span> stop_words:
-        filteredTokens.append<span style="color: #458588;">(</span>token<span style="color: #458588;">)</span>
+        filteredTokens.append<span style="color: #0000ff;">(</span>token<span style="color: #0000ff;">)</span>
 </pre>
 </div>
 </div>
@@ -216,11 +216,11 @@ Ora che si è ottenuta la lista di tokens filtrati, utilizzando il modulo ngrams
 
 <pre class="src src-python"><span style="color: #83a598;">n</span> = 3 <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">Numero di ngrams</span>
 
-<span style="color: #83a598;">ngrammi</span> = <span style="color: #fe8019;">list</span><span style="color: #458588;">(</span>ngrams<span style="color: #b16286;">(</span>filteredTokens, n<span style="color: #b16286;">)</span><span style="color: #458588;">)</span>
+<span style="color: #83a598;">ngrammi</span> = <span style="color: #fe8019;">list</span><span style="color: #0000ff;">(</span>ngrams<span style="color: #b16286;">(</span>filteredTokens, n<span style="color: #b16286;">)</span><span style="color: #0000ff;">)</span>
 
-<span style="color: #83a598;">fDist</span> = nltk.FreqDist<span style="color: #458588;">(</span>ngrammi<span style="color: #458588;">)</span>
+<span style="color: #83a598;">fDist</span> = nltk.FreqDist<span style="color: #0000ff;">(</span>ngrammi<span style="color: #0000ff;">)</span>
 
-<span style="color: #83a598;">mostComm</span> = fDist.most_common<span style="color: #458588;">(</span>30<span style="color: #458588;">)</span> <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
+<span style="color: #83a598;">mostComm</span> = fDist.most_common<span style="color: #0000ff;">(</span>30<span style="color: #0000ff;">)</span> <span style="color: #7c6f64;">#</span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
 </pre>
 </div>
 </div>
@@ -231,7 +231,7 @@ Ora che si è ottenuta la lista di tokens filtrati, utilizzando il modulo ngrams
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 
-<pre class="src src-python">fDist.plot<span style="color: #458588;">(</span>30,                      <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
+<pre class="src src-python">fDist.plot<span style="color: #0000ff;">(</span>30,                      <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">I 30 ngrammi pi&#249; frequenti</span>
            cumulative=<span style="color: #d3869b;">False</span>,        <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Se mostrare frequenza cumulativa</span>
            title=<span style="color: #b8bb26;">"Titolo"</span>,          <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Titolo del grafico</span>
            color=<span style="color: #b8bb26;">"blue"</span>,            <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Colore della linea</span>
@@ -239,7 +239,7 @@ Ora che si è ottenuta la lista di tokens filtrati, utilizzando il modulo ngrams
            marker=<span style="color: #b8bb26;">"."</span>,              <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Punti di riferimento sulla linea</span>
            markerfacecolor=<span style="color: #b8bb26;">"red"</span>,   <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Colore interno del marker</span>
            markeredgecolor=<span style="color: #b8bb26;">"blue"</span>,  <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Contorno del marker </span>
-           markersize=10.0<span style="color: #458588;">)</span>         <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Dimensione del Marker (float)</span>
+           markersize=10.0<span style="color: #0000ff;">)</span>         <span style="color: #7c6f64;"># </span><span style="color: #7c6f64;">Dimensione del Marker (float)</span>
 </pre>
 </div>
 
@@ -260,6 +260,14 @@ Altri oggetti / arguments per il grafico disponibili sono <b>linewidth</b> e <b>
 </div>
 </div>
 <div id="postamble" class="status">
+<div>
+<script src="https://utteranc.es/client.js"
+        repo="andcarnivorous/andcarnivorous.github.io"
+        issue-term="title"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-01-07 Sun&gt;</span></span></p>
 <p class="author"> Author: Andrew</p>
 <a href = "archive.html" >Other posts</a>
