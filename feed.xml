@@ -11,6 +11,16 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>Linguistic-mode: An Emacs Package for Corpus Analysis</title>
+ 	<link>https://andcarnivorous.github.io/linguistic-mode-launch.html</link>
+ 	<description>
+A brief blog post to present and talk about Linguistic-mode, a package for Emacs that can perform different corpus analysis tasks 
+such as ngram or word frequency, collocation, concordance and more. I started writing this mode as a hobby and then it just got out of hand.
+Now it can be found on MELPA and new features will soon be added.
+</description>
+</item>
+
+<item>
  	<title>Normalizzazione Lobanov delle Vocali</title>
  	<link>https://andcarnivorous.github.io/normalizzazione-vocali-lobanov.html</link>
  	<description>

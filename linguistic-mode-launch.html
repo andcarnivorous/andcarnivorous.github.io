@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Archive</title>
+<title>Linguistic-mode: An Emacs Package for Corpus Analysis</title>
 <!-- 2018-09-16 Sun 23:35 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Main" />
+<meta  name="author" content="Andrew" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -143,27 +143,90 @@ for the JavaScript code in this tag.
  </a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> <font color="black"></font></a>
 </div>
 <div id="content">
-<h1 class="title">Archive</h1>
+<h1 class="title">Linguistic-mode: An Emacs Package for Corpus Analysis</h1>
+<p>
+A brief blog post to present and talk about Linguistic-mode, a package for Emacs that can perform different corpus analysis tasks 
+such as ngram or word frequency, collocation, concordance and more. I started writing this mode as a hobby and then it just got out of hand.
+Now it can be found on MELPA and new features will soon be added.
+</p>
+
+<p>
+This will not be a guide per se, if you want to have technical information you can find the manual <a href="https://andcarnivorous.github.io/linguisticmode/manual.html">here</a> and the repository <a href="https://github.com/andcarnivorous/linguistic">here</a>.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">About Emacs and Linguistics</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+I truly believe that Emacs can be a linguist's best friend. The software comes with some built-ins that can surely be useful 
+for a linguist who is starting into the computational side of things or who wants to work in corpus analysis. Word counts, moving by sentence or
+paragraph and especially  RegEx searches and substitutions are perfect introductory tools. Aside from these, however, reasons to use Emacs
+in linguistics are obviously:
+</p>
+
 <ul class="org-ul">
-<li><a href="linguistic-mode-launch.html">2018-09-16 |          Linguistic-mode: An Emacs Package for Corpus Analysis</a>
+<li>AUCTeX
 </li>
-<li><a href="usare-linguistica-uchicago.html">2018-07-26 |          Usare Linguistica di UChicago</a>
+<li>Elpy
 </li>
-<li><a href="normalizzazione-vocali-lobanov.html">2018-07-23 |          Normalizzazione Lobanov delle Vocali</a>
+<li>EIN 
 </li>
-<li><a href="individuare-un-merger-vocalico.html">2018-06-30 |          Individuare un Merger Vocalico</a>
-</li>
-<li><a href="classificazione-vocali-in-python.html">2018-05-20 |          Classificazione delle Vocali in Python</a>
-</li>
-<li><a href="estrarre-facilmente-ngrams.html">2018-01-07 |          Come Estrarre Ngrams Facilmente</a>
-</li>
-<li><a href="modificare-stopwords-in-nltk.html">2018-01-05 |          Modificare Stopwords in NLTK</a>
-</li>
-<li><a href="vocali-nello-spettrogramma.html">2017-09-12 |          Vocali nello Spettrogramma</a>
-</li>
-<li><a href="theindex.html">2016-05-15 |          Blogging Linguistics</a>
+<li>ESS
 </li>
 </ul>
+
+<p>
+Sooner or later all linguistic students find out about LaTeX, are required to use it or hear about it. 
+With AUCTeX it is possible to  work smoothly in LaTeX and PDF Viewer allows to have a preview of your pdf always in sight. This could very well be
+the only reason to have Emacs installed on your machine, but if you start working in corpus linguistics then ESS (Emacs Speaks Statistics) 
+gives you a lightweight IDE for R, while, if you find yourself using Python for corpus analysis or computational linguistics, Elpy and EIN can provide
+a nifty and essential IDE for Python. There are surely other general advantages of using Emacs, but these can be found out easily in any guide or blog post
+on Emacs.
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Linguistic-mode</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The mode just developed from a nice script I found some time ago on stackoverflow. I was tinkering with Elisp and wondering how I could build
+a word frequency function like the one in Python's NLTK library. It turned out, obviously, that <a href="https://emacs.stackexchange.com/questions/13514/how-to-obtain-the-statistic-of-the-the-frequency-of-words-in-a-buffer">someone had already asked a similar question on stackoverflow</a>
+and the user <a href="https://emacs.stackexchange.com/users/3889/xuchunyang">xuchunyang</a> gave this answer inspired to a <a href="https://emacs.stackexchange.com/questions/8067/how-to-obtain-the-statistics-of-the-frequency-of-characters-in-a-buffer/8071#8071">previous similar one</a>. Once I got the function fixed to my liking, I then wanted to try and see whether 
+something similar with N-Grams was possible, and from there it just snowballed into what the mode is now. 
+At the moment, the mode allows to have word and ngram frequencies with snippets of code in Python, Gnuplot and R ready to use to plot the results.
+Additionally it is possible to carry out collocation searches and expand them to make them concordance-like. The collocation function may take some time
+to compute, but for example to find all the occurrences of the word "Emma" in £Emma£ by Jane Austen, the function took about 15 seconds.
+In the makings there is a function to perform proper concordance searches with faster results than the collocation one, improvements to the latter and
+functions to have information on the number of sentences in a corpus and their average lengths.
+</p>
+
+<p>
+The next screenshots show the functions' results and their time:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/wordfreqtime.png" alt="wordfreqtime.png" width="100%" height="100%" align="center" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./img/collocationtime.png" alt="collocationtime.png" width="100%" height="100%" align="center" />
+</p>
+</div>
+
+<p>
+The computation times for the N-Gram frequency functions are far longer than these.
+However, the mode is still being worked on and any feedback or contribution is more than welcome, especially since 
+I am not exactly an expert in programming and Elisp is a language that I have only recently started to study more seriously.
+You can leave a comment here for feedback or suggestions, email me or open an issue on GitHub.
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <div>
@@ -174,8 +237,8 @@ for the JavaScript code in this tag.
         async>
 </script>
 </div>
-<p class="date">Date: </p>
-<p class="author"> Author: Main</p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-09-16 Fri&gt;</span></span></p>
+<p class="author"> Author: Andrew</p>
 <a href = "archive.html" >Other posts</a>
 </div>
 </body>
