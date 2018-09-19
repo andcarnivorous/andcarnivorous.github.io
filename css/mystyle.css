@@ -1,3 +1,7 @@
+h1.title {
+    text-align: center;
+}
+
 #text-table-of-contents{
     color: red;
     link: red;
@@ -11,9 +15,6 @@
 
 #postamble {
     margin-top: 30px;
-}
-
-#postamble{
     border-top: 4px #B2B2B2;
     border-top-style:solid;
     color: black;
@@ -115,3 +116,9 @@ a {
 .timestamp{
     color:black;
 }
+h2  {
+    text-align: center;
+}
+#outline-container-sec-3.outline-2 {border-bottom: 4px lightgray; border-bottom-style:solid;}
+#text-3.outline-text-2  {text-align: center;}
+#outline-container-sec-3.org-ul  {text-align: center;}
