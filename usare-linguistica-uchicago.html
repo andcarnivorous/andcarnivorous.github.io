@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Archive</title>
+<title>Usare Linguistica di UChicago</title>
 <!-- 2018-09-28 Fri 10:16 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Main" />
+<meta  name="author" content="Andrew" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -143,27 +143,134 @@ for the JavaScript code in this tag.
  </a> <a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> <font color="black"></font></a>
 </div>
 <div id="content">
-<h1 class="title">Archive</h1>
-<ul class="org-ul">
-<li><a href="usare-linguistica-uchicago.html">2018-09-25 |          Usare Linguistica di UChicago</a>
-</li>
-<li><a href="linguistic-mode-launch.html">2018-09-16 |          Linguistic-mode: An Emacs Package for Corpus Analysis</a>
-</li>
-<li><a href="normalizzazione-vocali-lobanov.html">2018-07-23 |          Normalizzazione Lobanov delle Vocali</a>
-</li>
-<li><a href="individuare-un-merger-vocalico.html">2018-06-30 |          Individuare un Merger Vocalico</a>
-</li>
-<li><a href="classificazione-vocali-in-python.html">2018-05-20 |          Classificazione delle Vocali in Python</a>
-</li>
-<li><a href="estrarre-facilmente-ngrams.html">2018-01-07 |          Come Estrarre Ngrams Facilmente</a>
-</li>
-<li><a href="modificare-stopwords-in-nltk.html">2018-01-05 |          Modificare Stopwords in NLTK</a>
-</li>
-<li><a href="vocali-nello-spettrogramma.html">2017-09-12 |          Vocali nello Spettrogramma</a>
-</li>
-<li><a href="theindex.html">2016-05-15 |          Blogging Linguistics</a>
+<h1 class="title">Usare Linguistica di UChicago</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">How to install and start Linguistica</a></li>
+<li><a href="#sec-2">Load e Run</a>
+<ul>
+<li><a href="#sec-2-1">Bigrammi e Trigrammi</a></li>
+<li><a href="#sec-2-2">Signatures</a></li>
+<li><a href="#sec-2-3">Manifolds</a></li>
+</ul>
 </li>
 </ul>
+</div>
+</div>
+<p>
+Il software Linguistica di UChicago permette di ottenere bigrammi, trigrammi, affissi, n-neighbors e molto altro con una interfaccia molto semplice ed efficace. Il punto più forte. però, è sicuramente la rappresentazione del manifold ricavato dal corpus.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/linguisticauchicago.png" alt="linguisticauchicago.png" width="70%" height="70%" align="center" />
+</p>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">How to install and start Linguistica</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Il software ha una buona documentazione che può essere trovata qui <a href="http://linguistica-uchicago.github.io/lxa5/">http://linguistica-uchicago.github.io/lxa5/</a>
+</p>
+
+<p>
+Per rendere le cose più immediate però, ecco come installare Linguistica (preferibilmente in un virtual environment)
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">$ pip install PyQt5
+
+$ pip install linguistica
+</pre>
+</div>
+
+<p>
+adesso per far partire linguistica basta chiamare il software nel terminale
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">$ linguistica gui
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Load e Run</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Cliccando su <b>File</b> possiamo scegliere se caricare un corpus o wordlist. 
+Caricando come corpus uno dei vari libri in txt presenti in NLTK (nel mio caso Moby-Dick di Melville), 
+basta semplicemente andare su <b>File</b> nuovamente e cliccare su <b>Run</b>. Dopo aver eseguito, i risultati saranno disponibili nell'interfaccia.
+</p>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">Bigrammi e Trigrammi</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Il risultato con bigrammi e trigrammi è decisamente sporco, caratteri vengono presi in considerazione e sembra non esserci alcun filtraggio di stop-words.
+</p>
+
+<p>
+Ciò può comunque essere molto probabilmente modificato facilmente nel codice del software.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/linguisticatrigrams.png" alt="linguisticatrigrams.png" width="70%" height="70%" align="center" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">Signatures</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Questa sezione mostra gli affissi ed i loro stems, si possono visualizzare i risultati per affissi o per radici.
+I risultati con l'inglese sembrano molto buoni ed interessanti, ho provato con l'italiano ma il corpus che avevo era dicisamente pieno di rumore e i risultati, nonostante buoni, erano decisamente influenzati dalla presenza di link e stringhe nel corpus.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/linguisticasignatures.png" alt="linguisticasignatures.png" width="70%" height="70%" align="center" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3">Manifolds</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Questa è la mia sezione preferita di Linguistica. La sezione Manifolds offre la wordlist del corpus in ordine di frequenza e gli N neighbors più frequenti per ogni parola, 
+cioè le parole che più frequentemente compaiono vicino alla keyword. Visualized graph, infine, offre il bel grafico del manifold che può essere salvato.
+</p>
+
+<p>
+C'è da notare però che, almeno nel mio caso, il salvataggio del grafico non è del tutto chiaro al primo tentativo, perchè non si ottiene alcun feedback o richiesta di path per il salvataggio. Ho trovato, dopo un pò di ricerca, il file salvato in una cartella nascosta <b>.linguistica</b> nella mia home directory. Il grafico è salvato come un file HTML al quale è associato il file JS che produce il grafico.
+</p>
+
+
+
+<div class="figure">
+<p><img src="./img/linguisticawordneighbors.png" alt="linguisticawordneighbors.png" width="70%" height="70%" align="center" />
+</p>
+</div>
+
+
+<p>
+In the <a href="./extra/show_manifold.html">following link</a> it is possible to see the actual interactive representation of the manifold with the novel Moby-Dick.
+</p>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <div>
@@ -174,8 +281,8 @@ for the JavaScript code in this tag.
         async>
 </script>
 </div>
-<p class="date">Date: </p>
-<p class="author"> Author: Main</p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-09-25 Tue&gt;</span></span></p>
+<p class="author"> Author: Andrew</p>
 <a href = "archive.html" >Other posts</a>
 </div>
 </body>

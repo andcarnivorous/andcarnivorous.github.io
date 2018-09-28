@@ -8,9 +8,89 @@
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
 
-<meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="css/mystyle.css" rel="stylesheet" type="text/css"/>
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<style>.outline-2 {border-bottom: 4px black; border-bottom-style:inset;} .outline-text-2  {text-align: center;} h2  {text-align: center;} #title {text-align: center;}</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -57,43 +137,45 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<link href="css/mystyle.css" rel="stylesheet" type="text/css"/>
-  </head>
+</head>
 <body>
 <div id="preamble" class="status">
 <a id ="home" href = "index.html" ><i class="fa fa-language"></i></a><a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i></a><a id ="git" href = "https://github.com/andcarnivorous" ><i class="fa fa-github"></i></a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i><font color="black"></font></a><div style="float: right;"><a id="linguistic-mode" href = "linguisticmode/manual.html">Linguistic-Mode</a></div>
 </div>
 <div id="content">
 <h1 class="title">Blogging Linguistics</h1>
-<div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="linguistic-mode-launch.html">| 2018-09-14 | Linguistic-mode: An Emacs Package for Corpus Analysis</a></li></ul></div></div>
+<div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="usare-linguistica-uchicago.html">| 2018-09-25 | Usare Linguistica di UChicago</a></li></ul></div></div>
+<p>
+Il software Linguistica di UChicago permette di ottenere bigrammi, trigrammi, affissi, n-neighbors e molto altro con una interfaccia molto semplice ed efficace. Il punto più forte. però, è sicuramente la rappresentazione del manifold ricavato dal corpus.
+</p><div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="linguistic-mode-launch.html">| 2018-09-16 | Linguistic-mode: An Emacs Package for Corpus Analysis</a></li></ul></div></div>
 <p>
 A brief blog post to present and talk about Linguistic-mode, a package for Emacs that can perform different corpus analysis tasks 
 such as ngram or word frequency, collocation, concordance and more. I started writing this mode as a hobby and then it just got out of hand.
 Now it can be found on MELPA and new features will soon be added.
-</p><div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="normalizzazione-vocali-lobanov.html">| 2018-07-23 | Normalizzazione Lobanov delle Vocali</a></li></ul></div></div>
+</p><div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="normalizzazione-vocali-lobanov.html">| 2018-07-23 | Normalizzazione Lobanov delle Vocali</a></li></ul></div></div>
 <p>
 In questo post verrà spiegato come normalizzare un dataframe di valori delle formanti attraverso il metodo di Lobanov, che non è niente altro che un z-score applicato sulle formanti di un parlante. 
-</p><div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="individuare-un-merger-vocalico.html">| 2018-06-30 | Individuare un Merger Vocalico</a></li></ul></div></div>
+</p><div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="individuare-un-merger-vocalico.html">| 2018-06-30 | Individuare un Merger Vocalico</a></li></ul></div></div>
 <p>
 Merger e split sono due dei vari possibili cambiamenti fonologici che una lingua può attraversare. 
 Grazie ad analisi acustiche accurate e con abbastanza dati a disposizione, è possibile ottere in modo scientifico una risposta su un possibile merger o split di vocali.
 Per poter fare ciò, basta sottoporre le formanti ottenute ad un t-test.
-</p><div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="classificazione-vocali-in-python.html">| 2018-05-20 | Classificazione delle Vocali in Python</a></li></ul></div></div>
+</p><div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="classificazione-vocali-in-python.html">| 2018-05-20 | Classificazione delle Vocali in Python</a></li></ul></div></div>
 <p>
 Un modo interessante di testare i dati fonetici raccolti è quello di sottoporli a vari classifiers (algoritmi di classificazione) 
 per vedere quali algoritmi possano essere i più accurati e se i dati sono sufficienti ad avere classificatori affidabili.
-</p><div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="estrarre-facilmente-ngrams.html">| 2018-01-07 | Come Estrarre Ngrams Facilmente</a></li></ul></div></div>
+</p><div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="estrarre-facilmente-ngrams.html">| 2018-01-07 | Come Estrarre Ngrams Facilmente</a></li></ul></div></div>
 <p>
 Installando la libreria NLTK per Python3 si possono immediatamente provare molti dei suoi strumenti sui corpora che la libreria stessa fornisce.
 Il modo più semplice per scaricare e installare i vari moduli e corpora è usando la funzione nltk.download() in uno shell di python oppure con python -m nltk.downloader nel terminale.
 Tramite il downloader installate i moduli stopwords, punkt e il corpus gutenberg. 
-</p><div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="le-parole-piu-comuni-nei-commenti-con-praw-ed-nltk.html">| 2018-01-06 | Le Parole Più Comuni Con Praw ed NLTK</a></li></ul></div></div>
+</p><div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="le-parole-piu-comuni-nei-commenti-con-praw-ed-nltk.html">| 2018-01-06 | Le Parole Più Comuni Con Praw ed NLTK</a></li></ul></div></div>
 <p>
 Ultimamente ho iniziato a dare uno sguardo a PRAW, un wrapper per l'API di Reddit che permette di fare data mining in modo molto semplice. 
-</p><div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="modificare-stopwords-in-nltk.html">| 2018-01-05 | Modificare Stopwords in NLTK</a></li></ul></div></div>
+</p><div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="modificare-stopwords-in-nltk.html">| 2018-01-05 | Modificare Stopwords in NLTK</a></li></ul></div></div>
 <p>
 Spesso capita di voler analizzare un corpus in modo molto semplice e preliminare in Python con la libreria NLTK vedendo semplicemente le frequenze dei lemmi.
-</p><div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="vocali-nello-spettrogramma.html">| 2017-09-12 | Vocali nello Spettrogramma</a></li></ul></div></div>
+</p><div id="outline-container-sec-X" class="outline-X"><h2 id="sec-3"></h2><div class="outline-text-2" id="text-3"><ul class="org-ul"><li><a href="vocali-nello-spettrogramma.html">| 2017-09-12 | Vocali nello Spettrogramma</a></li></ul></div></div>
 <p>
 Trovare le formanti manualmente non è difficile, anche se può richiedere abbastanza tempo. Tutto ciò che serve è un microfono esterno per il pc e due free softwares. 
 </p></div>

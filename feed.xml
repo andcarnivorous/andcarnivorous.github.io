@@ -11,6 +11,14 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>Usare Linguistica di UChicago</title>
+ 	<link>https://andcarnivorous.github.io/usare-linguistica-uchicago.html</link>
+ 	<description>
+Il software Linguistica di UChicago permette di ottenere bigrammi, trigrammi, affissi, n-neighbors e molto altro con una interfaccia molto semplice ed efficace. Il punto più forte. però, è sicuramente la rappresentazione del manifold ricavato dal corpus.
+</description>
+</item>
+
+<item>
  	<title>Linguistic-mode: An Emacs Package for Corpus Analysis</title>
  	<link>https://andcarnivorous.github.io/linguistic-mode-launch.html</link>
  	<description>
