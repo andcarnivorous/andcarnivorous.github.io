@@ -82,7 +82,6 @@ table {
 p {
     margin-left: 2%;
     font-family: "Lucida Console", Monaco, monospace;
-    text-align: justify;
     text-justify: inter-word;
     text-decoration: none;
 }
