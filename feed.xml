@@ -11,8 +11,17 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>I linguaggi di programmazione e strumenti più utili per linguisti</title>
+ 	<link>https://www.bloglinguistica.press/linguaggi-e-strumenti.html</link>
+ 	<description>
+Quali sono i migliori e più usati strumenti per raccogliere ed analizzare dati? 
+Quali sono i linguaggi di programmazione con librerie utili per linguisti e quali i più richiesti nel mondo del lavoro?
+</description>
+</item>
+
+<item>
  	<title>Usare Linguistica di UChicago</title>
- 	<link>https://andcarnivorous.github.io/usare-linguistica-uchicago.html</link>
+ 	<link>https://www.bloglinguistica.press/usare-linguistica-uchicago.html</link>
  	<description>
 Il software Linguistica di UChicago permette di ottenere bigrammi, trigrammi, affissi, n-neighbors e molto altro con una interfaccia molto semplice ed efficace. Il punto più forte. però, è sicuramente la rappresentazione del manifold ricavato dal corpus.
 </description>
@@ -20,7 +29,7 @@ Il software Linguistica di UChicago permette di ottenere bigrammi, trigrammi, af
 
 <item>
  	<title>Linguistic-mode: An Emacs Package for Corpus Analysis</title>
- 	<link>https://andcarnivorous.github.io/linguistic-mode-launch.html</link>
+ 	<link>https://www.bloglinguistica.press/linguistic-mode-launch.html</link>
  	<description>
 A brief blog post to present and talk about Linguistic-mode, a package for Emacs that can perform different corpus analysis tasks 
 such as ngram or word frequency, collocation, concordance and more. I started writing this mode as a hobby and then it just got out of hand.
@@ -30,7 +39,7 @@ Now it can be found on MELPA and new features will soon be added.
 
 <item>
  	<title>Normalizzazione Lobanov delle Vocali</title>
- 	<link>https://andcarnivorous.github.io/normalizzazione-vocali-lobanov.html</link>
+ 	<link>https://www.bloglinguistica.press/normalizzazione-vocali-lobanov.html</link>
  	<description>
 In questo post verrà spiegato come normalizzare un dataframe di valori delle formanti attraverso il metodo di Lobanov, che non è niente altro che un z-score applicato sulle formanti di un parlante. 
 </description>
@@ -38,7 +47,7 @@ In questo post verrà spiegato come normalizzare un dataframe di valori delle fo
 
 <item>
  	<title>Individuare un Merger Vocalico</title>
- 	<link>https://andcarnivorous.github.io/individuare-un-merger-vocalico.html</link>
+ 	<link>https://www.bloglinguistica.press/individuare-un-merger-vocalico.html</link>
  	<description>
 Merger e split sono due dei vari possibili cambiamenti fonologici che una lingua può attraversare. 
 Grazie ad analisi acustiche accurate e con abbastanza dati a disposizione, è possibile ottere in modo scientifico una risposta su un possibile merger o split di vocali.
@@ -48,7 +57,7 @@ Per poter fare ciò, basta sottoporre le formanti ottenute ad un t-test.
 
 <item>
  	<title>Classificazione delle Vocali in Python</title>
- 	<link>https://andcarnivorous.github.io/classificazione-vocali-in-python.html</link>
+ 	<link>https://www.bloglinguistica.press/classificazione-vocali-in-python.html</link>
  	<description>
 Un modo interessante di testare i dati fonetici raccolti è quello di sottoporli a vari classifiers (algoritmi di classificazione) 
 per vedere quali algoritmi possano essere i più accurati e se i dati sono sufficienti ad avere classificatori affidabili.
@@ -57,7 +66,7 @@ per vedere quali algoritmi possano essere i più accurati e se i dati sono suffi
 
 <item>
  	<title>Come Estrarre Ngrams Facilmente</title>
- 	<link>https://andcarnivorous.github.io/estrarre-facilmente-ngrams.html</link>
+ 	<link>https://www.bloglinguistica.press/estrarre-facilmente-ngrams.html</link>
  	<description>
 Installando la libreria NLTK per Python3 si possono immediatamente provare molti dei suoi strumenti sui corpora che la libreria stessa fornisce.
 Il modo più semplice per scaricare e installare i vari moduli e corpora è usando la funzione nltk.download() in uno shell di python oppure con python -m nltk.downloader nel terminale.
@@ -67,7 +76,7 @@ Tramite il downloader installate i moduli stopwords, punkt e il corpus gutenberg
 
 <item>
  	<title>Le Parole Più Comuni Con Praw ed NLTK</title>
- 	<link>https://andcarnivorous.github.io/le-parole-piu-comuni-nei-commenti-con-praw-ed-nltk.html</link>
+ 	<link>https://www.bloglinguistica.press/le-parole-piu-comuni-nei-commenti-con-praw-ed-nltk.html</link>
  	<description>
 Ultimamente ho iniziato a dare uno sguardo a PRAW, un wrapper per l'API di Reddit che permette di fare data mining in modo molto semplice. 
 </description>
@@ -75,7 +84,7 @@ Ultimamente ho iniziato a dare uno sguardo a PRAW, un wrapper per l'API di Reddi
 
 <item>
  	<title>Modificare Stopwords in NLTK</title>
- 	<link>https://andcarnivorous.github.io/modificare-stopwords-in-nltk.html</link>
+ 	<link>https://www.bloglinguistica.press/modificare-stopwords-in-nltk.html</link>
  	<description>
 Spesso capita di voler analizzare un corpus in modo molto semplice e preliminare in Python con la libreria NLTK vedendo semplicemente le frequenze dei lemmi.
 </description>
@@ -83,7 +92,7 @@ Spesso capita di voler analizzare un corpus in modo molto semplice e preliminare
 
 <item>
  	<title>Vocali nello Spettrogramma</title>
- 	<link>https://andcarnivorous.github.io/vocali-nello-spettrogramma.html</link>
+ 	<link>https://www.bloglinguistica.press/vocali-nello-spettrogramma.html</link>
  	<description>
 Trovare le formanti manualmente non è difficile, anche se può richiedere abbastanza tempo. Tutto ciò che serve è un microfono esterno per il pc e due free softwares. 
 </description>
