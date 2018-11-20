@@ -11,6 +11,15 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>RegEx per linguisti Parte 2</title>
+ 	<link>https://www.bloglinguistica.press/regex-parte2.html</link>
+ 	<description>
+In questa parte 2 vedremo come utilizzare alcuni caratteri speciali per espandere le nostre ricerche con RegEx, 
+e come questi possono essere usati in diversi contesti quando si analizzano dati linguistici. 
+</description>
+</item>
+
+<item>
  	<title>Introduzione a RegEx per Linguisti</title>
  	<link>https://www.bloglinguistica.press/introduzione-a-regex.html</link>
  	<description>

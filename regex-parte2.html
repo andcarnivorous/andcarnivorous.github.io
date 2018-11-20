@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-11-20 di 12:24 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RegEx per linguisti Parte 2</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> 
+<link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a id ="home" href = "index.html" >
+<i class="fa fa-language"></i> </a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ </a> <a id ="archive" href = "about.html" >
+<i class="fa fa-address-book"></i></a><a id ="git" href = "https://github.com/andcarnivorous" >
+<i class="fab fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> 
+<font color="black"></font></a>
+</div>
+<div id="content">
+<h1 class="title">RegEx per linguisti Parte 2</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org72c1414">Il carattere <b>?</b></a>
+<ul>
+<li><a href="#orgebd0886">Più avanzato</a></li>
+</ul>
+</li>
+<li><a href="#orga630315">Il carattere <b>*</b></a></li>
+<li><a href="#orge5c6dbb">Esercizi</a></li>
+</ul>
+</div>
+</div>
+<p>
+In questa parte 2 vedremo come utilizzare alcuni caratteri speciali per espandere le nostre ricerche con RegEx, 
+e come questi possono essere usati in diversi contesti quando si analizzano dati linguistici. 
+</p>
+
+<p>
+I caratteri che andremo ad analizzare sono <b>?</b> e <b>*</b>.
+</p>
+
+<div id="outline-container-org72c1414" class="outline-2">
+<h2 id="org72c1414">Il carattere <b>?</b></h2>
+<div class="outline-text-2" id="text-org72c1414">
+<p>
+Il punto interrogativo si utilizza dopo un carattere per dire "Trova 1 o 0 ripetizioni di questo carattere".
+</p>
+
+<p>
+Il primo metodo di utilizzo nella linguistica applicata potrebbe essere di vedere quante volte in un corpus 
+si utilizza <i>acquilone</i> o <i>aquilone</i> (se siete prescrittivisti i risultati potrebbero farvi star male).
+</p>
+
+<p>
+Analizziamo il sostantivo prima di tutto e cerchiamo di applicare anche i caratteri speciali <b>[a-z]</b> e <b>+</b> del precedente post.
+</p>
+
+<ol class="org-ol">
+<li>Sappiamo che i sostantivi in italiano hanno diversi possibili suffissi, quindi prendiamo solo la radice <b>aquilon</b> in considerazione.</li>
+<li>Sappiamo che vogliamo comunque il resto del sostantivo con qualunque suffisso, quindi aggiungeremo la combinazione di caratteri speciali <b>[a-z]+</b> (qualsiasi lettera fino al prossimo spazio) alla radice: <b>acquilon[a-z]+</b>.</li>
+<li>Adesso applichiamo <b>?</b> per trovare sia i sostantivi con radice <b>acquilon[a-z]+</b> che <b>aquilon[a-z]+</b>. Il carattere che tende ad esserci o non esserci sembra essere la <b>c</b>, quindi il punto interrogativo verrà utilizzato su di esso.</li>
+</ol>
+
+<p>
+<b>RegEx finale:</b> <b>ac?quilon[a-z]+</b>
+</p>
+
+<p>
+Se lo applichiamo al seguente esempio, tutti i sostantivi verranno presi.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #fb4933;">import</span> re
+
+<span style="color: #fb4933;">return</span> re.findall<span style="color: #458588;">(</span><span style="color: #006600;">"ac?quilon[a-z]+"</span>, <span style="color: #006600;">"acquilone aquilone acquiloni aquiloni acquiloncini aquiloncini"</span> <span style="color: #458588;">)</span>
+
+</pre>
+</div>
+
+<table id="orgdd2bcd0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">acquilone</td>
+<td class="org-left">aquilone</td>
+<td class="org-left">acquiloni</td>
+<td class="org-left">aquiloni</td>
+<td class="org-left">acquiloncini</td>
+<td class="org-left">aquiloncini</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-orgebd0886" class="outline-3">
+<h3 id="orgebd0886">Più avanzato</h3>
+<div class="outline-text-3" id="text-orgebd0886">
+<p>
+Dato che la difficoltà tra quando usare <b>cq</b> e solo <b>q</b> è ben conosciuta in generale, non solo nella parola aquilone (se ci si pensa è una differenza che non è presente nel sistema fonologico),
+si potrebbe cercare di scrivere un regex abbastanza generico da prendere tutte le parole con la <b>q</b> seguita da una <b>u</b> e vedere se è mai preceduta da una <b>c</b>.
+</p>
+
+<p>
+Analizziamo passo per passo:
+</p>
+
+<ol class="org-ol">
+<li><b>q</b> e <b>cq</b> non saranno mai i primi caratteri della parola in questo caso, quindi i primi caratteri saranno altre lettere, che possiamo definire con <b>[a-z]+</b>. (Usiamo <b>[a-z]</b> invece di <b>.</b> perchè quest'ultimo prenderebbe in considerazione anche gli spazi, includendo parole inutili)</li>
+<li>Dopo le altre lettere avremo, in mezzo, <b>q</b> o <b>cq</b>. Applichiamo <b>?</b> alla <b>c</b> che a volte c'è e a volte no, e sviluppiamo ulteriormente il nostro regex <b>[a-z]+c?q</b>.</li>
+<li>Dopo la <b>q</b> avremo sempre una <b>u</b> in questo caso (visto che ci riferiamo a parole come acqua, aquilone, aquila, acquedotto, ecc&#x2026;), quindi <b>[a-z]+c?qu</b>.</li>
+<li>Finalmente, il resto dei caratteri possono essere molteplici lettere, quindi useremo nuovamente <b>[a-z]+</b>.</li>
+</ol>
+
+<p>
+<b>RegEx finale:</b> <b>[a-z]+c?qu[a-z]+</b>
+</p>
+
+<p>
+Illeggibile per chi non conosce RegEx, ma non per noi :) potremmo tradurlo come: "Trova ogni parola che inizia con una o più lettere qualsiasi, ma ad un certo punto ha <b>cqu</b> o <b>qu</b> seguiti da qualsiasi altre lettere.".
+</p>
+
+<p>
+Testiamolo ora in Python
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #fb4933;">import</span> re
+
+<span style="color: #fb4933;">return</span> re.findall<span style="color: #458588;">(</span><span style="color: #006600;">"[a-z]+c?qu[a-z]+"</span>, <span style="color: #006600;">"acquilone aquilone casa acqua aqua </span>
+<span style="color: #006600;">                                       acquedotto aquedotto aquila acquila </span>
+<span style="color: #006600;">                                       acquistare aquistare tacque taque </span>
+<span style="color: #006600;">                                       macchina nacquero naquero"</span> <span style="color: #458588;">)</span>
+
+</pre>
+</div>
+
+<table id="org363886e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">acquilone</td>
+<td class="org-left">aquilone</td>
+<td class="org-left">acqua</td>
+<td class="org-left">aqua</td>
+<td class="org-left">acquedotto</td>
+<td class="org-left">aquedotto</td>
+<td class="org-left">aquila</td>
+<td class="org-left">acquila</td>
+<td class="org-left">acquistare</td>
+<td class="org-left">aquistare</td>
+<td class="org-left">tacque</td>
+<td class="org-left">taque</td>
+<td class="org-left">nacquero</td>
+<td class="org-left">naquero</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Sembra funzionare bene ed ignora anche le parole che non c'entrano nulla.
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orga630315" class="outline-2">
+<h2 id="orga630315">Il carattere <b>*</b></h2>
+<div class="outline-text-2" id="text-orga630315">
+<p>
+L'asterisco fornisce la stessa funzionalità del <b>+</b>, con la differenza che il <span class="underline"><b>+ definisce 1 o più di un carattere</b></span>, mentre <span class="underline"><b>* definisce 0 o più di un carattere</b></span>.
+</p>
+
+<p>
+Un buon utilizzo per questo simbolo è nel caso dei prefissi nei numeri di telefono internazionali (il +39 dell'Italia può anche essere scritto come 0039).
+</p>
+
+<ol class="org-ol">
+<li>Il numero inizia con 00 oppure no, sappiamo quindi che ci sono più 0 oppure nessuno come primo carattere, quindi applicheremo <b>*</b> allo 0 così <b>0*</b>.</li>
+<li>Con un numero come 39123123456 possiamo utilizzare le parentesi quadre <b>[]</b>, viste la scorsa volta, per definire un range di numeri da 0 a 9 <b>[0-9]</b> per il resto del numero.</li>
+</ol>
+
+<p>
+<b>RegEx finale:</b> 0*[0-9]+
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #fb4933;">import</span> re
+
+<span style="color: #fb4933;">return</span> re.findall<span style="color: #458588;">(</span><span style="color: #006600;">"0*[0-9]+"</span>, <span style="color: #006600;">"0039123123456 39123123456"</span> <span style="color: #458588;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge5c6dbb" class="outline-2">
+<h2 id="orge5c6dbb">Esercizi</h2>
+<div class="outline-text-2" id="text-orge5c6dbb">
+<ol class="org-ol">
+<li>Scrivere un RegEx per trovare sia il verbo <b>accelerare</b> e <b>accellerare</b> e tutte le loro coniugazioni.</li>
+<li>Scrivere un RegEx per trovare tutte le parole con <b>l</b> e <b>m</b> che possono venire erroneamente scritte in doppia e viceversa.</li>
+<li>Scrivere un RegEx per trovare tutte le parole senza <b>m</b>, con una <b>m</b> o con doppia <b>m</b> all'interno della parola (non in posizione iniziale).</li>
+<li>Scrivere un RegEx che trova tutti i numeri che terminano con un <b>5</b>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div>
+<script src="https://utteranc.es/client.js"
+        repo="andcarnivorous/andcarnivorous.github.io"
+        issue-term="title"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+<p class="date">Date: 2018-11-18 zo 00:00</p>
+<p class="author"> Author: Andrew</p>
+<a href = "archive.html" >Other posts</a>
+</div>
+</body>
+</html>
