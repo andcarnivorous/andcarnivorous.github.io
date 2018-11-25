@@ -11,6 +11,15 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>Parlare come Yoda tu puoi</title>
+ 	<link>https://www.bloglinguistica.press/yodinator.html</link>
+ 	<description>
+Non avendo molto da fare in questo fine settimana, ed essendo il tempo non dei migliori, ho deciso di pensare a qualche piccolo progetto divertente e di poche righe. 
+Ed ecco che il risultato è stato una breve funzione che trasforma le frasi da SVO ad OSV, da come parliamo noi e gli Inglesi a come parla Yoda.
+</description>
+</item>
+
+<item>
  	<title>RegEx per linguisti Parte 2</title>
  	<link>https://www.bloglinguistica.press/regex-parte2.html</link>
  	<description>
