@@ -2,8 +2,9 @@
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 90%;
-  position: center;
+  max-width: 110%;
+  position:relative;
+/*  text-align:center;*/
   margin: auto;
 }
 
