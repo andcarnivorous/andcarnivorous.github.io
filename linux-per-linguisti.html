@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-01-24 do 17:48 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux per Linguisti</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> 
+<link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a id ="home" href = "index.html" >
+<i class="fa fa-language"></i> </a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ </a> <a id ="archive" href = "about.html" >
+<i class="fa fa-address-book"></i></a><a id ="git" href = "https://github.com/andcarnivorous" >
+<i class="fab fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> 
+<font color="black"></font></a>
+</div>
+<div id="content">
+<h1 class="title">Linux per Linguisti</h1>
+<p>
+Cosa è Linux e perchè ogni linguista dovrebbe conoscerlo? Linux è una premessa per una metodologia di ricerca riproducibile e affidabile.
+</p>
+
+<div id="outline-container-org95a4b01" class="outline-2">
+<h2 id="org95a4b01">Cosa è Linux</h2>
+<div class="outline-text-2" id="text-org95a4b01">
+<p>
+Specialmente se siete in una magistrale, o ancor più in un Ph.D., avrete sicuramente sentito nominare o visto Linux, o per meglio dire <b>GNU/Linux</b> (nel resto del post sarà chiamato Linux, sorry Richard).
+</p>
+
+<p>
+Linux è un sistema operativo open source nato negli anni 90 che da un decennio diventa sempre più presente nel desktop environment. E' praticamente un'alternativa a Windows. Un'alternativa gratis. Dove tutto ciò che accade nel sistema può essere visto, controllato, cambiato, ecc&#x2026;
+</p>
+
+<p>
+Ci sono tantissime varietà di Linux (chiamate distributions o in breve <span class="underline"><b>distro</b></span>) per desktop, così come di Linux per server, ed essendo open source chiunque può controllare il codice sorgente di ogni varietà per assicurarsi che sia legittima, quali problemi possa contenere ed aggiustare quei problemi e proporre i propri aggiustamenti a chi mantiene una distro di Linux o il kernel stesso, così che tutti possano poi usufruire dei miglioramenti al sistema.
+</p>
+
+<p>
+Linux è quindi "community driven". Quando si installa una distro ci si sta affidando a decine, centinaia o migliaia di persone che impiegano parte del loro tempo e conoscenze a rendere un sistema operativo utilizzabile da tutti in maniera affidabile, sicura ed efficiente.
+</p>
+
+<p>
+Se siete interessati un pò più alla storia di Linux, così come a cosa si intende per open source e free software (free nel senso di libero, non gratis), questa presentazione TEDx di Richard Stallman è ottima anche per chi non è familiare con il topic:
+</p>
+
+<p>
+ <video width="320" height="240" controls>
+    <source src="http://audio-video.gnu.org/video/TEDxGE2014_Stallman05_LQ.webm" type="video/mp4">
+</video>
+</p>
+
+
+<p>
+Le slide sono anche disponibili in italiano qui: <a href="https://static.fsf.org/nosvn/rms_tedx_it.odp">https://static.fsf.org/nosvn/rms_tedx_it.odp</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgbe9fec3" class="outline-2">
+<h2 id="orgbe9fec3">Perchè Linux sarebbe adatto ai linguisti?</h2>
+<div class="outline-text-2" id="text-orgbe9fec3">
+<p>
+In realtà Linux è adatto a tutti. Anche la nonna o zia poco familiare con i computer può usare una distro di linux per navigare sul web.
+</p>
+
+<p>
+Ciò che intendo dicendo che un linguista dovrebbe saper usare linux è che chi fa ricerca, in generale, dovrebbe usare linux.
+</p>
+
+<p>
+Se siete su questo post probabilmente avrete avuto una minima esperienza con l'analizzare dati in maniera quantitativa invece che qualitativa. Se lo avete fatto avrete forse dovuto iniziare a capire come scrivere qualche riga di codice in Python, R o simili. Oppure avete usato Excel ed SPSS.
+</p>
+
+<p>
+Ecco, la differenza fra i primi due, Python e R, e Excel ed SPSS è che i primi due sono open source mentre gli ultimi due no. Questo vuol dire che, se ci fosse qualche piccolo problema nella struttura di SPSS o Excel (cosa che sicuramente c'è perchè nessun programma o sistema è perfetto per ogni situazione) e i risultati che si ottengono sono leggermente o grandemente sfalsati, non c'è modo di saperlo!
+</p>
+
+<p>
+Gli unici a poter individuare simili problemi prima che causino danni sono coloro che sviluppano questo software chiusi e ciò può richiedere tempo o anche non essere subito rivelato agli utenti.
+</p>
+
+<p>
+Se invece di Excel o SPSS si usasse Libre Calc e PSPP (versioni open source dei due), se ci fosse un problema interno al software che crea risultati sfalsati, una community intera potrebbe accorgersene, riportare il problema ed aggiustarlo.
+</p>
+
+<p>
+In questa presentazione, vengono elencati alcuni esempi di casi in cui errori interni ad Excel hanno avuto come conseguenza risultati sbagliati in campi come la genetica ed economia.
+</p>
+
+<p>
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/CGnt_PWoM5Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+<p>
+Quindi, fare ricerca che sia affidabile e riproducibile dipende molto dagli strumenti che si utilizzano. In effetti ha senso, un'analogia che uso spesso è quella della macchina: se si usa il cambio manuale per andare da A a B non si conosce chiaramente quante marce e quali sono state cambiate durante il tragitto, con il cambio manuale invece lo si sa chiaramente, mentre con una macchina autoguidata non si sa assolutamente nulla su come si arriva da A a B. Usare Linux per semplici calcoli su Libre Calc può essere come guidare una macchina con il cambio manuale, ma la macchina è trasparente e possiamo vedere ogni marcia che viene cambiata dal sistema automatico proprio come lo vedremmo se stessimo cambiando le marce manualmente.
+</p>
+
+<p>
+Questi problemi di reproducible research sono ovviamente correlati anche ad altri come open data, paywalls in accademia, ecc&#x2026; che però sono un pò fuori dall'argomento principale del post.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd9f6a8b" class="outline-2">
+<h2 id="orgd9f6a8b">E' davvero così utile per la ricerca usare Linux?</h2>
+<div class="outline-text-2" id="text-orgd9f6a8b">
+<p>
+Ok, non siete ancora del tutto certi di ciò che scrivo. Non sono ancora riuscito a vendere l'idea. Mettiamola così:
+</p>
+
+<ul class="org-ul">
+<li>I top 500 supercomputer nel mondo girano su Linux</li>
+<li>La maggior parte dei webserver (praticamente i siti web che visitate) girano su Linux</li>
+<li>La ISS (la stazione spaziale internazionale) è passata per le sue principali funzionalità da Windows a Linux</li>
+</ul>
+
+<p>
+La ragione per il successo in ambito scientifico di Linux non è casuale, non è perchè gli scienziati vogliono sembrare geek e nerd ed essere fuori dal coro.
+</p>
+
+<p>
+Il motivo è che, se si prende in considerazione il processo di sviluppo del kernel e di ogni software open source, è evidente come sia simile al processo di ricerca utilizzato in tutto il mondo:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">1. Creazione di un programma</td>
+<td class="org-left">1. Nuova ipotesi proposta</td>
+</tr>
+
+<tr>
+<td class="org-left">2. Community testa e controlla il codice</td>
+<td class="org-left">2. Ipotesi studiata e testata</td>
+</tr>
+
+<tr>
+<td class="org-left">3. Modifiche, miglioramenti</td>
+<td class="org-left">3. Rettificazioni e ulteriori prove</td>
+</tr>
+
+<tr>
+<td class="org-left">4. Nuovo programma che include il precedente</td>
+<td class="org-left">4. Nuove ipotesi rinforzano la teoria</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Ovviamente, se il programma non funziona per niente, non è affidabile o simili, la community lo scarterà, così come un'ipotesi alternativa accettata per errore viene poi scartata quando si identifica l'errore
+</p>
+
+<p>
+Il metodo scientifico non è perfetto ma funziona, ed è ciò che guida lo sviluppo della civilizzazione. E' quindi possibile proporre l'idea che la scelta migliore per la computazione dei propri dati di ricerca risieda in un sistema che si basa su principi simili.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgda817dd" class="outline-2">
+<h2 id="orgda817dd">Altri vantaggi pratici?</h2>
+<div class="outline-text-2" id="text-orgda817dd">
+<p>
+Ok, in effetti ho utilizzato motivazioni e esempi un pò troppo ideologici e teorici ma ecco alcuni dei vantaggi immediati che ho trovato.
+</p>
+</div>
+
+<div id="outline-container-org0dbe044" class="outline-3">
+<h3 id="org0dbe044">Installare software:</h3>
+<div class="outline-text-3" id="text-org0dbe044">
+<p>
+Il motivo per cui provai Ubuntu fu il seguente: Dovevo installare Python per un corso universitario, ci misi un sacco per farlo, scoprii che installare libraries infastidiva ancor più, e lessi che su Linux era molto più facile. In efffetti, appena si installa Linux si ha Python2.7 e Python3 inclusi.
+</p>
+
+<p>
+Bisogno di installare Spyder o Jupyter notebook per poter scrivere codice in Python? Ecco ciò che serve:
+</p>
+
+<p>
+<code>sudo apt-get install spyder</code>
+</p>
+
+<p>
+Niente siti dove dover andare, niente pulsanti DOWNLOAD da cliccare per poi scoprire che era un ad ed il vero pulsante era sotto, solo quattro parole da scrivere nel terminale.
+</p>
+
+<p>
+Bisogno delle librerie di Python? Magar NLTK e matplotlib per un pò di analisi dei corpora con qualche grafico?
+</p>
+
+<p>
+<code>sudo apt-get install python3-matplotlib python3-nltk</code>
+</p>
+
+<p>
+Fatto. Si può anche scegliere di usare pip ovviamente, ma è un'altra storia.
+</p>
+
+<p>
+Ciò è possibile perchè le distro di Linux hanno repositories (tipo un grande magazzino, o registro) di tutti i programmi disponibili per la distro e quando si da il comando d'installare un programma, il computer contatta il magazzino più vicino da cui scarica il programma.
+</p>
+
+<p>
+Ovviamente, questi registri contengono programmi che sono stati esaminati e accettati dalla community e possono quindi essere considerati sicuri e affidabili.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1756c40" class="outline-3">
+<h3 id="org1756c40">Performance</h3>
+<div class="outline-text-3" id="text-org1756c40">
+<p>
+Ci sono tante distro di Linux, alcune sono pesanti quanto Windows sulla RAM, altre invece sono leggere, progettate magari per vecchi laptop, e quindi permettono di occupare poco spazio nella RAM. Con Lubuntu (una variante di Ubuntu) si può riuscire ad avere meno di un giga di RAM occupata dal sistema.
+</p>
+
+<p>
+Ciò permette non solo di sfruttare meglio un buon computer, ma anche di usare computer vecchi che non reggerebbero mai Windows 10. Personalmente, ho un secondo laptop che ha più di 7 anni ma che funziona benissimo con Linux. Installare Windows lo renderebbe troppo lento ed inutilizzabile.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org125528f" class="outline-3">
+<h3 id="org125528f">Customizzare</h3>
+<div class="outline-text-3" id="text-org125528f">
+<p>
+Anche se le distro hanno un look prestabilito, le si possono modificare in qualsiasi modo. Ricordate, il codice è tutto aperto e disponibile, quindi si possono applicare tutte le modifiche che si vogliono!
+</p>
+
+<p>
+Visitate su Reddit <a href="https://www.reddit.com/r/unixporn/">Unixporn</a> per vedere alcune personalizzazioni che sono praticamente opere d'arte!
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce439cd" class="outline-2">
+<h2 id="orgce439cd">Ok, quasi venduto, ma riguardo ai miei giochi? Ho letto che il wifi spesso non funziona e neanche le stampanti. Come farò?</h2>
+<div class="outline-text-2" id="text-orgce439cd">
+<p>
+Questi sono problemi del passato, seriamente. L'unica cosa di cui preoccuparsi è il tipo di scheda grafica che si possiede. Non tutte le schede Nvidia hanno una buona compatibilità con sistemi Linux perchè i driver sono proprietari.
+</p>
+
+<p>
+I giochi erano in parte un problema fino a un paio di anni fa. Su Steam tantissimi giochi hanno supporto immediato su Linux e possono essere giocati tranquillamente, dall'anno scorso inoltre molti giochi disponibili solo su Windows sono ora giocabili grazie a Steam anche su Linux tramite una specie di emulatore (proton). Personalmente, gioco a mortal kombat e Miscreated che sono solo per windows, ma con proton vanno benissimo.
+</p>
+
+<p>
+Le schede wifi ormai vanno tutte. Ho installato Linux su circa 7-8 macchine diverse e mai trovato una che avesse una scheda wifi con driver non presenti nel Linux kernel. Stesso discorso per le stampanti.
+</p>
+
+<p>
+Certo, gli intoppi possono esserci, ma se si tiene in considerazione tutto ciò che è stato detto in questo post e nel primo video si guadagnano due cose importanti:
+</p>
+
+<ol class="org-ol">
+<li>Si diventa effettivi proprietari della propria macchina, il computer ed il sistema operativo sono vostri, potete letteralmente farci ciò che volete.</li>
+
+<li>Si diventa più responsabili. Poter fare ciò che si vuole da anche la libertà di fare danni. E' normale creare casini e rompere magari il proprio OS sperimentando, si può sempre però cercare di risolvere e, se proprio va male, reinstallare senza troppo sforzo.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org46c170b" class="outline-2">
+<h2 id="org46c170b">Dove posso saperne e imparare di più?</h2>
+<div class="outline-text-2" id="text-org46c170b">
+<p>
+Ottimi posti dove avere informazioni sono:
+</p>
+
+<ul class="org-ul">
+<li>[<a href="https://reddit.com/r/linux4noobs">https://reddit.com/r/linux4noobs</a>]</li>
+<li>[<a href="https://reddit.com/r/linux">https://reddit.com/r/linux</a>]</li>
+<li><a href="https://stackoverflow.com">https://stackoverflow.com</a></li>
+<li><a href="https://askubuntu.com/">https://askubuntu.com/</a></li>
+<li><a href="https://ubuntuforums.org/">https://ubuntuforums.org/</a></li>
+</ul>
+
+<p>
+Ricordate, qualsiasi problema o curiosità possiate avere, è probabile al 99% che qualcuno abbia già fatto la domanda ed avuto una risposta su una di queste piattaforme.
+</p>
+
+<p>
+Per installare Linux metto il link della video-guida che usai io tre anni fa per installarlo su una chiavetta USB invece che sul computer.
+</p>
+
+<p>
+<b>RICORDATE DI FARE UN BACKUP DEI VOSTRI DATI PRIMA DI CIMENTARVI</b>:
+</p>
+
+<p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8_SK8iEMyJk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+
+<p>
+Ciò che io posso dire sulla community, per esperienza personale, è che potete trovare davvero un sacco di persone felici di aiutare a risolvere un problema, dare suggerimenti e far scoprire cose nuove.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orged9629f" class="outline-2">
+<h2 id="orged9629f">Ulteriori cose Open Source e Free Software</h2>
+<div class="outline-text-2" id="text-orged9629f">
+<p>
+Per alcuni software free e open source, potete vedere la mia pagina <a href="https://www.bloglinguistica.press/about.html">About</a> dove c'è una lista di free software che uso che sono disponibili anche su Windows e MacOS spesso.
+</p>
+
+<p>
+Se volete fare un ulteriore passo anche con i social media verso dei sistemi open source che non si basano sul tracciare i vostri dati per venderli, rifilare pubblicità e farvi finire in una bubble di informazione basata su algoritmi che scelgono ciò che più vi fa arrabbiare o piacere, potete provare queste piattaforme:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://joinmastodon.org/">Mastodon</a> è un'alternativa a Twitter. Niente pubblicità e timeline cronologica, niente algoritmi che scelgono cosa vedere prima.</li>
+
+<li><a href="https://pixelfed.social/">Pixelfed</a> è un'alternativa ad Instagram. Niente pubblicità ogni 4-5 post (controllate pure), timeline cronologica così gli amici e utenti con meno follower non vengono oscurati da celebrità. (Purtroppo niente app ancora.)</li>
+
+<li><a href="https://pleroma.social/">Pleroma</a> e <a href="https://gnu.io/social/">GnuSocial</a> sembrano un pò FB, un pò Twitter, un pò tumblr, non so, sono comunque fighi! Stessi pro di Mastodon</li>
+</ul>
+
+<p>
+La cosa più interessante di questi social network oltre ad essere open source? Ognuno di loro può avere centinaia di istanze diverse, ma sono tutti collegati fra loro!
+</p>
+
+<p>
+Se si ha un profilo su un'istanza di Mastodon, ad esempio, si possono seguire e vedere post di utenti su Pixelfed e Pleroma!
+</p>
+
+<p>
+E' come se su FB fosse possibile seguire persone su Twitter e vedere i loro post e viceversa.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div>
+<script src="https://utteranc.es/client.js"
+        repo="andcarnivorous/andcarnivorous.github.io"
+        issue-term="title"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+<p class="date">Date: 2019-01-24 do 00:00</p>
+<p class="author"> Author: Andrew</p>
+<a href = "archive.html" >Other posts</a>
+</div>
+</body>
+</html>
