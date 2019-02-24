@@ -11,10 +11,21 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>Unsupervised Vowels</title>
+ 	<link>https://www.bloglinguistica.press/unsupervised-vowels.html</link>
+ 	<description>
+La differenza fra supervised e unsupervised learning è che il primo ha bisogno dell'aiuto umano per imparare, ad esempio, a categorizzare i dati, mentre il secondo non ha bisogno di altro che i dati per poi proporre dei gruppi che scopre da solo.
+Nel futuro l'A.I. conquisterà il mondo con supercyborg, almeno questo è quello che leggo, quindi sarebbe meglio far sì che questi cyborg imparino a distinguere una u da una i, altrimenti c'è il rischio che al grido di "Fuoco" capiscano "fioco" o ancor peggio "fc".
+Questa digressione è per far capire che si parlerà di categorizzazione delle vocali tramite unsupervised clustering con k-means.
+</description>
+</item>
+
+<item>
  	<title>Da Frasi a Vettori</title>
  	<link>https://www.bloglinguistica.press/da-parole-a-vettori.html</link>
  	<description>
-In questo articolo saranno spiegati i concetti base di analisi dei testi e di una delle tecniche più comunemente usate in linguistica computazionale ed NLP.
+  In questo articolo saranno spiegati i concetti base di analisi dei testi e di una delle tecniche più comunemente usate in linguistica computazionale ed NLP.
+
 </description>
 </item>
 
