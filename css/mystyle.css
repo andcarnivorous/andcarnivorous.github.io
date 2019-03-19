@@ -23,7 +23,7 @@ h1.title {
 }
 
 
-#home, #archive, #git, #rss{
+#home, #archive, #git, #rss, #donate{
     background-color: #ccccff;
     background: -webkit-linear-gradient(bottom, rgba(200,200,255,.4), rgba(255, 255, 255,1));
     background: -moz-linear-gradient(bottom, rgba(200,200,255,.6), rgba(255,255,255,.8));
