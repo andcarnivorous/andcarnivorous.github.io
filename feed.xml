@@ -11,14 +11,28 @@ Linguistics</title>
 <description></description>
 
 <item>
+ 	<title>Un neurone per leggere Parte 1</title>
+ 	<link>https://www.bloglinguistica.press/un-neurone-per-leggere.html</link>
+ 	<description>
+In un paio di post fa abbiamo visto come rappresentare frasi in un piano cartesiano 2d, 3d e multidimensionale, trasformando le parole in vettori. 
+E' stato suggerito come questi vettori possano essere usati per calcoli di distanza e, quindi, possono potenzialmente anche essere raggruppati. 
+La classificazione è una delle task in cui machine learning è usato più estensivamente grazie ai molti modelli a disposizione. Uno dei più basilari e conosciuti è il perceptron.
+</description>
+</item>
+
+<item>
  	<title>Emacs + Beaker Browser = Website in 5 minutes</title>
  	<link>https://www.bloglinguistica.press/beakerbrowser.html</link>
+ 	<description> </description>
+</item>
+
+<item>
+ 	<title>Unsupervised Vowels</title>
+ 	<link>https://www.bloglinguistica.press/unsupervised-vowels-eng.html</link>
  	<description>
-Beaker Browser is a browser that allows users to use the dat protocol to browse
-websites shared with peer-to-peer (p2p). This allows to disperse the computational
-power necessary to load a website. Basically, the more people seed (aka share on their own computer) your website,
-the faster your website and webapps will load. One of the main arguments about this is that many people host websites
-on servers that would not deal as well with a sudden huge number of visitors as a peer-2-peer network would (given that enough people seed a site under heavy traffic).
+The difference between supervised and unsupervised learning is that the first requires human help to learn to categorize data, while the latter does not need anything more than the data itself to learn and propose its own classification groups.
+In the future A.I. will conquer the world with supercyborgs, at least that's what I got from tabloids, so it would be better for these cyborg to learn how to distinguish between a u and a i, otherwise there might be the chance that instead of "fire!" they will understand "fare!" or, even worse, "fr!".
+This digression was just to explain that we will talk about vowel classification with unsupervised clustering using k-means.
 </description>
 </item>
 

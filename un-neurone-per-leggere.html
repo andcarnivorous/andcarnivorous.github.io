@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-06-03 ma 17:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Un neurone per leggere Parte 1</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> 
+<link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a id ="home" href = "index.html" >
+<i class="fa fa-language"></i> </a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ </a> <a id ="archive" href = "about.html" >
+<i class="fa fa-address-book"></i></a><a id ="git" href = "https://github.com/andcarnivorous" >
+<i class="fab fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> 
+<font color="black"></font></a><a id ="git" href = "contribute.html" ><i class="fa fa-donate"></i></a>
+</div>
+<div id="content">
+<h1 class="title">Un neurone per leggere Parte 1</h1>
+<p>
+In un paio di post fa abbiamo visto come rappresentare frasi in un piano cartesiano 2d, 3d e multidimensionale, trasformando le parole in vettori. 
+E' stato suggerito come questi vettori possano essere usati per calcoli di distanza e, quindi, possono potenzialmente anche essere raggruppati. 
+La classificazione è una delle task in cui machine learning è usato più estensivamente grazie ai molti modelli a disposizione. Uno dei più basilari e conosciuti è il perceptron.
+</p>
+
+<p>
+<iframe src="https://giphy.com/embed/D8KpfyMWk53FK" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+</p>
+
+
+<p>
+Creato da uno psicologo ispirandosi ai neuroni del cervello umano, il perceptron impara dai dati ricevuti a distinguere se un input appartiene ad un gruppo / classe o un'altra.
+Per poter classificare dati, il perceptron è un ottimo modello lineare. Permette di categorizzare dati in due gruppi dopo essere stato allenato.
+</p>
+
+
+<div id="outline-container-org85553ac" class="outline-2">
+<h2 id="org85553ac">Come imparano le macchine</h2>
+<div class="outline-text-2" id="text-org85553ac">
+<p>
+Per poter insegnare ad un modello, si usa un misto di analisi di funzioni, algebra, geometria e magia.
+Le macchine hanno dei weights (pesi), che devono calibrare fino al loro valore ottimale per poter categorizzare al meglio un input.
+</p>
+
+<p>
+Un esempio concreto in cui molti possono rispecchiarsi, è quello del voto di partenza di laurea.
+Fingiamo di sapere i voti ricevuti a tutti gli esami, diciamo che sono 10 in totale, ma non i crediti (CFU) degli esami passati, e di sapere già quale è il nostro voto di partenza alla seduta di laurea, per esempio 95. 
+Quindi:
+</p>
+
+<ul class="org-ul">
+<li>10 voti</li>
+<li>95 voto di partenza laurea</li>
+<li>crediti???</li>
+</ul>
+
+<p>
+Quando andiamo a fare il calcolo della media ponderata per sapere il voto di partenza, dobbiamo sapere i crediti di ogni esame, ma cosa fare se non li sapessimo come in questo caso?
+</p>
+
+<p>
+Un'opzione sarebbe assegnare dei crediti a caso ad ogni esame, fare il calcolo e vedere quale è il totale che esce fuori, se esce 80 probabilmente dobbiamo aggiungere dei crediti ad alcuni esami, e se esce 115 dobbiamo sicuramente togliere dei crediti ad alcuni esami invece. 
+</p>
+
+<p>
+I modelli di machine learning usano più o meno lo stesso meccanismo, dove si hanno:
+</p>
+
+<ul class="org-ul">
+<li>dati di input (equivalente dei voti)</li>
+<li>weights (l'equivalente dei crediti)</li>
+<li>output (equivalente del voto di laurea)</li>
+</ul>
+
+<p>
+Un altro esempio, spesso usato, è quello della radio. Un modello per imparare aggiusta le manopole dei weights come noi facciamo con le manopole della radio fino a quando il segnale non è buono e la 
+posizione delle manopole ottimale.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org0309059" class="outline-2">
+<h2 id="org0309059">Il Perceptron</h2>
+<div class="outline-text-2" id="text-org0309059">
+<p>
+Ecco un bellissimo schema del perceptron
+</p>
+
+
+<div class="figure">
+<p><img src="./img/uglyperceptron.jpg" alt="uglyperceptron.jpg" />
+</p>
+</div>
+
+<p>
+A parte gli scherzi, ce ne sono di ottimi come questo
+</p>
+
+
+<div class="figure">
+<p><img src="http://ataspinar.com/wp-content/uploads/2016/11/perceptron_schematic_overview.png" alt="perceptron_schematic_overview.png" />
+</p>
+</div>
+
+<p>
+Il perceptron, quindi, prende degli input, somma i prodotti di essi con i pesi, aggiungendo il bias, e passando per una funzione d'attivazione decide se l'input appartiene al gruppo A o B.
+</p>
+</div>
+
+<div id="outline-container-orgc27a57d" class="outline-3">
+<h3 id="orgc27a57d">I mattoni</h3>
+<div class="outline-text-3" id="text-orgc27a57d">
+<p>
+Per prima cosa, gli unici "oggetti" che questo semplice perceptron userà saranno:
+</p>
+<ul class="org-ul">
+<li>l'input con labels</li>
+<li>I weights (pesi)</li>
+<li>Il bias</li>
+</ul>
+
+<p>
+Non abbiamo bisogno di altro, con questi tre elementi possiam fare qualsiasi classificazione lineare, in più weights e bias sono creati in modo casuale.
+</p>
+
+<p>
+Creaiamo la classe del nostro Perceptron, definiamo le sue variabili, input, bias e weigths. 
+Per i weights dovremo giostrare un pochino con numpy, questo ci tornerà utile più in la. Praticamente creiamo un vettore di numeri casuali.
+La cosa importante, però, è la forma di questo vettore, deve avere la stessa forma dell'input e quindi useremo la forma dell'input per crearlo della stessa dimensionalità.
+Se l'input è un vettore 3d [1,2,3], quindi di forma (1,3), anche il nostro weight dovrà essere 3d [5,2,6] ad esempio (Noterete che il nostro perceptron può avere a che fare solo con input di una riga).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #a020f0;">class</span> <span style="color: #228b22;">Perc</span><span style="color: #707183;">(</span><span style="color: #483d8b;">object</span><span style="color: #707183;">)</span>:
+
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span><span style="color: #707183;">(</span><span style="color: #a020f0;">self</span>, inputv<span style="color: #707183;">)</span>:
+        <span style="color: #a020f0;">self</span>.inputv = inputv
+
+        <span style="color: #a020f0;">self</span>.W = np.ndarray.flatten<span style="color: #707183;">(</span>np.random.randint<span style="color: #7388d6;">(</span>1, 3,size=<span style="color: #909183;">(</span>1,inputv.shape<span style="color: #709870;">[</span>1<span style="color: #709870;">]</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+        <span style="color: #a020f0;">self</span>.b = 0.5
+
+
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgb8e3412" class="outline-3">
+<h3 id="orgb8e3412">Predizione</h3>
+<div class="outline-text-3" id="text-orgb8e3412">
+<p>
+Adesso addentriamoci nell'algebra delle cose. 
+Per predire la classe di un singolo vettore input, faremo un dot product tra esso e il weight, aggiungendo il bias.
+Se il risultato è maggiore di 0, allora sarà di classe 1, altrimenti di classe 0.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">predict</span><span style="color: #707183;">(</span><span style="color: #a020f0;">self</span>,x, w<span style="color: #707183;">)</span>:
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">y</span> = np.dot<span style="color: #707183;">(</span>x, w<span style="color: #707183;">)</span> + <span style="color: #a020f0;">self</span>.b
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> y &gt; 0:
+        <span style="color: #a0522d;">act</span> = 1.0
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:
+        <span style="color: #a0522d;">act</span> = 0.0
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">return</span> act
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8ca3188" class="outline-3">
+<h3 id="org8ca3188">Converging&#x2026;<sub>Converging</sub>&#x2026;</h3>
+<div class="outline-text-3" id="text-org8ca3188">
+<p>
+Ok, il perceptron predice bene il gruppo del primo input, ma al secondo sbaglia e&#x2026; Adesso?
+Se cercassimo di capire perchè il nostro voto di partenza di laurea è quello che è, e ci accorgessimo che il nostro calcolo non coincide, oltre a un complotto guidato dall'università, l'unica spiegazione è che abbiamo dato un peso sbagliato ad uno degli esami fatti nel calcolo della media ponderata.
+Allo stesso modo, il perceptron vede di aver sbagliato, e va ad aggiustare i suoi weights così che magari troverà finalmente la combinazione giusta per fare la giusta predizione.
+La formula è semplice, aggiungiamo ai weights il prodotto dell'input, dell'errore e del learning rate.
+Definiamo ora la funzione per ridefinire i weights. Faremo la stessa cosa per il bias, ma senza includere l'input nel prodotto.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">descent</span><span style="color: #707183;">(</span><span style="color: #a020f0;">self</span>, x,w, lr, target, pred<span style="color: #707183;">)</span>:
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">error</span> = target-pred
+
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">w</span> = <span style="color: #707183;">(</span>w + <span style="color: #7388d6;">(</span>lr * error * x<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">B</span> = <span style="color: #a020f0;">self</span>.b + <span style="color: #707183;">(</span>lr * error<span style="color: #707183;">)</span>
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"self.W:"</span>, w<span style="color: #707183;">)</span>
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"B=="</span>,B<span style="color: #707183;">)</span>
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">self</span>.b = B
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">self</span>.W = w
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org77fad62" class="outline-3">
+<h3 id="org77fad62">No pain, no gain.</h3>
+<div class="outline-text-3" id="text-org77fad62">
+<p>
+Adesso è ora di rendere questo processo iterativo. Dobbiamo ripeterlo più volte con tutti gli input del training set fino a che il perceptron non trova dei weights ideali che danno il minor numero di errori possibile.
+Ciò è abbastanza semplice, per ogni input, prediciamo la classe, se la predizione è corretta lasciamo i weights come sono, vanno bene in quel caso, altrimenti usiamo la funzione descent per ridefinirli.
+Facciamo ciò per un certo numero di volte (epochs). Alla fine, il nostro perceptron sarà allenato e pronto ad essere usato per conquistare il mondo.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train</span><span style="color: #707183;">(</span><span style="color: #a020f0;">self</span>,x,epochs,target<span style="color: #707183;">)</span>:
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>epochs<span style="color: #707183;">)</span>:
+        <span style="color: #a020f0;">for</span> j <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span><span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>:
+            <span style="color: #a0522d;">act</span> = <span style="color: #a020f0;">self</span>.predict<span style="color: #707183;">(</span>x<span style="color: #7388d6;">[</span>j<span style="color: #7388d6;">]</span>,<span style="color: #a020f0;">self</span>.W<span style="color: #707183;">)</span>
+            <span style="color: #a020f0;">if</span> act == target<span style="color: #707183;">[</span>j<span style="color: #707183;">]</span>:
+                <span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"OK!"</span><span style="color: #707183;">)</span>
+                <span style="color: #a020f0;">continue</span>
+            <span style="color: #a020f0;">else</span>:
+                <span style="color: #a020f0;">self</span>.descent<span style="color: #707183;">(</span>x<span style="color: #7388d6;">[</span>j<span style="color: #7388d6;">]</span>,<span style="color: #a020f0;">self</span>.W, 0.01, target<span style="color: #7388d6;">[</span>j<span style="color: #7388d6;">]</span>, act<span style="color: #707183;">)</span>
+                <span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"Descending..."</span><span style="color: #707183;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8305fb3" class="outline-3">
+<h3 id="org8305fb3">Primo test!</h3>
+<div class="outline-text-3" id="text-org8305fb3">
+<p>
+Creiamo un dataset con vettori che hanno coordinate x,y maggiori di 100 e uno con coordinate x,y minori di 80. 
+Se rappresentiamo i dati creati avremo questi due gruppi ben distinti.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/data_1.png" alt="data_1.png" />
+</p>
+</div>
+
+<p>
+Ora, noi riusciamo subito ad occhio a distinguere che ci sono due gruppi ben diversi, ma noi abbiamo miliardi di neuroni e quello che abbiamo creato è un povero neurone solitario.
+Quindi, non sa ancora nulla, ciò che faremo quindi è dargli un vettore  dopo l'altro. 
+Prima di fare ciò però, mescoliamo i nostri vettori come un mazzo di carte e creiamo le etichette dei gruppi a cui appartengono.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #a0522d;">o</span> = np.random.randint<span style="color: #707183;">(</span>low = 100, high = 200,size=<span style="color: #7388d6;">(</span>200,2<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #a0522d;">q</span> = np.random.randint<span style="color: #707183;">(</span>low = 1, high = 80,size=<span style="color: #7388d6;">(</span>200,2<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">X</span> = np.concatenate<span style="color: #707183;">(</span><span style="color: #7388d6;">[</span>o,q<span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
+np.random.shuffle<span style="color: #707183;">(</span>X<span style="color: #707183;">)</span>
+<span style="color: #a0522d;">y</span> = <span style="color: #707183;">[]</span>
+
+<span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> X:
+        <span style="color: #a020f0;">if</span> i<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span> &lt; 81:
+                y.append<span style="color: #707183;">(</span>0.0<span style="color: #707183;">)</span>
+        <span style="color: #a020f0;">else</span>:
+                y.append<span style="color: #707183;">(</span>1.0<span style="color: #707183;">)</span>
+
+
+
+</pre>
+</div>
+
+<p>
+Adesso è arrivato il tempo di usare il perceptron sui dati, creiamo un'istanza della nostra classe Perc, l'input sarà ovviamente X.
+Dopo aver creato l'oggetto perceptron, possiamo usare il metodo (o funzione) train, dove X sarà il training set,10 le epochs e le etichette (labels) dei gruppi saranno y.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #a0522d;">perceptron</span>= Perc<span style="color: #707183;">(</span>X<span style="color: #707183;">)</span>
+
+perceptron.train<span style="color: #707183;">(</span>X,10,y<span style="color: #707183;">)</span>
+
+</pre>
+</div>
+
+<p>
+Dall'output, possiamo vedere ogni volta che il perceptron predice correttamente e, si nota chiaramente, alla fine del training il neurone ha imparato a distinguere
+chiaramente fra i due gruppi!
+</p>
+
+<p>
+Ovviamente, per rendere il concetto più chiaro, possiamo rappresentarlo con delle eccezionali gif degne della front page di Reddit.
+</p>
+
+
+<div class="figure">
+<p><img src="./gifs/myimage.gif" alt="myimage.gif" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./gifs/myimage2.gif" alt="myimage2.gif" />
+</p>
+</div>
+
+
+<p>
+Questi sono due neuroni preparati sugli stessi dati, il pattern di come imparano è diverso, così come la velocità che impiegano, perchè sono stati usati due learning rate diversi.
+</p>
+
+<p>
+Ora che è chiaro come funziona un neurone e abbiamo classificato semplici dati ben divisi in 2d, il prossimo passo è categorizzare dati più complessi, magari recensioni di film, o il genere di un libro!
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div>
+<script src="https://utteranc.es/client.js"
+        repo="andcarnivorous/andcarnivorous.github.io"
+        issue-term="title"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+<p class="date">Date: 2019-06-03 ma 00:00</p>
+<p class="author"> Author: Andrew</p>
+<a href = "archive.html" >Other posts</a>
+</div>
+</body>
+</html>
