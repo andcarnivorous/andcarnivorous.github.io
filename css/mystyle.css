@@ -48,7 +48,7 @@ body {
     font-family: "Courier New", Courier, monospace;
     background-color: #fffffe;
     font-family: helvetica;
-    max-width: 80%;
+    max-width: 60%;
     margin: 0px auto;
 }
 
@@ -109,7 +109,13 @@ a {
 
 .src.src-python{
     overflow:auto;
-    background-color:lightgrey;
+    background-color:GhostWhite;
+    font-size:14px;
+}
+
+.src.src-bash{
+    overflow:auto;
+    font-size:14px;
 }
 
 .timestamp{
