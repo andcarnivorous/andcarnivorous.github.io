@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-26 Sat 23:46 -->
+<!-- 2020-09-27 Sun 00:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Panda Paralleli</title>
@@ -262,7 +262,7 @@ Ecco, arrivato ad avere questa esperienza troppe volte mi sono detto: forse dovr
 
 <p>
 La prima cosa che ho trovato sono stati tanti, e tanti, ma tanti tutorial sul multiprocessing e su come usare il package <b>multiprocessing</b> di Python. Stavo quasi per iniziare ad usare quello, quando ho scoperto che per molte delle cose che faccio posso semplicemente usare tre righe dal modulo <b>concurrent.futures</b> e ottenere lo stesso risultato che si ottiene in 4 con <b>multiprocessing</b> in 3. Entrambi sono moduli inclusi in Python3.
-Provato e implementato <i>concurrent.futures</i> per task che sono fuori dalla manipolazione dei dataframes, ho deciso di vedere come poter avere risultati simili con questi ultimi e mi sono imbattuto nella libreria <b>pandarallel</b> che si può trovare qui[LINK HERE].
+Provato e implementato <i>concurrent.futures</i> per task che sono fuori dalla manipolazione dei dataframes, ho deciso di vedere come poter avere risultati simili con questi ultimi e mi sono imbattuto nella libreria <b>pandarallel</b> che si può <a href="https://github.com/nalepae/pandarallel">trovare qui</a>.
 Ho applicato pandarallel ad un df.apply() che mi richiedeva circa mezz'ora per completare ed il risultato è stato come mettere una nuova marcia che non c'era nella macchina e vedere il tempo attorno alla Fiat Panda del 90' dilatarsi fino a fermarsi.
 </p>
 

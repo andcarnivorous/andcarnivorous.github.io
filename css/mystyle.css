@@ -110,12 +110,12 @@ a {
 .src.src-python{
     overflow:auto;
     background-color:GhostWhite;
-    font-size:14px;
+    font-size:15px;
 }
 
 .src.src-bash{
     overflow:auto;
-    font-size:14px;
+    font-size:15px;
 }
 
 .timestamp{
