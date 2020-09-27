@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-27 Sun 00:10 -->
+<!-- 2020-09-27 Sun 13:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Panda Paralleli</title>
@@ -249,7 +249,7 @@ for the JavaScript code in this tag.
 <h2 id="orgd00b2bc">Rendere le operazioni in  Pandas più veloci con multiprocessing</h2>
 <div class="outline-text-2" id="text-orgd00b2bc">
 <p>
-Quante volte sarà capitato di avere un nuovo dataset sotto le mani, appena scaricato o appena finito di mettere insieme con dati presi dal web, e voler subito provare qualche funzione sul dataframe per pulirlo, filtrarlo o aggiungere flags e fare df.apply() e&#x2026;
+aQuante volte sarà capitato di avere un nuovo dataset sotto le mani, appena scaricato o appena finito di mettere insieme con dati presi dal web, e voler subito provare qualche funzione sul dataframe per pulirlo, filtrarlo o aggiungere flags e fare df.apply() e&#x2026;
 </p>
 
 <p>
@@ -284,32 +284,32 @@ Nelle righe seguenti potete vedere cosa stavo facendo:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #C678DD;">import</span> pandas <span style="color: #C678DD;">as</span> pd
-<span style="color: #C678DD;">import</span> os
-<span style="color: #C678DD;">import</span> pickle <span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">to open some dataframes that contain numpy arrays</span>
-<span style="color: #C678DD;">import</span> time 
-<span style="color: #C678DD;">import</span> concurrent.futures
-<span style="color: #C678DD;">import</span> numpy <span style="color: #C678DD;">as</span> np
-<span style="color: #C678DD;">from</span> nltk.corpus <span style="color: #C678DD;">import</span> stopwords
-<span style="color: #C678DD;">from</span> nltk.tokenize <span style="color: #C678DD;">import</span> word_tokenize
-<span style="color: #C678DD;">from</span> pandarallel <span style="color: #C678DD;">import</span> pandarallel 
+<pre class="src src-python"><span style="color: #0000FF;">import</span> pandas <span style="color: #0000FF;">as</span> pd
+<span style="color: #0000FF;">import</span> os
+<span style="color: #0000FF;">import</span> pickle <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">to open some dataframes that contain numpy arrays</span>
+<span style="color: #0000FF;">import</span> time 
+<span style="color: #0000FF;">import</span> concurrent.futures
+<span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np
+<span style="color: #0000FF;">from</span> nltk.corpus <span style="color: #0000FF;">import</span> stopwords
+<span style="color: #0000FF;">from</span> nltk.tokenize <span style="color: #0000FF;">import</span> word_tokenize
+<span style="color: #0000FF;">from</span> pandarallel <span style="color: #0000FF;">import</span> pandarallel 
 
-<span style="color: #E06C75;">home_dir</span> = os.environ<span style="color: #61AFEF;">[</span><span style="color: #98C379;">"HOME"</span><span style="color: #61AFEF;">]</span>
+<span style="color: #BA36A5;">home_dir</span> = os.environ<span style="color: #707183;">[</span><span style="color: #008000;">"HOME"</span><span style="color: #707183;">]</span>
 
-<span style="color: #E06C75;">genres</span> = <span style="color: #61AFEF;">[</span><span style="color: #98C379;">"pop"</span>, <span style="color: #98C379;">"rap"</span>, <span style="color: #98C379;">"country"</span>, <span style="color: #98C379;">"metal"</span><span style="color: #61AFEF;">]</span> <span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">these are also the names of the directories</span>
+<span style="color: #BA36A5;">genres</span> = <span style="color: #707183;">[</span><span style="color: #008000;">"pop"</span>, <span style="color: #008000;">"rap"</span>, <span style="color: #008000;">"country"</span>, <span style="color: #008000;">"metal"</span><span style="color: #707183;">]</span> <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">these are also the names of the directories</span>
 
-<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">make_df</span><span style="color: #61AFEF;">(</span>genre<span style="color: #61AFEF;">)</span>:
-<span style="background-color: #282C34;"> </span>   <span style="color: #E06C75;">df</span> = pd.DataFrame<span style="color: #61AFEF;">(</span>columns=<span style="color: #98C379;">[</span><span style="color: #98C379;">"author"</span>, <span style="color: #98C379;">"genre"</span>, <span style="color: #98C379;">"lyrics"</span><span style="color: #98C379;">]</span><span style="color: #61AFEF;">)</span>
-<span style="background-color: #282C34;"> </span>   <span style="color: #E06C75;">counter</span> = 0
-<span style="background-color: #282C34;"> </span>   <span style="color: #C678DD;">for</span> _f <span style="color: #C678DD;">in</span> <span style="color: #56B6C2;">list</span><span style="color: #61AFEF;">(</span><span style="color: #56B6C2;">set</span><span style="color: #98C379;">(</span>os.listdir<span style="color: #D19A66;">(</span>f<span style="color: #98C379;">"{home_dir}/Documents/{genre}/"</span><span style="color: #D19A66;">)</span><span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>:
-        <span style="color: #C678DD;">if</span> _f.endswith<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"MetroLyrics"</span><span style="color: #61AFEF;">)</span> <span style="color: #C678DD;">and</span> <span style="color: #C678DD;">not</span> _f.startswith<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"Lyrs"</span><span style="color: #61AFEF;">)</span>:
-            <span style="color: #E06C75;">author</span> = _f.split<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"1"</span><span style="color: #61AFEF;">)[</span>0<span style="color: #61AFEF;">][</span>:-1<span style="color: #61AFEF;">]</span>
-            <span style="color: #C678DD;">with</span> <span style="color: #56B6C2;">open</span><span style="color: #61AFEF;">(</span>f<span style="color: #98C379;">"{home_dir}/Documents/{genre}/{_f}"</span><span style="color: #61AFEF;">)</span> <span style="color: #C678DD;">as</span> song:
-                <span style="color: #E06C75;">song</span> = song.read<span style="color: #61AFEF;">()</span>
-                <span style="color: #C678DD;">if</span> <span style="color: #56B6C2;">len</span><span style="color: #61AFEF;">(</span>song<span style="color: #61AFEF;">)</span> &gt; 20:
-                    <span style="color: #E06C75;">df.loc</span><span style="color: #61AFEF;">[</span>counter<span style="color: #61AFEF;">]</span> = <span style="color: #61AFEF;">[</span>author, genre, song<span style="color: #61AFEF;">]</span>
-                    <span style="color: #E06C75;">counter</span> += 1
-<span style="background-color: #282C34;"> </span>   <span style="color: #C678DD;">return</span> df
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">make_df</span><span style="color: #707183;">(</span>genre<span style="color: #707183;">)</span>:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #BA36A5;">df</span> = pd.DataFrame<span style="color: #707183;">(</span>columns=<span style="color: #7388D6;">[</span><span style="color: #008000;">"author"</span>, <span style="color: #008000;">"genre"</span>, <span style="color: #008000;">"lyrics"</span><span style="color: #7388D6;">]</span><span style="color: #707183;">)</span>
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #BA36A5;">counter</span> = 0
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">for</span> _f <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">list</span><span style="color: #707183;">(</span><span style="color: #006FE0;">set</span><span style="color: #7388D6;">(</span>os.listdir<span style="color: #909183;">(</span>f<span style="color: #008000;">"{home_dir}/Documents/{genre}/"</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>:
+        <span style="color: #0000FF;">if</span> _f.endswith<span style="color: #707183;">(</span><span style="color: #008000;">"MetroLyrics"</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">and</span> <span style="color: #0000FF;">not</span> _f.startswith<span style="color: #707183;">(</span><span style="color: #008000;">"Lyrs"</span><span style="color: #707183;">)</span>:
+            <span style="color: #BA36A5;">author</span> = _f.split<span style="color: #707183;">(</span><span style="color: #008000;">"1"</span><span style="color: #707183;">)[</span>0<span style="color: #707183;">][</span>:-1<span style="color: #707183;">]</span>
+            <span style="color: #0000FF;">with</span> <span style="color: #006FE0;">open</span><span style="color: #707183;">(</span>f<span style="color: #008000;">"{home_dir}/Documents/{genre}/{_f}"</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">as</span> song:
+                <span style="color: #BA36A5;">song</span> = song.read<span style="color: #707183;">()</span>
+                <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">len</span><span style="color: #707183;">(</span>song<span style="color: #707183;">)</span> &gt; 20:
+                    <span style="color: #BA36A5;">df.loc</span><span style="color: #707183;">[</span>counter<span style="color: #707183;">]</span> = <span style="color: #707183;">[</span>author, genre, song<span style="color: #707183;">]</span>
+                    <span style="color: #BA36A5;">counter</span> += 1
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">return</span> df
 
 
 </pre>
@@ -320,16 +320,16 @@ Questa funzione che crea il dataframe per ogni genere ci impiega un pò troppo a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #E06C75;">t0</span> = time.time<span style="color: #61AFEF;">()</span>
-<span style="color: #E06C75;">dfs</span> = <span style="color: #61AFEF;">[</span>make_df<span style="color: #98C379;">(</span>x<span style="color: #98C379;">)</span> <span style="color: #C678DD;">for</span> x <span style="color: #C678DD;">in</span> genres<span style="color: #61AFEF;">]</span> <span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">create dataframe for each genre</span>
-<span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"DFS:\t"</span>, time.time<span style="color: #98C379;">()</span>-t0<span style="color: #61AFEF;">)</span>
+<pre class="src src-python"><span style="color: #BA36A5;">t0</span> = time.time<span style="color: #707183;">()</span>
+<span style="color: #BA36A5;">dfs</span> = <span style="color: #707183;">[</span>make_df<span style="color: #7388D6;">(</span>x<span style="color: #7388D6;">)</span> <span style="color: #0000FF;">for</span> x <span style="color: #0000FF;">in</span> genres<span style="color: #707183;">]</span> <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">create dataframe for each genre</span>
+<span style="color: #0000FF;">print</span><span style="color: #707183;">(</span><span style="color: #008000;">"DFS:\t"</span>, time.time<span style="color: #7388D6;">()</span>-t0<span style="color: #707183;">)</span>
 
-<span style="color: #E06C75;">dfs2</span> = <span style="color: #61AFEF;">[]</span>
-<span style="color: #E06C75;">t0</span> = time.time<span style="color: #61AFEF;">()</span>
-<span style="color: #C678DD;">with</span> concurrent.futures.ProcessPoolExecutor<span style="color: #61AFEF;">()</span> <span style="color: #C678DD;">as</span> executor:
-<span style="background-color: #282C34;"> </span>   <span style="color: #E06C75;">dfs2</span> = <span style="color: #61AFEF;">[</span>executor.submit<span style="color: #98C379;">(</span>make_df, x<span style="color: #98C379;">)</span> <span style="color: #C678DD;">for</span> x <span style="color: #C678DD;">in</span> genres<span style="color: #61AFEF;">]</span> <span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">create dataframe for each genre</span>
-<span style="background-color: #282C34;"> </span>   <span style="color: #E06C75;">dfs2</span> = <span style="color: #61AFEF;">[</span>f.result<span style="color: #98C379;">()</span> <span style="color: #C678DD;">for</span> f <span style="color: #C678DD;">in</span> concurrent.futures.as_completed<span style="color: #98C379;">(</span>dfs2<span style="color: #98C379;">)</span><span style="color: #61AFEF;">]</span>
-<span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"DFS Parallel:\t"</span>, time.time<span style="color: #98C379;">()</span>-t0<span style="color: #61AFEF;">)</span>
+<span style="color: #BA36A5;">dfs2</span> = <span style="color: #707183;">[]</span>
+<span style="color: #BA36A5;">t0</span> = time.time<span style="color: #707183;">()</span>
+<span style="color: #0000FF;">with</span> concurrent.futures.ProcessPoolExecutor<span style="color: #707183;">()</span> <span style="color: #0000FF;">as</span> executor:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #BA36A5;">dfs2</span> = <span style="color: #707183;">[</span>executor.submit<span style="color: #7388D6;">(</span>make_df, x<span style="color: #7388D6;">)</span> <span style="color: #0000FF;">for</span> x <span style="color: #0000FF;">in</span> genres<span style="color: #707183;">]</span> <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">create dataframe for each genre</span>
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #BA36A5;">dfs2</span> = <span style="color: #707183;">[</span>f.result<span style="color: #7388D6;">()</span> <span style="color: #0000FF;">for</span> f <span style="color: #0000FF;">in</span> concurrent.futures.as_completed<span style="color: #7388D6;">(</span>dfs2<span style="color: #7388D6;">)</span><span style="color: #707183;">]</span>
+<span style="color: #0000FF;">print</span><span style="color: #707183;">(</span><span style="color: #008000;">"DFS Parallel:\t"</span>, time.time<span style="color: #7388D6;">()</span>-t0<span style="color: #707183;">)</span>
 
 </pre>
 </div>
@@ -361,37 +361,37 @@ Quello che ora voglio fare è creare una colonna delle lyrics tokenizzate e con 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python">pandarallel.initialize<span style="color: #61AFEF;">()</span>
+<pre class="src src-python">pandarallel.initialize<span style="color: #707183;">()</span>
 
-<span style="color: #E06C75;">default_stopwords</span> = <span style="color: #56B6C2;">set</span><span style="color: #61AFEF;">(</span>stopwords.words<span style="color: #98C379;">(</span><span style="color: #98C379;">'english'</span><span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+<span style="color: #BA36A5;">default_stopwords</span> = <span style="color: #006FE0;">set</span><span style="color: #707183;">(</span>stopwords.words<span style="color: #7388D6;">(</span><span style="color: #008000;">'english'</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>
 
-<span style="color: #E06C75;">custom_stopwords</span> = <span style="color: #61AFEF;">{</span>u<span style="color: #98C379;">'http'</span>,u<span style="color: #98C379;">'https'</span>,u<span style="color: #98C379;">'-'</span>, u<span style="color: #98C379;">"get"</span>, u<span style="color: #98C379;">"..."</span>, u<span style="color: #98C379;">"'"</span>, u<span style="color: #98C379;">"'s"</span>, 
-                        u<span style="color: #98C379;">"n't"</span>, u<span style="color: #98C379;">"``"</span>, u<span style="color: #98C379;">"''"</span>, u<span style="color: #98C379;">"//www"</span>, u<span style="color: #98C379;">"'m"</span>, u<span style="color: #98C379;">"'re"</span>, <span style="color: #98C379;">"would"</span>, 
-                        <span style="color: #98C379;">"could"</span>, <span style="color: #98C379;">"like"</span>, <span style="color: #98C379;">"should"</span>, <span style="color: #98C379;">"can"</span>, <span style="color: #98C379;">"'ve'"</span>, <span style="color: #98C379;">"the"</span><span style="color: #61AFEF;">}</span>
+<span style="color: #BA36A5;">custom_stopwords</span> = <span style="color: #707183;">{</span>u<span style="color: #008000;">'http'</span>,u<span style="color: #008000;">'https'</span>,u<span style="color: #008000;">'-'</span>, u<span style="color: #008000;">"get"</span>, u<span style="color: #008000;">"..."</span>, u<span style="color: #008000;">"'"</span>, u<span style="color: #008000;">"'s"</span>, 
+                        u<span style="color: #008000;">"n't"</span>, u<span style="color: #008000;">"``"</span>, u<span style="color: #008000;">"''"</span>, u<span style="color: #008000;">"//www"</span>, u<span style="color: #008000;">"'m"</span>, u<span style="color: #008000;">"'re"</span>, <span style="color: #008000;">"would"</span>, 
+                        <span style="color: #008000;">"could"</span>, <span style="color: #008000;">"like"</span>, <span style="color: #008000;">"should"</span>, <span style="color: #008000;">"can"</span>, <span style="color: #008000;">"'ve'"</span>, <span style="color: #008000;">"the"</span><span style="color: #707183;">}</span>
 
-<span style="color: #E06C75;">all_stopwords</span> = default_stopwords | custom_stopwords
+<span style="color: #BA36A5;">all_stopwords</span> = default_stopwords | custom_stopwords
 
-<span style="color: #C678DD;">import</span> time
+<span style="color: #0000FF;">import</span> time
 
-<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">tokenize_and_remove_stopwords</span><span style="color: #61AFEF;">(</span>df, parallel=<span style="color: #56B6C2;">False</span><span style="color: #61AFEF;">)</span>:
-<span style="background-color: #282C34;"> </span>   <span style="color: #C678DD;">if</span> parallel == <span style="color: #56B6C2;">True</span>:
-        <span style="color: #E06C75;">t0</span> = time.time<span style="color: #61AFEF;">()</span>
-        <span style="color: #E06C75;">df</span> = df.parallel_apply<span style="color: #61AFEF;">(</span><span style="color: #C678DD;">lambda</span> x: word_tokenize<span style="color: #98C379;">(</span>x<span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
-        <span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span>f<span style="color: #98C379;">"Tokenized in {time.time()-t0}"</span><span style="color: #61AFEF;">)</span>
-<span style="background-color: #282C34;"> </span>   <span style="color: #C678DD;">else</span>:
-        <span style="color: #E06C75;">t0</span> = time.time<span style="color: #61AFEF;">()</span>
-        <span style="color: #E06C75;">df</span> = df.<span style="color: #56B6C2;">apply</span><span style="color: #61AFEF;">(</span><span style="color: #C678DD;">lambda</span> x: word_tokenize<span style="color: #98C379;">(</span>x<span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
-        <span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span>f<span style="color: #98C379;">"Tokenized with parallel in {time.time()-t0}"</span><span style="color: #61AFEF;">)</span>
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">tokenize_and_remove_stopwords</span><span style="color: #707183;">(</span>df, parallel=<span style="color: #D0372D;">False</span><span style="color: #707183;">)</span>:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">if</span> parallel == <span style="color: #D0372D;">True</span>:
+        <span style="color: #BA36A5;">t0</span> = time.time<span style="color: #707183;">()</span>
+        <span style="color: #BA36A5;">df</span> = df.parallel_apply<span style="color: #707183;">(</span><span style="color: #0000FF;">lambda</span> x: word_tokenize<span style="color: #7388D6;">(</span>x<span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>
+        <span style="color: #0000FF;">print</span><span style="color: #707183;">(</span>f<span style="color: #008000;">"Tokenized in {time.time()-t0}"</span><span style="color: #707183;">)</span>
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">else</span>:
+        <span style="color: #BA36A5;">t0</span> = time.time<span style="color: #707183;">()</span>
+        <span style="color: #BA36A5;">df</span> = df.<span style="color: #006FE0;">apply</span><span style="color: #707183;">(</span><span style="color: #0000FF;">lambda</span> x: word_tokenize<span style="color: #7388D6;">(</span>x<span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>
+        <span style="color: #0000FF;">print</span><span style="color: #707183;">(</span>f<span style="color: #008000;">"Tokenized with parallel in {time.time()-t0}"</span><span style="color: #707183;">)</span>
 
-<span style="background-color: #282C34;"> </span>   <span style="color: #C678DD;">for</span> cell <span style="color: #C678DD;">in</span> <span style="color: #56B6C2;">range</span><span style="color: #61AFEF;">(</span><span style="color: #56B6C2;">len</span><span style="color: #98C379;">(</span>df<span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>:
-        <span style="color: #C678DD;">for</span> word <span style="color: #C678DD;">in</span> df.iloc<span style="color: #61AFEF;">[</span>cell<span style="color: #61AFEF;">]</span>:
-            <span style="color: #C678DD;">if</span> word.lower<span style="color: #61AFEF;">()</span> <span style="color: #C678DD;">in</span> all_stopwords:
-                df.iloc<span style="color: #61AFEF;">[</span>cell<span style="color: #61AFEF;">]</span>.remove<span style="color: #61AFEF;">(</span>word<span style="color: #61AFEF;">)</span>
-<span style="background-color: #282C34;"> </span>   <span style="color: #C678DD;">return</span> df
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">for</span> cell <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span><span style="color: #707183;">(</span><span style="color: #006FE0;">len</span><span style="color: #7388D6;">(</span>df<span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>:
+        <span style="color: #0000FF;">for</span> word <span style="color: #0000FF;">in</span> df.iloc<span style="color: #707183;">[</span>cell<span style="color: #707183;">]</span>:
+            <span style="color: #0000FF;">if</span> word.lower<span style="color: #707183;">()</span> <span style="color: #0000FF;">in</span> all_stopwords:
+                df.iloc<span style="color: #707183;">[</span>cell<span style="color: #707183;">]</span>.remove<span style="color: #707183;">(</span>word<span style="color: #707183;">)</span>
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">return</span> df
 
 
-<span style="color: #E06C75;">tokenized_series</span> = tokenize_and_remove_stopwords<span style="color: #61AFEF;">(</span>lyrics_series<span style="color: #61AFEF;">)</span>
-<span style="color: #E06C75;">tokenized_series</span> = tokenize_and_remove_stopwords<span style="color: #61AFEF;">(</span>lyrics_series, <span style="color: #56B6C2;">True</span><span style="color: #61AFEF;">)</span>
+<span style="color: #BA36A5;">tokenized_series</span> = tokenize_and_remove_stopwords<span style="color: #707183;">(</span>lyrics_series<span style="color: #707183;">)</span>
+<span style="color: #BA36A5;">tokenized_series</span> = tokenize_and_remove_stopwords<span style="color: #707183;">(</span>lyrics_series, <span style="color: #D0372D;">True</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -399,8 +399,8 @@ Quello che ora voglio fare è creare una colonna delle lyrics tokenizzate e con 
 <div class="org-src-container">
 <pre class="src src-bash">&gt;INFO: Pandarallel will run on 8 workers.
 &gt;INFO: Pandarallel will use Memory file system to transfer data &gt;between the main process and workers.
-&gt;Tokenized<span style="color: #C678DD;"> in</span> 21.08686637878418
-&gt;Tokenized with parallel<span style="color: #C678DD;"> in</span> 6.702610969543457
+&gt;Tokenized<span style="color: #0000FF;"> in</span> 21.08686637878418
+&gt;Tokenized with parallel<span style="color: #0000FF;"> in</span> 6.702610969543457
 </pre>
 </div>
 
@@ -414,14 +414,14 @@ Proviamo adesso con un'operazione molto più semplice, rimuovere canzoni dove le
 
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #E06C75;">t0</span> = time.time<span style="color: #61AFEF;">()</span>
-<span style="color: #E06C75;">lyrics_dataframe</span><span style="color: #61AFEF;">[</span><span style="color: #98C379;">"to_delete"</span><span style="color: #61AFEF;">]</span> = lyrics_dataframe.word_list.<span style="color: #56B6C2;">apply</span><span style="color: #61AFEF;">(</span><span style="color: #C678DD;">lambda</span> x: <span style="color: #56B6C2;">len</span><span style="color: #98C379;">(</span><span style="color: #56B6C2;">set</span><span style="color: #D19A66;">(</span>x<span style="color: #D19A66;">)</span><span style="color: #98C379;">)</span> &lt; 4<span style="color: #61AFEF;">)</span>
-<span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"Without parallel:\t"</span>, time.time<span style="color: #98C379;">()</span>-t0<span style="color: #61AFEF;">)</span>
-<span style="color: #E06C75;">lyrics_dataframe</span><span style="color: #61AFEF;">[</span><span style="color: #98C379;">"to_delete"</span><span style="color: #61AFEF;">]</span> = lyrics_dataframe.word_list.parallel_apply<span style="color: #61AFEF;">(</span><span style="color: #C678DD;">lambda</span> x: <span style="color: #56B6C2;">len</span><span style="color: #98C379;">(</span><span style="color: #56B6C2;">set</span><span style="color: #D19A66;">(</span>x<span style="color: #D19A66;">)</span><span style="color: #98C379;">)</span> &lt; 4<span style="color: #61AFEF;">)</span>
-<span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"With parallel:\t"</span>, time.time<span style="color: #98C379;">()</span>-t0<span style="color: #61AFEF;">)</span>
+<pre class="src src-python"><span style="color: #BA36A5;">t0</span> = time.time<span style="color: #707183;">()</span>
+<span style="color: #BA36A5;">lyrics_dataframe</span><span style="color: #707183;">[</span><span style="color: #008000;">"to_delete"</span><span style="color: #707183;">]</span> = lyrics_dataframe.word_list.<span style="color: #006FE0;">apply</span><span style="color: #707183;">(</span><span style="color: #0000FF;">lambda</span> x: <span style="color: #006FE0;">len</span><span style="color: #7388D6;">(</span><span style="color: #006FE0;">set</span><span style="color: #909183;">(</span>x<span style="color: #909183;">)</span><span style="color: #7388D6;">)</span> &lt; 4<span style="color: #707183;">)</span>
+<span style="color: #0000FF;">print</span><span style="color: #707183;">(</span><span style="color: #008000;">"Without parallel:\t"</span>, time.time<span style="color: #7388D6;">()</span>-t0<span style="color: #707183;">)</span>
+<span style="color: #BA36A5;">lyrics_dataframe</span><span style="color: #707183;">[</span><span style="color: #008000;">"to_delete"</span><span style="color: #707183;">]</span> = lyrics_dataframe.word_list.parallel_apply<span style="color: #707183;">(</span><span style="color: #0000FF;">lambda</span> x: <span style="color: #006FE0;">len</span><span style="color: #7388D6;">(</span><span style="color: #006FE0;">set</span><span style="color: #909183;">(</span>x<span style="color: #909183;">)</span><span style="color: #7388D6;">)</span> &lt; 4<span style="color: #707183;">)</span>
+<span style="color: #0000FF;">print</span><span style="color: #707183;">(</span><span style="color: #008000;">"With parallel:\t"</span>, time.time<span style="color: #7388D6;">()</span>-t0<span style="color: #707183;">)</span>
 
-<span style="color: #E06C75;">lyrics_dataframe</span> = lyrics_dataframe.loc<span style="color: #61AFEF;">[</span>lyrics_dataframe.to_delete == <span style="color: #56B6C2;">False</span><span style="color: #61AFEF;">]</span>
-lyrics_dataframe.reset_index<span style="color: #61AFEF;">(</span>drop=<span style="color: #56B6C2;">True</span>, inplace=<span style="color: #56B6C2;">True</span><span style="color: #61AFEF;">)</span>
+<span style="color: #BA36A5;">lyrics_dataframe</span> = lyrics_dataframe.loc<span style="color: #707183;">[</span>lyrics_dataframe.to_delete == <span style="color: #D0372D;">False</span><span style="color: #707183;">]</span>
+lyrics_dataframe.reset_index<span style="color: #707183;">(</span>drop=<span style="color: #D0372D;">True</span>, inplace=<span style="color: #D0372D;">True</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -457,8 +457,41 @@ Per ultima cosa, ho usato pandarallel su un apply che, quando ho usato sul dataf
 
 
 <div class="org-src-container">
-<pre class="src src-python">
+<pre class="src src-python">pandarallel.initialize<span style="color: #707183;">(</span>progress_bar=<span style="color: #D0372D;">True</span><span style="color: #707183;">)</span>
+
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">get_mean_vector</span><span style="color: #707183;">(</span>_input<span style="color: #707183;">)</span>:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #BA36A5;">vectors</span> = <span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>*<span style="color: #006FE0;">len</span><span style="color: #707183;">(</span>_input<span style="color: #707183;">)</span>
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">for</span> word <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span><span style="color: #707183;">(</span><span style="color: #006FE0;">len</span><span style="color: #7388D6;">(</span>_input<span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>:
+        <span style="color: #BA36A5;">vectors</span><span style="color: #707183;">[</span>word<span style="color: #707183;">]</span> = dataframe.vector.loc<span style="color: #707183;">[</span>dataframe.word == _input<span style="color: #7388D6;">[</span>word<span style="color: #7388D6;">]</span><span style="color: #707183;">]</span>
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">return</span> np.mean<span style="color: #707183;">(</span>vectors<span style="color: #707183;">)</span>
+
+<span style="color: #BA36A5;">t0</span> = time.time<span style="color: #707183;">()</span>
+<span style="color: #BA36A5;">vecs</span> = df.word_list.loc<span style="color: #707183;">[</span>:<span style="color: #006FE0;">int</span><span style="color: #7388D6;">(</span><span style="color: #006FE0;">len</span><span style="color: #909183;">(</span>df<span style="color: #909183;">)</span>/10<span style="color: #7388D6;">)</span><span style="color: #707183;">]</span>.parallel_apply<span style="color: #707183;">(</span>get_mean_vector<span style="color: #707183;">)</span>
+<span style="color: #0000FF;">print</span><span style="color: #707183;">(</span><span style="color: #008000;">"Parallel:\t"</span>, time.time<span style="color: #7388D6;">()</span>-t0<span style="color: #707183;">)</span>
+
+<span style="color: #BA36A5;">t0</span> = time.time<span style="color: #707183;">()</span>
+<span style="color: #BA36A5;">vecs2</span> = df.word_list.loc<span style="color: #707183;">[</span>:<span style="color: #006FE0;">int</span><span style="color: #7388D6;">(</span><span style="color: #006FE0;">len</span><span style="color: #909183;">(</span>df<span style="color: #909183;">)</span>/10<span style="color: #7388D6;">)</span><span style="color: #707183;">]</span>.<span style="color: #006FE0;">apply</span><span style="color: #707183;">(</span>get_mean_vector<span style="color: #707183;">)</span>
+<span style="color: #0000FF;">print</span><span style="color: #707183;">(</span><span style="color: #008000;">"Not Parallel:\t"</span>, time.time<span style="color: #7388D6;">()</span>-t0<span style="color: #707183;">)</span>
+
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="./img/parallelscore.png" alt="parallelscore.png" />
+</p>
+</div>
+
+<p>
+491 secondi invece di 1706, risparmiato più di 2/3 del tempo, e questo usandolo solo su un decimo del mio dataset, sul dataset intero in parallelo ci vuole quasi un'ora, se usassi il semplice metodo apply di Pandas probabilmente dovrei lasciare il pc acceso la notte.
+Ecco una piccola bar chart dei risultati:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/parallelbar1.png" alt="parallelbar1.png" />
+<img src="./img/parallelbar2.png" alt="parallelbar2.png" />
+</p>
 </div>
 </div>
 </div>
