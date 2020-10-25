@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-10-25 Sun 21:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Preprocessing e Decoratori in Python</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> 
+<link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a id ="home" href = "index.html" >
+<i class="fa fa-language"></i> </a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ </a> <a id ="archive" href = "about.html" >
+<i class="fa fa-address-book"></i></a><a id ="git" href = "https://github.com/andcarnivorous" >
+<i class="fab fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> 
+<font color="black"></font></a><a id ="git" href = "contribute.html" ><i class="fa fa-donate"></i></a>
+</div>
+<div id="content">
+<h1 class="title">Preprocessing e Decoratori in Python</h1>
+<p>
+Per far pratica e giocare con i decoratori si può creare un semplice sistema di cleaning e preprocessing dei testi.
+</p>
+
+<p>
+Essendo molti di questi passi sempre simili, ma non sempre tutti effettuati o effettuati in ordini diversi, una serie di decoratori che possono essere applicati al <b>word<sub>tokenize</sub></b> di NLTK possono tornare utili.
+</p>
+
+
+<p>
+Per questo esempio importiamo alcune funzioni e <b>wraps</b> da <b>functools</b> per aiutarci a creare i decoratori. I decoratori non sono altro funzioni che prendono altri funzioni come argomento, applicando processi attorno alla funzione input o sui suoi risultati.
+</p>
+
+<p>
+Come dati useremo Emma di Jane Austen, preso dal progetto Gutenberg che, purtroppo, è oscurato in Italia ma non in Olanda e neanche nella maggior parte del mondo occidentale.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">from</span> functools <span style="color: #C678DD;">import</span> wraps
+<span style="color: #C678DD;">from</span> time <span style="color: #C678DD;">import</span> time
+<span style="color: #C678DD;">from</span> nltk.tokenize <span style="color: #C678DD;">import</span> word_tokenize
+<span style="color: #C678DD;">from</span> nltk.stem.snowball <span style="color: #C678DD;">import</span> EnglishStemmer
+<span style="color: #C678DD;">from</span> nltk.corpus <span style="color: #C678DD;">import</span> stopwords
+
+
+<span style="color: #C678DD;">with</span> <span style="color: #56B6C2;">open</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"~/Documents/austen.txt"</span><span style="color: #61AFEF;">)</span> <span style="color: #C678DD;">as</span> raw_text:
+    <span style="color: #E06C75;">raw_text</span> = raw_text.read<span style="color: #61AFEF;">()</span>
+
+<span style="color: #E06C75;">raw_text</span> = raw_text<span style="color: #61AFEF;">[</span>:10000<span style="color: #61AFEF;">]</span>
+
+<span style="color: #E06C75;">stopwords</span> =  <span style="color: #56B6C2;">set</span><span style="color: #61AFEF;">(</span>stopwords.words<span style="color: #98C379;">(</span><span style="color: #98C379;">'english'</span><span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+
+raw_text<span style="color: #61AFEF;">[</span>:100<span style="color: #61AFEF;">]</span>
+
+</pre>
+</div>
+
+<p>
+Baseremo il tutto sul tokenizzare un testo, con una funzione che semplicemente restituisce il risultato di word<sub>tokenize</sub>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">tokenize</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">return</span> word_tokenize<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+
+
+</pre>
+</div>
+
+
+<p>
+Il nostro primo decoratore sarà usato per rimuovere stopwords, il decoratore e <b>wraps</b> prendono una funzione come argomento, ed il wrapper prende come argomento quello della funzione originale. Printeremo il nome della funzione ricevuta per poi vedere come funzionano gli ordini di esecuzione dei decoratori. Da notare che il decoratore deve dare come return il wrapper perchè funzioni.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">remove_stopwords</span><span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>:
+    wraps<span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">rm_stopwords_wrapper</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+        <span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span>func.<span style="color: #56B6C2;">__name__</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #E06C75;">result</span> = func<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> <span style="color: #61AFEF;">[</span>x <span style="color: #C678DD;">for</span> x <span style="color: #C678DD;">in</span> result <span style="color: #C678DD;">if</span> x <span style="color: #C678DD;">not</span> <span style="color: #C678DD;">in</span> stopwords<span style="color: #61AFEF;">]</span>
+    <span style="color: #C678DD;">return</span> rm_stopwords_wrapper
+
+
+</pre>
+</div>
+
+<p>
+Creiamo ora anche un decoratore che prende parametri. In questo caso un decoratore che applica un regex per sostituire pattern dalla stringa o lista data (controlliamo se il risultato della funzione ricevuta è una lista o una stringa infatti)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">substitute</span><span style="color: #61AFEF;">(</span>pattern, new<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">sub_decorator</span><span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>:
+        wraps<span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">sub_wrapper</span><span style="color: #61AFEF;">(</span>*args, **kwargs<span style="color: #61AFEF;">)</span>:
+            <span style="color: #C678DD;">import</span> re
+            <span style="color: #E06C75;">result</span> = func<span style="color: #61AFEF;">(</span>*args, **kwargs<span style="color: #61AFEF;">)</span>
+            <span style="color: #C678DD;">if</span> <span style="color: #56B6C2;">isinstance</span><span style="color: #61AFEF;">(</span>result, <span style="color: #56B6C2;">str</span><span style="color: #61AFEF;">)</span>:
+                <span style="color: #C678DD;">return</span> re.sub<span style="color: #61AFEF;">(</span>pattern, new, result<span style="color: #61AFEF;">)</span>
+            <span style="color: #C678DD;">elif</span> <span style="color: #56B6C2;">isinstance</span><span style="color: #61AFEF;">(</span>result, <span style="color: #56B6C2;">list</span><span style="color: #61AFEF;">)</span>:
+                <span style="color: #C678DD;">return</span> <span style="color: #61AFEF;">[</span>re.sub<span style="color: #98C379;">(</span>pattern, new, x<span style="color: #98C379;">)</span> <span style="color: #C678DD;">for</span> x <span style="color: #C678DD;">in</span> result<span style="color: #61AFEF;">]</span>
+        <span style="color: #C678DD;">return</span> sub_wrapper
+    <span style="color: #C678DD;">return</span> sub_decorator
+
+</pre>
+</div>
+
+
+<p>
+Alla fine, esagerando, facciamo un decoratore un pò per tutto.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">stem</span><span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>:
+    <span style="color: #98C379;">"""This decoratore stems each word in a output list"""</span>
+    wraps<span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">stem_wrapper</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+        <span style="color: #E06C75;">stemmer</span> = EnglishStemmer<span style="color: #61AFEF;">()</span>
+        <span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span>func.<span style="color: #56B6C2;">__name__</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #E06C75;">result</span> = func<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> <span style="color: #61AFEF;">[</span>stemmer.stem<span style="color: #98C379;">(</span>x<span style="color: #98C379;">)</span> <span style="color: #C678DD;">for</span> x <span style="color: #C678DD;">in</span> result<span style="color: #61AFEF;">]</span>
+    <span style="color: #C678DD;">return</span> stem_wrapper
+
+
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">remove_stopwords</span><span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>:
+    wraps<span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">rm_stopwords_wrapper</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+        <span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span>func.<span style="color: #56B6C2;">__name__</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #E06C75;">result</span> = func<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> <span style="color: #61AFEF;">[</span>x <span style="color: #C678DD;">for</span> x <span style="color: #C678DD;">in</span> result <span style="color: #C678DD;">if</span> x <span style="color: #C678DD;">not</span> <span style="color: #C678DD;">in</span> stopwords<span style="color: #61AFEF;">]</span>
+    <span style="color: #C678DD;">return</span> rm_stopwords_wrapper
+
+
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">lower</span><span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>:
+    wraps<span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">lower_wrapper</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+        <span style="color: #E06C75;">result</span> = func<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span>func.<span style="color: #56B6C2;">__name__</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> <span style="color: #61AFEF;">[</span>x.lower<span style="color: #98C379;">()</span> <span style="color: #C678DD;">for</span> x <span style="color: #C678DD;">in</span> result<span style="color: #61AFEF;">]</span>
+    <span style="color: #C678DD;">return</span> lower_wrapper
+
+
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">substitute</span><span style="color: #61AFEF;">(</span>pattern, new<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">sub_decorator</span><span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>:
+        wraps<span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">sub_wrapper</span><span style="color: #61AFEF;">(</span>*args, **kwargs<span style="color: #61AFEF;">)</span>:
+            <span style="color: #C678DD;">import</span> re
+            <span style="color: #E06C75;">result</span> = func<span style="color: #61AFEF;">(</span>*args, **kwargs<span style="color: #61AFEF;">)</span>
+            <span style="color: #C678DD;">if</span> <span style="color: #56B6C2;">isinstance</span><span style="color: #61AFEF;">(</span>result, <span style="color: #56B6C2;">str</span><span style="color: #61AFEF;">)</span>:
+                <span style="color: #C678DD;">return</span> re.sub<span style="color: #61AFEF;">(</span>pattern, new, result<span style="color: #61AFEF;">)</span>
+            <span style="color: #C678DD;">elif</span> <span style="color: #56B6C2;">isinstance</span><span style="color: #61AFEF;">(</span>result, <span style="color: #56B6C2;">list</span><span style="color: #61AFEF;">)</span>:
+                <span style="color: #C678DD;">return</span> <span style="color: #61AFEF;">[</span>re.sub<span style="color: #98C379;">(</span>pattern, new, x<span style="color: #98C379;">)</span> <span style="color: #C678DD;">for</span> x <span style="color: #C678DD;">in</span> result<span style="color: #61AFEF;">]</span>
+        <span style="color: #C678DD;">return</span> sub_wrapper
+    <span style="color: #C678DD;">return</span> sub_decorator
+
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">timeit</span><span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>:
+    <span style="color: #98C379;">"""Function execution time"""</span>
+    wraps<span style="color: #61AFEF;">(</span>func<span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">timeit_wrapper</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+        <span style="color: #E06C75;">t0</span> = time<span style="color: #61AFEF;">()</span>
+        <span style="color: #E06C75;">result</span> = func<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"time it took: %.5f"</span> % <span style="color: #98C379;">(</span>time<span style="color: #D19A66;">()</span>-t0<span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> result
+    <span style="color: #C678DD;">return</span> timeit_wrapper
+
+<span style="color: #E5C07B;">@timeit</span>
+<span style="color: #E5C07B;">@stem</span>
+<span style="color: #E5C07B;">@remove_stopwords</span>
+<span style="color: #E5C07B;">@substitute</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"emma"</span>, <span style="color: #98C379;">"peppa"</span><span style="color: #61AFEF;">)</span>
+<span style="color: #E5C07B;">@lower</span>
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">tokenize</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">return</span> word_tokenize<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+<span style="color: #E06C75;">first_result</span> = tokenize<span style="color: #61AFEF;">(</span>raw_text<span style="color: #61AFEF;">)</span>
+<span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"\n"</span>, first_result<span style="color: #98C379;">[</span>:20<span style="color: #98C379;">]</span>, <span style="color: #98C379;">"\n"</span><span style="color: #61AFEF;">)</span>
+
+
+</pre>
+</div>
+
+
+<p>
+Adesso compariamo gli ordini di esecuzione e i tempi di esecuzione con più o meno preprocessing.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #E5C07B;">@timeit</span>
+<span style="color: #E5C07B;">@stem</span>
+<span style="color: #E5C07B;">@remove_stopwords</span>
+<span style="color: #E5C07B;">@substitute</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"emma"</span>, <span style="color: #98C379;">"peppa"</span><span style="color: #61AFEF;">)</span>
+<span style="color: #E5C07B;">@lower</span>
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">tokenize</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">return</span> word_tokenize<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+<span style="color: #E06C75;">first_result</span> = tokenize<span style="color: #61AFEF;">(</span>raw_text<span style="color: #61AFEF;">)</span>
+<span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"\n"</span>, first_result<span style="color: #98C379;">[</span>:20<span style="color: #98C379;">]</span>, <span style="color: #98C379;">"\n"</span><span style="color: #61AFEF;">)</span>
+
+<span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">One preprocessing step less</span>
+<span style="color: #E5C07B;">@timeit</span>
+<span style="color: #E5C07B;">@stem</span>
+<span style="color: #E5C07B;">@substitute</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"emma"</span>, <span style="color: #98C379;">"peppa"</span><span style="color: #61AFEF;">)</span>
+<span style="color: #E5C07B;">@lower</span>
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">tokenize</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">return</span> word_tokenize<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+<span style="color: #E06C75;">second_result</span> = tokenize<span style="color: #61AFEF;">(</span>raw_text<span style="color: #61AFEF;">)</span>
+<span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"\n"</span>, second_result<span style="color: #98C379;">[</span>:20<span style="color: #98C379;">]</span>, <span style="color: #98C379;">"\n"</span><span style="color: #61AFEF;">)</span>
+
+
+<span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">Wrong Order, stopwords with capitals still present</span>
+<span style="color: #E5C07B;">@timeit</span>
+<span style="color: #E5C07B;">@stem</span>
+<span style="color: #E5C07B;">@lower</span>
+<span style="color: #E5C07B;">@remove_stopwords</span>
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">tokenize</span><span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">return</span> word_tokenize<span style="color: #61AFEF;">(</span>_input<span style="color: #61AFEF;">)</span>
+
+<span style="color: #E06C75;">third_result</span> = tokenize<span style="color: #61AFEF;">(</span>raw_text<span style="color: #98C379;">[</span>:1000<span style="color: #98C379;">]</span><span style="color: #61AFEF;">)</span>
+
+<span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span><span style="color: #98C379;">"\n"</span>, third_result<span style="color: #98C379;">[</span>:20<span style="color: #98C379;">]</span>, <span style="color: #98C379;">"\n"</span><span style="color: #61AFEF;">)</span>
+
+</pre>
+</div>
+
+
+
+<div class="org-src-container">
+<pre class="src src-bash">
+rm_stopwords_wrapper
+sub_wrapper
+tokenize
+<span style="color: #C678DD;">time</span> it took: 0.02496
+
+ <span style="color: #61AFEF;">[</span><span style="color: #98C379;">'\ufeffthe'</span>, <span style="color: #98C379;">'project'</span>, <span style="color: #98C379;">'gutenberg'</span>, <span style="color: #98C379;">'ebook'</span>, <span style="color: #98C379;">'peppa'</span>, <span style="color: #98C379;">','</span>, <span style="color: #98C379;">'jane'</span>, <span style="color: #98C379;">'austen'</span>, <span style="color: #98C379;">'ebook'</span>, <span style="color: #98C379;">'use'</span>, <span style="color: #98C379;">'anyon'</span>, <span style="color: #98C379;">'anywher'</span>, <span style="color: #98C379;">'cost'</span>, <span style="color: #98C379;">'almost'</span>, <span style="color: #98C379;">'restrict'</span>, <span style="color: #98C379;">'whatsoev'</span>, <span style="color: #98C379;">'.'</span>, <span style="color: #98C379;">'may'</span>, <span style="color: #98C379;">'copi'</span>, <span style="color: #98C379;">','</span><span style="color: #61AFEF;">]</span> 
+
+sub_wrapper
+tokenize
+<span style="color: #C678DD;">time</span> it took: 0.02977
+
+ <span style="color: #61AFEF;">[</span><span style="color: #98C379;">'\ufeffthe'</span>, <span style="color: #98C379;">'project'</span>, <span style="color: #98C379;">'gutenberg'</span>, <span style="color: #98C379;">'ebook'</span>, <span style="color: #98C379;">'of'</span>, <span style="color: #98C379;">'peppa'</span>, <span style="color: #98C379;">','</span>, <span style="color: #98C379;">'by'</span>, <span style="color: #98C379;">'jane'</span>, <span style="color: #98C379;">'austen'</span>, <span style="color: #98C379;">'this'</span>, <span style="color: #98C379;">'ebook'</span>, <span style="color: #98C379;">'is'</span>, <span style="color: #98C379;">'for'</span>, <span style="color: #98C379;">'the'</span>, <span style="color: #98C379;">'use'</span>, <span style="color: #98C379;">'of'</span>, <span style="color: #98C379;">'anyon'</span>, <span style="color: #98C379;">'anywher'</span>, <span style="color: #98C379;">'at'</span><span style="color: #61AFEF;">]</span> 
+
+lower_wrapper
+tokenize
+rm_stopwords_wrapper
+<span style="color: #C678DD;">time</span> it took: 0.00253<span style="color: #61AFEF;">[</span><span style="color: #98C379;">'\ufeffthe'</span>, <span style="color: #98C379;">'project'</span>, <span style="color: #98C379;">'gutenberg'</span>, <span style="color: #98C379;">'ebook'</span>, <span style="color: #98C379;">'emma'</span>, <span style="color: #98C379;">','</span>, <span style="color: #98C379;">'jane'</span>, <span style="color: #98C379;">'austen'</span>, <span style="color: #98C379;">'this'</span>, <span style="color: #98C379;">'ebook'</span>, <span style="color: #98C379;">'use'</span>, <span style="color: #98C379;">'anyon'</span>, <span style="color: #98C379;">'anywher'</span>, <span style="color: #98C379;">'cost'</span>, <span style="color: #98C379;">'almost'</span>, <span style="color: #98C379;">'restrict'</span>, <span style="color: #98C379;">'whatsoev'</span>, <span style="color: #98C379;">'.'</span>, <span style="color: #98C379;">'you'</span>, <span style="color: #98C379;">'may'</span><span style="color: #61AFEF;">]</span>
+
+
+
+</pre>
+</div>
+</div>
+<p>
+Come si vede, il preprocessing senza la rimozione di stopwords ha impiegato di più. Ma la cosa più interessante è notare l'ordine di esecuzione (non abbiamo fatto altro che passare l'output della funzione da un decoratore all'altro in successione). Nell'operazione con ordine sbagliato, infatti, le stopwords che iniziavano con lettera maiuscola sono rimaste, perchè il decoratore *lower* è stato messo sopra il decoratore *remove_stopwords*. I decoratori, quindi, vengono eseguiti dal basso verso l'alto leggendo il codice.
+</p>
+<div id="postamble" class="status">
+<div>
+<script src="https://utteranc.es/client.js"
+        repo="andcarnivorous/andcarnivorous.github.io"
+        issue-term="title"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+<p class="date">Date: 2020-10-25 Sun 00:00</p>
+<p class="author"> Author: Andrew</p>
+<a href = "archive.html" >Other posts</a>
+</div>
+</body>
+</html>
