@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-04-04 Sun 16:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Creare Una Piccola Webapp Per Clustering Delle Vocali</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Andrew" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> 
+<link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a id ="home" href = "index.html" >
+<i class="fa fa-language"></i> </a> <a id ="archive" href = "archive.html" ><i class="fa fa-archive"></i>
+ </a> <a id ="archive" href = "about.html" >
+<i class="fa fa-address-book"></i></a><a id ="git" href = "https://github.com/andcarnivorous" >
+<i class="fab fa-github"></i> </a> <a id ="rss" href = "feed.xml" ><i class="fa fa-rss"></i> 
+<font color="black"></font></a><a id ="git" href = "contribute.html" ><i class="fa fa-donate"></i></a>
+</div>
+<div id="content">
+<h1 class="title">Creare Una Piccola Webapp Per Clustering Delle Vocali</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge3da7bb">Essenziali per una webapp minimalista</a></li>
+<li><a href="#org531d820">Cosa farà questa webapp</a></li>
+<li><a href="#org02a4053">Classe per gestire i dati e applicare clustering</a></li>
+<li><a href="#org0db7162">La Dashboard</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge3da7bb" class="outline-2">
+<h2 id="orge3da7bb">Essenziali per una webapp minimalista</h2>
+<div class="outline-text-2" id="text-orge3da7bb">
+<p>
+Questo primo articolo tratterà principalmente come gestire la creazione di modelli, i file tabulati caricati e impostare una semplice dashboard.
+</p>
+
+<p>
+In questi articoli utilizzerò: 
+</p>
+<ul class="org-ul">
+<li>il package <b>Dash</b> di python per poter creare la dashboard interattiva,</li>
+<li><b>plotly</b> per creare i grafici,</li>
+<li><b>Docker</b> per creare un container che sarà poi hostato serverless da un cloud provider,</li>
+<li><b>gcloud</b> command line tool per poter deployare il mio container su cloud run.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org531d820" class="outline-2">
+<h2 id="org531d820">Cosa farà questa webapp</h2>
+<div class="outline-text-2" id="text-org531d820">
+<p>
+Questa webapp permetterà di caricare file tabulari, come csv, xls, ecc&#x2026; contenenti le formanti delle vocali (F1, F2, F3 ed F4), ed effettuare clustering unsupervised delle vocali scegliendo tra vari modelli disponibili e impostando i parametri come si desidera. Il risultato finale sarà questo:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/vowelclusteringapp.png" alt="vowelclusteringapp.png" width="100%" />
+</p>
+</div>
+
+<p>
+L'intero codice usato per la webapp si può trovare qui: <a href="https://github.com/andcarnivorous/vowel-cluster-dashapp">https://github.com/andcarnivorous/vowel-cluster-dashapp</a>
+</p>
+
+<p>
+Mentre un'istanza della webapp è disponibile qui: <a href="https://vowel-cluster-j7bugp5hfa-ew.a.run.app">https://vowel-cluster-j7bugp5hfa-ew.a.run.app</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org02a4053" class="outline-2">
+<h2 id="org02a4053">Classe per gestire i dati e applicare clustering</h2>
+<div class="outline-text-2" id="text-org02a4053">
+<p>
+Per prima cosa creiamo una classe chiamata <b>Modeller</b>, questa classe creerà un modello usando il tipo di modello scelto e i dati forniti.
+</p>
+
+<p>
+I modelli scelti per questa webapp saranno KMeans, Agglomerative Clustering e DBSCAN.
+</p>
+
+<p>
+Creiamo la nostra classe, creando mappe dei modelli e dei loro parametri, così da poter gestire la selezione del modello da parte dell'utente e poter anche assicurarci che i parametri ricevuti siano sempre corretti e pertinenti al giusto modello. 
+</p>
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">import</span> pandas <span style="color: #C678DD;">as</span> pd
+<span style="color: #C678DD;">import</span> numpy <span style="color: #C678DD;">as</span> np
+<span style="color: #C678DD;">import</span> plotly.express <span style="color: #C678DD;">as</span> px
+
+<span style="color: #C678DD;">from</span> sklearn.preprocessing <span style="color: #C678DD;">import</span> StandardScaler
+<span style="color: #C678DD;">from</span> sklearn.cluster <span style="color: #C678DD;">import</span> KMeans
+<span style="color: #C678DD;">from</span> sklearn.cluster <span style="color: #C678DD;">import</span> AgglomerativeClustering, DBSCAN
+<span style="color: #C678DD;">from</span> time <span style="color: #C678DD;">import</span> time
+
+
+<span style="color: #C678DD;">class</span> <span style="color: #E5C07B;">Modeller</span>:
+
+    <span style="color: #E06C75;">models</span> = <span style="color: #61AFEF;">{</span><span style="color: #98C379;">"KMeans"</span>: KMeans,
+              <span style="color: #98C379;">"AgglomerativeClustering"</span>: AgglomerativeClustering,
+              <span style="color: #98C379;">"DBSCAN"</span>: DBSCAN<span style="color: #61AFEF;">}</span>
+    <span style="color: #E06C75;">params_map</span> = <span style="color: #61AFEF;">{</span><span style="color: #98C379;">"KMeans"</span>: <span style="color: #98C379;">{</span><span style="color: #98C379;">"n_clusters"</span>: <span style="color: #56B6C2;">None</span>, <span style="color: #98C379;">"n_init"</span>: <span style="color: #56B6C2;">None</span>, <span style="color: #98C379;">"max_iter"</span>: <span style="color: #56B6C2;">None</span><span style="color: #98C379;">}</span>,
+                  <span style="color: #98C379;">"AgglomerativeClustering"</span>: <span style="color: #98C379;">{</span><span style="color: #98C379;">"n_clusters"</span>: <span style="color: #56B6C2;">None</span><span style="color: #98C379;">}</span>,
+                  <span style="color: #98C379;">"DBSCAN"</span>: <span style="color: #98C379;">{</span><span style="color: #98C379;">"eps"</span>: <span style="color: #56B6C2;">None</span>, <span style="color: #98C379;">"min_samples"</span>: <span style="color: #56B6C2;">None</span><span style="color: #98C379;">}</span><span style="color: #61AFEF;">}</span>
+
+    <span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">__init__</span><span style="color: #61AFEF;">(</span><span style="color: #C678DD;">self</span>, dataframe, model_type, **params<span style="color: #61AFEF;">)</span>:
+        <span style="color: #C678DD;">self</span>.dataframe = dataframe
+        <span style="color: #C678DD;">self</span>.model_type = model_type
+        <span style="color: #C678DD;">self</span>.params = <span style="color: #61AFEF;">{</span>k: v <span style="color: #C678DD;">for</span> k, v <span style="color: #C678DD;">in</span> params.items<span style="color: #98C379;">()</span> <span style="color: #C678DD;">if</span> k <span style="color: #C678DD;">in</span> <span style="color: #C678DD;">self</span>.params_map<span style="color: #98C379;">[</span>model_type<span style="color: #98C379;">]</span><span style="color: #61AFEF;">}</span>
+
+
+</pre>
+</div>
+
+<p>
+I <b>**params</b> ricevuti all'instanzazione del modello saranno praticamente i parametri, e con quelli presenti nell'attributo della classe ci assicureremo di non includere altri parametri non pertinenti che potrebbero causare errori.
+</p>
+
+
+<p>
+Adesso creiamo un metodo per scegliere dal dataframe ricevuto solo le due colonne selezionate (potremmo fare clustering in più di due dimensioni, ma poi diventa difficile da plottare e più costoso da computare).
+Creeremo anche un metodo che applicherà lo z-score alle formanti, così da normalizzare i nostri dati.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">subset_dataframe</span><span style="color: #61AFEF;">(</span><span style="color: #C678DD;">self</span>, columns<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">if</span> <span style="color: #56B6C2;">all</span><span style="color: #61AFEF;">(</span>col <span style="color: #C678DD;">in</span> <span style="color: #C678DD;">self</span>.dataframe.columns <span style="color: #C678DD;">for</span> col <span style="color: #C678DD;">in</span> columns<span style="color: #61AFEF;">)</span>:
+        <span style="color: #C678DD;">try</span>:
+            <span style="color: #E06C75;">X</span> = <span style="color: #C678DD;">self</span>.dataframe.loc<span style="color: #61AFEF;">[</span>:, columns<span style="color: #61AFEF;">]</span>
+        <span style="color: #C678DD;">except</span> <span style="color: #E5C07B;">KeyError</span>:
+            <span style="color: #C678DD;">raise</span> <span style="color: #E5C07B;">KeyError</span><span style="color: #61AFEF;">(</span>f<span style="color: #98C379;">"Columns {columns} not present"</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> X
+
+    <span style="color: #C678DD;">if</span> <span style="color: #56B6C2;">all</span><span style="color: #61AFEF;">(</span>col.lower<span style="color: #98C379;">()</span> <span style="color: #C678DD;">in</span> <span style="color: #C678DD;">self</span>.dataframe.columns <span style="color: #C678DD;">for</span> col <span style="color: #C678DD;">in</span> columns<span style="color: #61AFEF;">)</span>:
+        <span style="color: #C678DD;">try</span>:
+            <span style="color: #E06C75;">columns</span> = <span style="color: #61AFEF;">[</span>col.lower<span style="color: #98C379;">()</span> <span style="color: #C678DD;">for</span> col <span style="color: #C678DD;">in</span> columns<span style="color: #61AFEF;">]</span>
+            <span style="color: #E06C75;">X</span> = <span style="color: #C678DD;">self</span>.dataframe.loc<span style="color: #61AFEF;">[</span>:, columns<span style="color: #61AFEF;">]</span>
+        <span style="color: #C678DD;">except</span> <span style="color: #E5C07B;">KeyError</span>:
+            <span style="color: #C678DD;">raise</span> <span style="color: #E5C07B;">KeyError</span><span style="color: #61AFEF;">(</span>f<span style="color: #98C379;">"Columns {columns} not present"</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> X
+    <span style="color: #C678DD;">else</span>:
+        <span style="color: #C678DD;">raise</span> <span style="color: #E5C07B;">KeyError</span><span style="color: #61AFEF;">(</span>f<span style="color: #98C379;">"Columns {columns} are not present in dataframe"</span><span style="color: #61AFEF;">)</span>
+
+@<span style="color: #56B6C2;">staticmethod</span>
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">standardize</span><span style="color: #61AFEF;">(</span>X<span style="color: #61AFEF;">)</span>:
+    <span style="color: #E06C75;">X_standardized</span> = StandardScaler<span style="color: #61AFEF;">()</span>.fit_transform<span style="color: #61AFEF;">(</span>X<span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">return</span> X_standardized
+
+</pre>
+</div>
+
+<p>
+Finalmente, creiamo una metodo che prenderà le colonne richieste, applicherà il metodo di normalizzazione, creerà l'instanza del modello sklearn e fara fitting dei dati, restituendo le labels dei gruppi trovati.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">set_up_model</span><span style="color: #61AFEF;">(</span><span style="color: #C678DD;">self</span>, columns<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">if</span> <span style="color: #56B6C2;">any</span><span style="color: #61AFEF;">(</span>param <span style="color: #C678DD;">is</span> <span style="color: #56B6C2;">None</span> <span style="color: #C678DD;">for</span> k, param <span style="color: #C678DD;">in</span> <span style="color: #C678DD;">self</span>.params.items<span style="color: #98C379;">()</span><span style="color: #61AFEF;">)</span>:
+        <span style="color: #C678DD;">return</span> <span style="color: #56B6C2;">None</span>
+    <span style="color: #E06C75;">X</span> = <span style="color: #C678DD;">self</span>.subset_dataframe<span style="color: #61AFEF;">(</span>columns<span style="color: #61AFEF;">)</span>
+    <span style="color: #E06C75;">X_standardized</span> = <span style="color: #C678DD;">self</span>.standardize<span style="color: #61AFEF;">(</span>X<span style="color: #61AFEF;">)</span>
+    <span style="color: #E06C75;">model</span> = <span style="color: #C678DD;">self</span>.models<span style="color: #61AFEF;">[</span><span style="color: #C678DD;">self</span>.model_type<span style="color: #61AFEF;">]</span>
+    <span style="color: #E06C75;">t0</span> = time<span style="color: #61AFEF;">()</span>
+    <span style="color: #E06C75;">model</span> = model<span style="color: #61AFEF;">(</span>**<span style="color: #C678DD;">self</span>.params<span style="color: #61AFEF;">)</span>.fit<span style="color: #61AFEF;">(</span>X_standardized<span style="color: #61AFEF;">)</span>
+    <span style="color: #E06C75;">timing</span> = time<span style="color: #61AFEF;">()</span> - t0
+    <span style="color: #E06C75;">model.execution_time</span> = timing
+    <span style="color: #C678DD;">self</span>.dataframe<span style="color: #61AFEF;">[</span><span style="color: #C678DD;">self</span>.model_type<span style="color: #61AFEF;">]</span> = model.labels_
+    <span style="color: #C678DD;">self</span>.dataframe<span style="color: #61AFEF;">[</span><span style="color: #C678DD;">self</span>.model_type<span style="color: #61AFEF;">]</span> = <span style="color: #C678DD;">self</span>.dataframe<span style="color: #61AFEF;">[</span><span style="color: #C678DD;">self</span>.model_type<span style="color: #61AFEF;">]</span>.astype<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"category"</span><span style="color: #61AFEF;">)</span>
+    <span style="color: #E06C75;">fig</span> = px.scatter<span style="color: #61AFEF;">(</span><span style="color: #C678DD;">self</span>.dataframe, x=columns<span style="color: #98C379;">[</span>0<span style="color: #98C379;">]</span>, y=columns<span style="color: #98C379;">[</span>1<span style="color: #98C379;">]</span>, color=<span style="color: #C678DD;">self</span>.model_type<span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">return</span> fig
+
+</pre>
+</div>
+
+<p>
+Per comodità, farò sì che il metodo <b>set_up_model</b> abbia come return il grafico già generato, ma sarebbe meglio usare una funzione in utils per questa azione o creare una classe che si prenda cura della generazione dei grafici.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0db7162" class="outline-2">
+<h2 id="org0db7162">La Dashboard</h2>
+<div class="outline-text-2" id="text-org0db7162">
+<p>
+Devo ammettere che il codice che si usa per creare dashboard con <b>dash</b> lo trovo abbastanza brutto, tra indentazione e parentesi sembra di star programmando qualcosa che può confondere ancor più di Lisp, ma permette in generale di creare velocemente dashboard semplici e, grazie al supporto di plotly, è facile creare grafici e mostrarli direttamente e renderli anche interattivi.
+</p>
+
+<p>
+Creiamo un'instanza della dashboard ed usiamo app.server che servirà per quando hosteremo l'app.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #C678DD;">import</span> base64
+<span style="color: #C678DD;">import</span> io
+<span style="color: #C678DD;">import</span> pandas <span style="color: #C678DD;">as</span> pd
+<span style="color: #C678DD;">import</span> dash
+<span style="color: #C678DD;">import</span> dash_bootstrap_components <span style="color: #C678DD;">as</span> dbc
+<span style="color: #C678DD;">import</span> dash_core_components <span style="color: #C678DD;">as</span> dcc
+<span style="color: #C678DD;">import</span> dash_html_components <span style="color: #C678DD;">as</span> html
+<span style="color: #C678DD;">from</span> dash.dependencies <span style="color: #C678DD;">import</span> Input, Output, State
+
+<span style="color: #C678DD;">from</span> modeller <span style="color: #C678DD;">import</span> Modeller
+<span style="color: #C678DD;">from</span> configs <span style="color: #C678DD;">import</span> models, params, all_params, limits, columns
+
+<span style="color: #E06C75;">app</span> = dash.Dash<span style="color: #61AFEF;">(</span><span style="color: #56B6C2;">__name__</span>, external_stylesheets=<span style="color: #98C379;">[</span>dbc.themes.LUX<span style="color: #98C379;">]</span><span style="color: #61AFEF;">)</span>
+<span style="color: #E06C75;">server</span> = app.server
+
+</pre>
+</div>
+
+<p>
+Per il layout, potete far riferimento alla repo, non ha molto senso andarci passo per passo attraverso [GITHUB LINK HEREEE]
+</p>
+
+<p>
+Ciò che ci interessa sono i callback, che vengono utilizzati da dash per rendere i grafici interattivi.
+</p>
+
+<p>
+Prima di tutto abbiamo bisogno di un callback per fare parsing dei file che saranno caricati:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #E5C07B;">@app.callback</span><span style="color: #61AFEF;">(</span>Output<span style="color: #98C379;">(</span><span style="color: #98C379;">'output-data-upload'</span>, <span style="color: #98C379;">'children'</span><span style="color: #98C379;">)</span>,
+              <span style="color: #98C379;">[</span>Input<span style="color: #D19A66;">(</span><span style="color: #98C379;">'upload-data'</span>, <span style="color: #98C379;">'contents'</span><span style="color: #D19A66;">)</span>, Input<span style="color: #D19A66;">(</span><span style="color: #98C379;">"model-type"</span>, <span style="color: #98C379;">"value"</span><span style="color: #D19A66;">)</span><span style="color: #98C379;">]</span> + inputs +
+              <span style="color: #98C379;">[</span>State<span style="color: #D19A66;">(</span><span style="color: #98C379;">'upload-data'</span>, <span style="color: #98C379;">'filename'</span><span style="color: #D19A66;">)</span>,
+               State<span style="color: #D19A66;">(</span><span style="color: #98C379;">'upload-data'</span>, <span style="color: #98C379;">'last_modified'</span><span style="color: #D19A66;">)</span><span style="color: #98C379;">]</span><span style="color: #61AFEF;">)</span>
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">update_output</span><span style="color: #61AFEF;">(</span>list_of_contents, model_type, n_init, max_iter, n_clusters, eps, min_samples, column1, column2, list_of_names, list_of_dates<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">if</span> list_of_contents <span style="color: #C678DD;">is</span> <span style="color: #C678DD;">not</span> <span style="color: #56B6C2;">None</span>:
+        <span style="color: #C678DD;">if</span> column1 == column2:
+            <span style="color: #C678DD;">return</span> html.P<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"Select different columns!"</span><span style="color: #61AFEF;">)</span>
+
+        <span style="color: #E06C75;">contents</span> = list_of_contents<span style="color: #61AFEF;">[</span>0<span style="color: #61AFEF;">]</span>
+        <span style="color: #E06C75;">content_type</span>, <span style="color: #E06C75;">content_string</span> = contents.split<span style="color: #61AFEF;">(</span><span style="color: #98C379;">','</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #E06C75;">decoded</span> = base64.b64decode<span style="color: #61AFEF;">(</span>content_string<span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">try</span>:
+            <span style="color: #C678DD;">if</span> <span style="color: #98C379;">'csv'</span> <span style="color: #C678DD;">in</span> content_type:
+                <span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">Assume that the user uploaded a CSV file</span>
+                <span style="color: #E06C75;">df</span> = pd.read_csv<span style="color: #61AFEF;">(</span>
+                    io.StringIO<span style="color: #98C379;">(</span>decoded.decode<span style="color: #D19A66;">(</span><span style="color: #98C379;">'utf-8'</span><span style="color: #D19A66;">)</span><span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+            <span style="color: #C678DD;">elif</span> <span style="color: #98C379;">'xls'</span> <span style="color: #C678DD;">in</span> content_type <span style="color: #C678DD;">or</span> list_of_names <span style="color: #C678DD;">and</span> list_of_names<span style="color: #61AFEF;">[</span>0<span style="color: #61AFEF;">]</span>.endswith<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"xls"</span><span style="color: #61AFEF;">)</span>:
+                <span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">Assume that the user uploaded an excel file</span>
+                <span style="color: #E06C75;">df</span> = pd.read_excel<span style="color: #61AFEF;">(</span>io.BytesIO<span style="color: #98C379;">(</span>decoded<span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+            <span style="color: #C678DD;">elif</span> <span style="color: #98C379;">'xlsx'</span> <span style="color: #C678DD;">in</span> content_type <span style="color: #C678DD;">or</span> list_of_names <span style="color: #C678DD;">and</span> list_of_names<span style="color: #61AFEF;">[</span>0<span style="color: #61AFEF;">]</span>.endswith<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"xlsx"</span><span style="color: #61AFEF;">)</span>:
+                <span style="color: #5C6370; font-style: italic;"># </span><span style="color: #5C6370; font-style: italic;">Assume that the user uploaded an excel file</span>
+                <span style="color: #E06C75;">df</span> = pd.read_excel<span style="color: #61AFEF;">(</span>io.BytesIO<span style="color: #98C379;">(</span>decoded<span style="color: #98C379;">)</span>, engine=<span style="color: #98C379;">"openpyxl"</span><span style="color: #61AFEF;">)</span>
+            <span style="color: #C678DD;">elif</span> <span style="color: #98C379;">"text"</span> <span style="color: #C678DD;">in</span> content_type:
+                <span style="color: #E06C75;">df</span> = pd.read_fwf<span style="color: #61AFEF;">(</span>
+                    io.StringIO<span style="color: #98C379;">(</span>decoded.decode<span style="color: #D19A66;">(</span><span style="color: #98C379;">'utf-8'</span><span style="color: #D19A66;">)</span><span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">except</span> <span style="color: #E5C07B;">Exception</span> <span style="color: #C678DD;">as</span> e:
+            <span style="color: #C678DD;">print</span><span style="color: #61AFEF;">(</span>e<span style="color: #61AFEF;">)</span>
+            <span style="color: #C678DD;">return</span> html.Div<span style="color: #61AFEF;">(</span><span style="color: #98C379;">[</span>
+                <span style="color: #98C379;">'There was an error processing this file.'</span>
+            <span style="color: #98C379;">]</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">if</span> <span style="color: #56B6C2;">len</span><span style="color: #61AFEF;">(</span>df.columns<span style="color: #61AFEF;">)</span> &gt; 8:
+            <span style="color: #C678DD;">return</span> html.P<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"Dataframe has too many columns!"</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #E06C75;">model</span> = Modeller<span style="color: #61AFEF;">(</span>df, model_type, **<span style="color: #56B6C2;">dict</span><span style="color: #98C379;">(</span>n_init=n_init, max_iter=max_iter,
+                                                n_clusters=n_clusters, eps=eps,
+                                                min_samples=min_samples<span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">try</span>:
+            <span style="color: #E06C75;">labels</span> = model.set_up_model<span style="color: #61AFEF;">(</span><span style="color: #98C379;">[</span>column1, column2<span style="color: #98C379;">]</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">except</span> <span style="color: #E5C07B;">Exception</span> <span style="color: #C678DD;">as</span> e:
+            <span style="color: #C678DD;">return</span> html.P<span style="color: #61AFEF;">(</span><span style="color: #56B6C2;">str</span><span style="color: #98C379;">(</span>e<span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">if</span> <span style="color: #C678DD;">not</span> labels:
+            <span style="color: #C678DD;">return</span> html.P<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"Please, fill in all the parameters in green."</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> dcc.Graph<span style="color: #61AFEF;">(</span><span style="color: #56B6C2;">id</span>=<span style="color: #98C379;">"chart"</span>, figure=labels,
+                         style=<span style="color: #98C379;">{</span><span style="color: #98C379;">'display'</span>: <span style="color: #98C379;">'block'</span>,
+                                <span style="color: #98C379;">'height'</span>: 600,
+                                <span style="color: #98C379;">'width'</span>: 900,
+                                <span style="color: #98C379;">'margin-left'</span>: <span style="color: #98C379;">'auto'</span>,
+                                <span style="color: #98C379;">'margin-right'</span>: <span style="color: #98C379;">'auto'</span><span style="color: #98C379;">}</span><span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">return</span> html.P<span style="color: #61AFEF;">(</span><span style="color: #98C379;">""</span><span style="color: #61AFEF;">)</span>
+
+</pre>
+</div>
+
+<p>
+Abbiamo poi bisogno di un callback per gestire i parametri, vogliamo rendere accessibili solo quelli relativi al modello scelto, e un semplice callback per uploadare i file:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+
+<span style="color: #E5C07B;">@app.callback</span><span style="color: #61AFEF;">(</span>Output<span style="color: #98C379;">(</span><span style="color: #98C379;">'output-params'</span>, <span style="color: #98C379;">'children'</span><span style="color: #98C379;">)</span>,
+              Input<span style="color: #98C379;">(</span><span style="color: #98C379;">'model-type'</span>, <span style="color: #98C379;">'value'</span><span style="color: #98C379;">)</span><span style="color: #61AFEF;">)</span>
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">update_params</span><span style="color: #61AFEF;">(</span>model_type<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">if</span> model_type:
+        <span style="color: #E06C75;">parameters</span> = all_params
+        <span style="color: #E06C75;">htmlparams</span> = html.Div<span style="color: #61AFEF;">(</span>
+            <span style="color: #98C379;">[</span>
+                dcc.Input<span style="color: #D19A66;">(</span>
+                    <span style="color: #56B6C2;">id</span>=f<span style="color: #98C379;">"input_{k}"</span>,
+                    <span style="color: #56B6C2;">type</span>=<span style="color: #98C379;">"number"</span>,
+                    placeholder=f<span style="color: #98C379;">"{k}:{v}"</span>, <span style="color: #56B6C2;">max</span>=limits<span style="color: #56B6C2;">[</span>k<span style="color: #56B6C2;">]</span>,
+                    readOnly=<span style="color: #56B6C2;">True</span> <span style="color: #C678DD;">if</span> k <span style="color: #C678DD;">not</span> <span style="color: #C678DD;">in</span> params<span style="color: #56B6C2;">[</span>model_type<span style="color: #56B6C2;">]</span> <span style="color: #C678DD;">else</span> <span style="color: #56B6C2;">False</span>,
+                    style=<span style="color: #56B6C2;">{</span>
+                        <span style="color: #98C379;">"color"</span>: <span style="color: #98C379;">"red"</span> <span style="color: #C678DD;">if</span> k <span style="color: #C678DD;">not</span> <span style="color: #C678DD;">in</span> params<span style="color: #C678DD;">[</span>model_type<span style="color: #C678DD;">]</span> <span style="color: #C678DD;">else</span> <span style="color: #98C379;">"green"</span><span style="color: #56B6C2;">}</span>
+                <span style="color: #D19A66;">)</span>
+                <span style="color: #C678DD;">for</span> k, v <span style="color: #C678DD;">in</span> parameters.items<span style="color: #D19A66;">()</span>
+            <span style="color: #98C379;">]</span>
+        <span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">return</span> htmlparams
+
+
+<span style="color: #E5C07B;">@app.callback</span><span style="color: #61AFEF;">(</span>Output<span style="color: #98C379;">(</span><span style="color: #98C379;">'upload-data'</span>, <span style="color: #98C379;">'children'</span><span style="color: #98C379;">)</span>,
+              <span style="color: #98C379;">[</span>Input<span style="color: #D19A66;">(</span><span style="color: #98C379;">'upload-data'</span>, <span style="color: #98C379;">'contents'</span><span style="color: #D19A66;">)</span><span style="color: #98C379;">]</span> +
+              <span style="color: #98C379;">[</span>State<span style="color: #D19A66;">(</span><span style="color: #98C379;">'upload-data'</span>, <span style="color: #98C379;">'filename'</span><span style="color: #D19A66;">)</span>, State<span style="color: #D19A66;">(</span><span style="color: #98C379;">'upload-data'</span>, <span style="color: #98C379;">'last_modified'</span><span style="color: #D19A66;">)</span><span style="color: #98C379;">]</span><span style="color: #61AFEF;">)</span>
+<span style="color: #C678DD;">def</span> <span style="color: #61AFEF;">upload_box</span><span style="color: #61AFEF;">(</span>list_of_contents, list_of_names, list_of_dates<span style="color: #61AFEF;">)</span>:
+    <span style="color: #C678DD;">if</span> list_of_contents <span style="color: #C678DD;">is</span> <span style="color: #C678DD;">not</span> <span style="color: #56B6C2;">None</span>:
+        <span style="color: #E06C75;">contents</span> = list_of_contents<span style="color: #61AFEF;">[</span>0<span style="color: #61AFEF;">]</span>
+        <span style="color: #E06C75;">content_type</span>, <span style="color: #E06C75;">content_string</span> = contents.split<span style="color: #61AFEF;">(</span><span style="color: #98C379;">','</span><span style="color: #61AFEF;">)</span>
+        <span style="color: #C678DD;">return</span> html.P<span style="color: #61AFEF;">(</span>f<span style="color: #98C379;">"{list_of_names[0]}"</span><span style="color: #61AFEF;">)</span>
+    <span style="color: #C678DD;">else</span>:
+        <span style="color: #C678DD;">return</span> html.Div<span style="color: #61AFEF;">(</span><span style="color: #98C379;">[</span><span style="color: #98C379;">'Drag and Drop or '</span>, html.A<span style="color: #D19A66;">(</span><span style="color: #98C379;">'Select Files'</span><span style="color: #D19A66;">)</span><span style="color: #98C379;">]</span><span style="color: #61AFEF;">)</span>
+
+
+</pre>
+</div>
+
+<p>
+Con queste tre callback e la classe Modeller abbiamo praticamente la nostra webapp pronta.
+</p>
+
+<p>
+Per provarla, basta aggiungere
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+
+<span style="color: #C678DD;">if</span> <span style="color: #56B6C2;">__name__</span> == <span style="color: #98C379;">'__main__'</span>:
+    app.run_server<span style="color: #61AFEF;">(</span>debug=<span style="color: #56B6C2;">False</span>, host=<span style="color: #98C379;">"0.0.0.0"</span>, port=<span style="color: #98C379;">"8080"</span><span style="color: #61AFEF;">)</span>
+
+
+</pre>
+</div>
+
+<p>
+alla fine del file ed eseguire il file usando il comando <b>python3 main.py</b>.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div>
+<script src="https://utteranc.es/client.js"
+        repo="andcarnivorous/andcarnivorous.github.io"
+        issue-term="title"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+<p class="date">Date: 2021-03-08 Mon 00:00</p>
+<p class="author"> Author: Andrew</p>
+<a href = "archive.html" >Other posts</a>
+</div>
+</body>
+</html>
